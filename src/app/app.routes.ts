@@ -4,6 +4,7 @@ import {SalaComponent} from '../components/sala/sala.component';
 
 export const routes: Routes = [
   {path : 'ordine', component: OrdineComponent},
-  {path: 'sala', component: SalaComponent}
+  {path: 'sala', component: SalaComponent},
+  {path: 'tavolo', component: TavoloComponent},
 
 ]

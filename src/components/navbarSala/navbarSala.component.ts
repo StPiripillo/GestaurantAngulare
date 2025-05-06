@@ -21,18 +21,7 @@ export class NavbarSalaComponent {
       }
     }
   }
-  onDeleteTable() {
-    const numeroTavolo = prompt("Inserisci il numero del tavolo da eliminare:");
-    if (numeroTavolo)
-    {
-      if(this.tavoliEsistenti.includes(numeroTavolo))
-      {const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${numeroTavolo}?`);
-      console.log(`Tavolo ${numeroTavolo} eliminato`); }
-    }
-  else
-  {
-    alert(`Il tavolo ${numeroTavolo} non esiste!`);
-  }}
+
 
 }
 
