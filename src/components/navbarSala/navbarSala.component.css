@@ -1,0 +1,51 @@
+.nav-menu-button {
+  background-color: #17a2b8; /* Colore di sfondo blu chiaro */
+  padding: 10px 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navbar-brand:hover {
+  color: #d4edda; /* Colore verde chiaro al passaggio del mouse */
+  text-decoration: none;
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #a71d2a;
+  transform: scale(1.05);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

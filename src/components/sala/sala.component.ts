@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import {NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-sala',
-  standalone: false,
+  imports: [],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
 })
