@@ -1,0 +1,18 @@
+body
+{
+  background-color: #222438;
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+main
+{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+repeating-linear-gradient(to right, transparent 0 50px, #fff1 50px 51px),
+repeating-linear-gradient(to bottom, transparent 0 50px, #fff1 50px 51px);
+
+
+}

@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
+import {NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-tavolo',
-  imports : [],
+  imports: [
+    NgStyle
+  ],
   templateUrl: './tavolo.component.html',
   styleUrl: './tavolo.component.css'
 })
