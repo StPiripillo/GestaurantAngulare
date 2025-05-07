@@ -3,12 +3,14 @@ import {NgFor, NgForOf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag, CdkDragMove} from '@angular/cdk/drag-drop';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-sala',
   imports: [
     NgForOf,
-    CdkDrag
+    CdkDrag,
+    FormsModule
   ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
