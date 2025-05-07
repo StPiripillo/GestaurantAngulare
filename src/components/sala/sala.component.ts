@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgFor, NgForOf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
@@ -11,12 +11,11 @@ import {TavoloRepositoryService} from '../../services/tavolo-repository.service'
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
 })
-export class SalaComponent {
+export class SalaComponent{
 
   tavoli:Tavolo[] = [];
 
   constructor(private tRepo:TavoloRepositoryService) {
-    this.tRepo.getTavoli()
   }
 
   caricaTavoli() {

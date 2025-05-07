@@ -26,4 +26,8 @@ export class ProdottiRepositoryService
     return this.http.get<Prodotti[]>('/api/ordine');
   }
 
+  modificaPrezzo(prodottoModificato: { prodotto: Prodotto; prezzo: number }) {
+    return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
+
+  }
 }
