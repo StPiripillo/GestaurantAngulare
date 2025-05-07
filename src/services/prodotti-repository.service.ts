@@ -23,7 +23,7 @@ export class ProdottiRepositoryService
   constructor(private http:HttpClient) { }
 
   getProdotti():Observable<Prodotti[]> {
-    return this.http.get<Prodotti[]>('/api/prodotti');
+    return this.http.get<Prodotti[]>('/api/ordine');
   }
 
 }
