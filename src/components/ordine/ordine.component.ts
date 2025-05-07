@@ -13,7 +13,5 @@ export class OrdineComponent {
   ordine:any=[];
 
   constructor(private ordineRepo:OrdineRepositoryService) {
-    this.ordineRepo.getOrdine().subscribe((data)=> {this.ordine=data})
   }
-
 }
