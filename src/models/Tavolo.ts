@@ -1,9 +1,9 @@
 
 export interface Tavolo
 {
-  id:number,
-  numeroTavolo:number,
-  stato:boolean,
+  id?:number,
+  numeroTAvolo:number,
+  occupato:boolean,
   posti:number
 
 }

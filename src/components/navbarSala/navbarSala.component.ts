@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
-import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -11,42 +10,54 @@ import {NgForOf} from '@angular/common';
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
 })
-export class NavbarSalaComponent {
+export class NavbarSalaComponent implements OnInit {
 
 
   tavoli: Tavolo[] = [];
 
-  constructor (private reposi:TavoloRepositoryService,private stato:TavoloGlobaleService, private router:Router) {}
-  tavoloDaSalvare:Tavolo =
-  {
-    id: 0,
-    numeroTavolo: 0,
-    posti: 0,
-    stato: true
-  };
+  constructor(private reposi: TavoloRepositoryService, private router: Router) {
+  }
 
-  salvaTavolo(){
-   const numeroIns = prompt("Inserisci il numero del tavolo da aggiungere");
-   if (numeroIns)
-   {const numeroTav = parseInt(numeroIns)
-   const numeroEsistente = this.tavoli.some(tavolo => tavolo.numeroTavolo === numeroTav);
-
-
-    if (numeroEsistente)
+  tavoloDaSalvare: Tavolo =
     {
-      alert("Tavolo già esistente");
+      id: 0,
+      numeroTAvolo: 0,
+      posti: 0,
+      occupato: true
+    };
+
+  caricaTavoli() {
+    this.reposi.getTavoli().subscribe((data) => {
+      this.tavoli = data;
+    });
+  }
+
+  salvaTavolo() {
+    const numeroIns = prompt("Inserisci il numero del tavolo da aggiungere");
+
+    if (numeroIns) {
+      const numeroTav = parseInt(numeroIns)
+      const numeroEsistente = this.tavoli.some(tavolo => tavolo.numeroTAvolo === numeroTav);
+      const postiIns = prompt("Inserisci il numero di posti del tavolo da aggiungere");
+      if(postiIns) {
+        const postiTav = parseInt(postiIns);
+        this.tavoloDaSalvare.posti = postiTav;
+      }
+
+
+      if (numeroEsistente) {
+        alert("Tavolo già esistente");
+      } else {
+        this.tavoloDaSalvare.numeroTAvolo = numeroTav;
+        console.log("Dati Inviati: ", this.tavoloDaSalvare);
+        this.reposi.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
+          alert("Tavolo aggiunto");
+          this.caricaTavoli();
+        }, error => {
+          console.log("Errore durante il salvataggio:", error);
+        })
+      }
     }
-    else {
-      this.tavoloDaSalvare.numeroTavolo = numeroTav;
-      console.log("Dati Inviati: ", this.tavoloDaSalvare);
-      this.reposi.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
-        alert("Tavolo aggiunto");
-        this.stato.ricaricaTavoli();
-      }, error => {
-        console.log("Errore durante il salvataggio:", error);
-      })
-    }
-   }
 
   }
 
@@ -55,6 +66,9 @@ export class NavbarSalaComponent {
       this.tavoli = data;
     });
   }
+
+
+
 
 }
 

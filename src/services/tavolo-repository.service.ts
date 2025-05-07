@@ -10,8 +10,8 @@ export class TavoloRepositoryService {
   private apiUrl = '/api/tavoli';
   constructor(private http: HttpClient) { }
 
-  insertTavolo(daSalvare: Tavolo): Observable<Object> {
-    return this.http.post(this.apiUrl, daSalvare);
+  insertTavolo( tavolo:Tavolo): Observable<Tavolo> {
+    return this.http.post<Tavolo>(this.apiUrl, tavolo);
   }
 
   eliminaTavolo(id: number):Observable<void>{
