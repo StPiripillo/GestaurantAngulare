@@ -1,0 +1,38 @@
+body
+{
+  background-color: #222438;
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
+
+main
+{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+repeating-linear-gradient(to right, transparent 0 50px, #fff1 50px 51px),
+repeating-linear-gradient(to bottom, transparent 0 50px, #fff1 50px 51px);
+
+
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
