@@ -66,9 +66,5 @@ export class NavbarSalaComponent implements OnInit {
       this.tavoli = data;
     });
   }
-
-
-
-
 }
 
