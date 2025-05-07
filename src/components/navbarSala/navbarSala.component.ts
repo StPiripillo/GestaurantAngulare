@@ -23,7 +23,9 @@ export class NavbarSalaComponent implements OnInit {
       id: 0,
       numeroTAvolo: 0,
       posti: 0,
-      occupato: true
+      occupato: true,
+      x:0,
+      y:0
     };
 
   caricaTavoli() {

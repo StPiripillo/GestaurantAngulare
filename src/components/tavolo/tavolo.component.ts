@@ -1,20 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
-import {NgStyle} from '@angular/common';
+import {Tavolo} from '../../models/Tavolo';
 
 @Component({
   selector: 'app-tavolo',
-  imports: [
-    NgStyle
-  ],
   templateUrl: './tavolo.component.html',
   styleUrl: './tavolo.component.css'
-})
-export class TavoloComponent {
+  })
+  export class TavoloComponent implements OnInit {
   @Input() numeroTAvolo: number | undefined;
   showMenu: boolean = false;
 
+  tavoli: Tavolo[] = [];
+
   constructor(private TavoloRepo: TavoloRepositoryService ) { }
+
+  ngOnInit(): void {
+    this.TavoloRepo.getTavoli().subscribe((data) => {
+      this.tavoli = data;
+    });
+  }
 
   onDeleteTable() {
     if (this.numeroTAvolo) {
@@ -29,8 +34,5 @@ export class TavoloComponent {
       alert(`Il tavolo ${this.numeroTAvolo} non esiste!`);
     }
   }
-
-
-
 }
 

@@ -22,4 +22,7 @@ export class TavoloRepositoryService {
     return this.http.get<Tavolo[]>(this.apiUrl);
   }
 
+  updatePosition(id: number | undefined, x: number, y: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, { x, y });
+  }
 }

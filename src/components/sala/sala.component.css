@@ -11,28 +11,24 @@ main
   height: 100vh;
   overflow: hidden;
   background-image:
-repeating-linear-gradient(to right, transparent 0 50px, #fff1 50px 51px),
-repeating-linear-gradient(to bottom, transparent 0 50px, #fff1 50px 51px);
-
-
+    repeating-linear-gradient(to right, transparent 0 50px, #fff1 50px 51px),
+    repeating-linear-gradient(to bottom, transparent 0 50px, #fff1 50px 51px);
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  padding: 10px;
-}
-
-.grid-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
+.app-tavolo {
+  position: absolute;
+  width: 160px;
+  height: 80px;
+  background-color: #1976d2;
+  color: white;
   text-align: center;
-  background-color: #f9f9f9;
+  line-height: 80px;
+  border-radius: 8px;
+  cursor: move;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  transition: box-shadow 0.2s;
+}
+.app-tavolo:active {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
