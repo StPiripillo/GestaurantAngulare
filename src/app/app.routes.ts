@@ -6,6 +6,6 @@ import {TavoloComponent} from '../components/tavolo/tavolo.component';
 export const routes: Routes = [
   {path : 'ordine', component: OrdineComponent},
   {path: 'sala', component: SalaComponent},
-  {path: 'tavolo', component: TavoloComponent},
+  {path: 'tavoli', component: TavoloComponent},
 
 ]

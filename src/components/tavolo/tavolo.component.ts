@@ -11,7 +11,7 @@ export class TavoloComponent {
   @Input() numeroTavolo: number | undefined;
   showMenu: boolean = false;
 
-  constructor(private TavoloRepo: TavoloRepositoryService) { }
+  constructor(private TavoloRepo: TavoloRepositoryService ) { }
 
   onDeleteTable() {
     if (this.numeroTavolo) {

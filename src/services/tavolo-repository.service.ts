@@ -7,16 +7,19 @@ import {Tavolo} from '../models/Tavolo';
   providedIn: 'root'
 })
 export class TavoloRepositoryService {
-  private apiUrl = '/api/tavolo';
+  private apiUrl = '/api/tavoli';
   constructor(private http: HttpClient) { }
 
-  eliminaTavolo(numeroTavolo: number):Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${numeroTavolo}`);
-  }
-  getTavoli():Observable<Tavolo>
-  {
-    return this.http.get<Tavolo>(this.apiUrl);
+  insertTavolo(daSalvare: Tavolo): Observable<Object> {
+    return this.http.post(this.apiUrl, daSalvare);
   }
 
+  eliminaTavolo(id: number):Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  getTavoli(): Observable<Tavolo[]>
+  {
+    return this.http.get<Tavolo[]>(this.apiUrl);
+  }
 
 }
