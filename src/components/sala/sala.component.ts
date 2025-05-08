@@ -33,14 +33,14 @@ export class SalaComponent implements OnInit {
     });
   }
 
-  onDragMoved(event: CdkDragMove, tavolo: Tavolo): void {
-    const el = event.source.element.nativeElement;
-    const x = event.pointerPosition.x - el.offsetWidth / 2;
-    const y = event.pointerPosition.y - el.offsetHeight / 2;
+  onDragMoved(event: CdkDragMove): void {
 
-    tavolo.x = x;
-    tavolo.y = y;
+  }
 
-    this.TavoloRepo.updatePosition(tavolo.id, x, y).subscribe();
+  onDragEnded(event: any, tavolo: Tavolo): void {
+    const pos = event.source.getFreeDragPosition();
+    tavolo.x = pos.x;
+    tavolo.y = pos.y;
+    this.TavoloRepo.updatePosition(tavolo.id, pos.x, pos.y).subscribe();
   }
 }

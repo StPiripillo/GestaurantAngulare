@@ -60,7 +60,6 @@ export class NavbarSalaComponent implements OnInit {
         })
       }
     }
-
   }
 
   ngOnInit() {

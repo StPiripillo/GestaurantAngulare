@@ -2,7 +2,7 @@
 <main>
     <div *ngFor="let tavolo of tavoli" cdkDrag  class="app-tavolo"
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
-      (cdkDragMoved)="onDragMoved($event, tavolo)"
+      (cdkDragEnded)="onDragEnded($event, tavolo)"
     >
 
 

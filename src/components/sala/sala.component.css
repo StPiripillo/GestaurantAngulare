@@ -7,6 +7,7 @@ body
 
 main
 {
+  position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -22,13 +23,13 @@ main
   background-color: #1976d2;
   color: white;
   text-align: center;
-  line-height: 80px;
   border-radius: 8px;
   cursor: move;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   user-select: none;
-  transition: box-shadow 0.2s;
+  transition: transform 0.0015s ease-in-out;
 }
+
 .app-tavolo:active {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
