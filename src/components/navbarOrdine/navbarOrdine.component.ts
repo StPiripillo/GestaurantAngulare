@@ -24,20 +24,6 @@ export class NavbarOrdineComponent implements OnInit {
 
   constructor(private filtroService: FiltroService) {
   }
-  private overlay = inject(Overlay);
-  private overlayRef: OverlayRef | null = null;
-
-  openModal() {
-    this.overlayRef = this.overlay.create({
-      hasBackdrop: true,
-      backdropClass: 'cdk-overlay-dark-backdrop',
-      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically()
-    });
-
-    this.overlayRef.backdropClick().subscribe(() => this.overlayRef?.dispose());
-    this.overlayRef.attach(new ComponentPortal(OverlayComponent));
-  }
-
 
   ngOnInit(): void {
     this.filtroService.getCategoria().subscribe((categorie: string[]) => {

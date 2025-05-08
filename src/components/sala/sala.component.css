@@ -34,7 +34,22 @@ main
   transition: transform 0.002s ease;
   z-index: 1;
 }
+.menu-dropdown {
+  display: none; /* Nascosto per default */
+  position: absolute;
+  top: 100%; /* Posizionato sotto l'elemento tavolo */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 8px 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 100; /* Assicura che appaia in primo piano */
+}
 
-/*.app-tavolo:active {*/
-/*  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);*/
-/*}*/
+/* Mostra il menu quando si passa il mouse sopra il tavolo */
+.app-tavolo:hover .menu-dropdown {
+  display: block;
+}
+

@@ -1,17 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NgFor, NgForOf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag, CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
 import {tmplAstVisitAll} from '@angular/compiler';
+import {VERSION} from '@angular/cdk';
+import {OverlayComponent} from '../overlay/overlay.component';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {ComponentPortal} from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-sala',
   imports: [
     NgForOf,
     CdkDrag,
-    FormsModule
+    FormsModule,
+    OverlayComponent
   ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
@@ -20,7 +25,8 @@ export class SalaComponent implements OnInit {
 
   tavoli: Tavolo[] = [];
 
-  constructor(private TavoloRepo: TavoloRepositoryService ) { }
+  constructor(private TavoloRepo: TavoloRepositoryService ) {
+  }
 
   caricaTavoli() {
     this.TavoloRepo.getTavoli().subscribe((data: Tavolo[]) => {
@@ -59,14 +65,28 @@ export class SalaComponent implements OnInit {
   }
 
   cancellaTavolo(tavolo: Tavolo): void {
-    const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.id}?`);
+    const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.numeroTavolo}?`);
     if (confirmDelete) {
       this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
-        alert(`Tavolo ${tavolo.id} eliminato`);
+        alert(`Tavolo ${tavolo.numeroTavolo} eliminato`);
         this.caricaTavoli();
       });
     }
 
+  }
+
+  private overlay = inject(Overlay);
+  private overlayRef: OverlayRef | null = null;
+
+  openModal() {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-dark-backdrop',
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically()
+    });
+
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef?.dispose());
+    this.overlayRef.attach(new ComponentPortal(OverlayComponent));
   }
 }
 

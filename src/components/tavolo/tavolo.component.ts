@@ -11,6 +11,7 @@ import {Tavolo} from '../../models/Tavolo';
   @Input() numeroTavolo: number | undefined;
   showMenu: boolean = false;
 
+
   tavoli: Tavolo[] = [];
 
   constructor(private TavoloRepo: TavoloRepositoryService ) { }
@@ -34,5 +35,6 @@ import {Tavolo} from '../../models/Tavolo';
       alert(`Il tavolo ${this.numeroTavolo} non esiste!`);
     }
   }
+
 }
 

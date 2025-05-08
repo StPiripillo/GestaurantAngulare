@@ -8,16 +8,18 @@
     (cdkDragEnded)="onDragEnded($event, tavolo)">
 
 
+
     <div class="app-tavolo-header">
 
       <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
         {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
       </button>
-      <h1>{{tavolo.id}} </h1>
+      <div class="menu-dropdown">
+        <button class="btn btn-success" (click)="openModal()">Ordina</button>
+      </div>
+      <h1>{{tavolo.numeroTavolo}} </h1>
       <button class="btn btn-primary" (click)="cancellaTavolo(tavolo)">Elimina</button>
     </div>
-
-
-  </div>
+    </div>
 </main>
 </body>

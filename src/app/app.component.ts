@@ -13,17 +13,5 @@ import {CommonModule} from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  menuAperto: boolean = false;
 
-
-  toggleMenu() {
-    this.menuAperto = !this.menuAperto;
-  }
-
-
-  selezionaCategoria(categoria: string) {
-    console.log('Categoria selezionata:', categoria);
-    this.menuAperto = false;
-
-  }
 }
