@@ -8,7 +8,7 @@ import {Tavolo} from '../../models/Tavolo';
   styleUrl: './tavolo.component.css'
   })
   export class TavoloComponent implements OnInit {
-  @Input() numeroTAvolo: number | undefined;
+  @Input() numeroTavolo: number | undefined;
   showMenu: boolean = false;
 
   tavoli: Tavolo[] = [];
@@ -22,16 +22,16 @@ import {Tavolo} from '../../models/Tavolo';
   }
 
   onDeleteTable() {
-    if (this.numeroTAvolo) {
-      const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${this.numeroTAvolo}?`);
+    if (this.numeroTavolo) {
+      const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${this.numeroTavolo}?`);
       if (confirmDelete)
-        this.TavoloRepo.eliminaTavolo(this.numeroTAvolo).subscribe(() => {
-          console.log(`Tavolo ${this.numeroTAvolo} eliminato`);
+        this.TavoloRepo.eliminaTavolo(this.numeroTavolo).subscribe(() => {
+          console.log(`Tavolo ${this.numeroTavolo} eliminato`);
         })
     }
     else
     {
-      alert(`Il tavolo ${this.numeroTAvolo} non esiste!`);
+      alert(`Il tavolo ${this.numeroTavolo} non esiste!`);
     }
   }
 }

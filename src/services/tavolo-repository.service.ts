@@ -14,8 +14,8 @@ export class TavoloRepositoryService {
     return this.http.post<Tavolo>(this.apiUrl, tavolo);
   }
 
-  eliminaTavolo(id: number | undefined):Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  eliminaTavolo(id: number | undefined):Observable<Tavolo>{
+    return this.http.delete<Tavolo>(`${this.apiUrl}/${id}`);
   }
   getTavoli(): Observable<Tavolo[]>
   {
