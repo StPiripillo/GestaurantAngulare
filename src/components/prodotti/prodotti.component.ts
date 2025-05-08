@@ -2,10 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ProdottiRepositoryService, Prodotti} from '../../services/prodotti-repository.service';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CurrencyPipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-prodotti',
-  imports : [],
+  imports: [
+    NgForOf,
+    CurrencyPipe
+  ],
   templateUrl: './prodotti.component.html',
   styleUrl: './prodotti.component.css'
 })
@@ -18,7 +22,7 @@ export class ProdottiComponent implements OnInit {
   constructor(private prodottoRepo: ProdottiRepositoryService, private route:ActivatedRoute) {
   }
 
-  /* ngOnInit(): void {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const Tipologia = params.get('tipologia');
       if (Tipologia) {
@@ -27,7 +31,7 @@ export class ProdottiComponent implements OnInit {
       }
     })
 
-  }*/
+  }
 
   caricaProdotti(): void {
     this.prodottoRepo.getProdotti().subscribe((data => {
@@ -49,5 +53,6 @@ export class ProdottiComponent implements OnInit {
   }
 
 
+  protected readonly test = module
 }
 

@@ -3,10 +3,11 @@ import {Router, RouterLink} from '@angular/router';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {NgForOf} from '@angular/common';
+import {ProdottiComponent} from '../prodotti/prodotti.component';
 
 @Component({
   selector: 'app-nav-bar-sala',
-  imports: [RouterLink, NgForOf],
+  imports: [RouterLink, NgForOf, ProdottiComponent],
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
 })
