@@ -63,4 +63,15 @@ export class SalaComponent implements OnInit {
 
     this.salvaPosizione(tavolo);
   }
+
+  cancellaTavolo(tavolo: Tavolo): void {
+    const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.id}?`);
+    if (confirmDelete) {
+      this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
+        alert(`Tavolo ${tavolo.id} eliminato`);
+        this.caricaTavoli();
+      });
+    }
+
+  }
 }
