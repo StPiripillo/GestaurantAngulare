@@ -2,13 +2,10 @@
 <main>
     <div *ngFor="let tavolo of tavoli" cdkDrag  class="app-tavolo"
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
-      (cdkDragEnded)="onDragEnded($event, tavolo)"
-    >
-
+      (cdkDragEnded)="onDragEnded($event, tavolo)">
 
 
       <div class="app-tavolo-header">
-        <button class="btn btn-primary" >Salva</button>
         <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
           {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
         </button>
