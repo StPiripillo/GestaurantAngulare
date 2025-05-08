@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class FiltroService {
-  private tipoSelezionata = new BehaviorSubject<string>('tutti');
-  categoria$ = this.tipoSelezionata.asObservable();
+  private apiUrl = '/api/ordine/categoria';
+  constructor(private http:HttpClient) { }
 
-  setCategoria(tipologia: string): void {
-    this.tipoSelezionata.next(tipologia);
+  getCategoria(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl);
   }
 }

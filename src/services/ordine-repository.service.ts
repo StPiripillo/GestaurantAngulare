@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class OrdineRepositoryService {
-  private apiUrl = '/api/ordine';
+  private apiUrl = '/api/ordine/';
   constructor(private http:HttpClient) {}
 
 
