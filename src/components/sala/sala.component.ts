@@ -4,6 +4,7 @@ import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag, CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
+import {tmplAstVisitAll} from '@angular/compiler';
 
 @Component({
   selector: 'app-sala',
@@ -37,12 +38,6 @@ export class SalaComponent implements OnInit {
 
   }
 
-  //onDragEnded(event: CdkDragEnd, tavolo: Tavolo): void {
-  //  const pos = event.source.getFreeDragPosition();
-  //  tavolo.x = pos.x;
-  //  tavolo.y = pos.y;
-   // this.salvaPosizione(tavolo);
- // }
 
   salvaPosizione(tavolo: Tavolo): void {
     this.TavoloRepo.updatePosition(tavolo.numeroTAvolo, tavolo.x, tavolo.y).subscribe({
@@ -64,3 +59,5 @@ export class SalaComponent implements OnInit {
     this.salvaPosizione(tavolo);
   }
 }
+
+

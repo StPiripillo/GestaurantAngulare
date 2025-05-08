@@ -2,3 +2,15 @@
 <app-tavolo></app-tavolo>
 <app-sala></app-sala>
 <router-outlet></router-outlet>
+
+<div class="menu-container">
+  <button (click)="toggleMenu()" class="order-button">Ordina</button>
+
+
+  <ul *ngIf="menuAperto" class="menu-dropdown">
+    <li (click)="selezionaCategoria('Antipasti')">Antipasti</li>
+    <li (click)="selezionaCategoria('Primi')">Primi</li>
+    <li (click)="selezionaCategoria('Secondi')">Secondi</li>
+    <li (click)="selezionaCategoria('Bevande')">Bevande</li>
+  </ul>
+</div>

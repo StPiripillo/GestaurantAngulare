@@ -10,7 +10,7 @@ import {NgForOf} from '@angular/common';
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
 })
-export class NavbarSalaComponent implements OnInit {
+export class NavbarSalaComponent {
 
 
   tavoli: Tavolo[] = [];

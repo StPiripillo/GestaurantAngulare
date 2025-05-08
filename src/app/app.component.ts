@@ -1,15 +1,36 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {RouterOutlet} from '@angular/router';
 import {NavbarSalaComponent} from '../components/navbarSala/navbarSala.component';
 import {TavoloComponent} from '../components/tavolo/tavolo.component';
 import {SalaComponent} from '../components/sala/sala.component';
 
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarSalaComponent, TavoloComponent, SalaComponent],
+  standalone: true,
+  imports: [RouterOutlet, NavbarSalaComponent, TavoloComponent, SalaComponent,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
+
 })
 export class AppComponent {
-  title = 'GestaurantAngular';
+  menuAperto: boolean = false;
+
+
+  toggleMenu() {
+    this.menuAperto = !this.menuAperto;
+  }
+
+
+  selezionaCategoria(categoria: string) {
+    console.log('Categoria selezionata:', categoria);
+    this.menuAperto = false;
+
+  }
 }
+
+
+
+
+
