@@ -40,8 +40,7 @@ export class SalaComponent implements OnInit {
 
 
   salvaPosizione(tavolo: Tavolo): void {
-    this.TavoloRepo.updatePosition(tavolo.numeroTAvolo, tavolo.x, tavolo.y).subscribe({
-      next: () => alert(`Salvato tavolo ${tavolo.id} in posizione (${tavolo.x}, ${tavolo.y})`),
+    this.TavoloRepo.updatePosition(tavolo.id, tavolo.x, tavolo.y).subscribe({
       error: (err) => console.error('Errore salvataggio', err)
     });
   }
@@ -57,6 +56,17 @@ export class SalaComponent implements OnInit {
     tavolo.y = snappedY;
 
     this.salvaPosizione(tavolo);
+  }
+
+  cancellaTavolo(tavolo: Tavolo): void {
+    const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.id}?`);
+    if (confirmDelete) {
+      this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
+        alert(`Tavolo ${tavolo.id} eliminato`);
+        this.caricaTavoli();
+      });
+    }
+
   }
 }
 

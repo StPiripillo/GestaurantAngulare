@@ -7,15 +7,17 @@
     [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
     (cdkDragEnded)="onDragEnded($event, tavolo)">
 
+
     <div class="app-tavolo-header">
-      <button class="btn btn-primary" (click)="salvaPosizione(tavolo)">Salva</button>
+      <button class="btn btn-primary">Ordini</button>
       <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
         {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
       </button>
+      <h1>{{tavolo.id}} </h1>
+      <button class="btn btn-primary" (click)="cancellaTavolo(tavolo)">Elimina</button>
     </div>
 
-      {{ tavolo.numeroTAvolo  }}
-    </div>
 
+  </div>
 </main>
 </body>

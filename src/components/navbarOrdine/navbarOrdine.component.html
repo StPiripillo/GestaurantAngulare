@@ -1,3 +1,17 @@
-<div class="navbar">
+<nav class="navbar">
+  <ul>
+    <li *ngFor="let tipo of tipologie">
+      <button (click)="selezionaTipologia(tipo)"
+        [class.active]="tipo===tipologiaSelezionata">
+        {{ tipo }}
+      </button>
+    </li>
+  </ul>
+</nav>
 
+<div class="piatti-container" *ngIf="tipologiaSelezionata">
+  <h2>Piatti di {{ tipologiaSelezionata }}</h2>
+  <ul>
+    <li *ngFor="let piatto of piattifiltrati">"</li>
+  </ul>
 </div>
