@@ -9,15 +9,15 @@
 
 
     <div class="app-tavolo-header">
-      <button class="btn btn-primary"></button>
+      <button class="btn btn-primary">Ordini</button>
       <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
         {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
       </button>
+      <h1>{{tavolo.id}} </h1>
+      <button class="btn btn-primary" (click)="cancellaTavolo(tavolo)">Elimina</button>
     </div>
 
-    <h1>{{tavolo.id}} </h1>
 
-
-    </div>
+  </div>
 </main>
 </body>
