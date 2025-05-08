@@ -2,7 +2,7 @@
 export interface Tavolo
 {
   id?:number,
-  numeroTAvolo:number,
+  //numeroTAvolo:number,
   occupato:boolean,
   posti:number
   x:number,

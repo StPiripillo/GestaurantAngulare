@@ -1,5 +1,6 @@
 body
 {
+  position: relative;
   background-color: #222438;
   margin: 0;
   font-family: Poppins, sans-serif;
@@ -7,13 +8,16 @@ body
 
 main
 {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  background-image:
-    repeating-linear-gradient(to right, transparent 0 50px, #fff1 50px 51px),
-    repeating-linear-gradient(to bottom, transparent 0 50px, #fff1 50px 51px);
+  background-color: #2c2e4a;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.2) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 0;
 }
 
 .app-tavolo {
@@ -23,13 +27,14 @@ main
   background-color: #1976d2;
   color: white;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: move;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   user-select: none;
-  transition: transform 0.0015s ease-in-out;
+  transition: transform 0.002s ease;
+  z-index: 1;
 }
 
-.app-tavolo:active {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
+/*.app-tavolo:active {*/
+/*  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);*/
+/*}*/

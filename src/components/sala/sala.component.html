@@ -1,24 +1,23 @@
 <body>
 <main>
-    <div *ngFor="let tavolo of tavoli" cdkDrag  class="app-tavolo"
-      [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
-      (cdkDragEnded)="onDragEnded($event, tavolo)"
-    >
+  <div
+    *ngFor="let tavolo of tavoli"
+    cdkDrag
+    class="app-tavolo"
+    [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
+    (cdkDragEnded)="onDragEnded($event, tavolo)">
 
 
+    <div class="app-tavolo-header">
+      <button class="btn btn-primary"></button>
+      <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
+        {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
+      </button>
+    </div>
 
-      <div class="app-tavolo-header">
-        <button class="btn btn-primary" >Salva</button>
-        <button class="btn btn-danger" (click)="tavolo.occupato">Occupato</button>
-      </div>
-      <div class="app-tavolo-body">
-        <h3>Numero</h3>
-        <input type="text" [(ngModel)]="tavolo.numeroTAvolo" />
-      </div>
-
+    <h1>{{tavolo.id}} </h1>
 
 
-      {{ tavolo.numeroTAvolo }}
     </div>
 </main>
 </body>
