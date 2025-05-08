@@ -88,6 +88,22 @@ export class SalaComponent implements OnInit {
     this.overlayRef.backdropClick().subscribe(() => this.overlayRef?.dispose());
     this.overlayRef.attach(new ComponentPortal(OverlayComponent));
   }
+
+  cambioNumero(tavolo: Tavolo): void {
+    const nuovoNumero = prompt("Inserisci il nuovo numero del tavolo:");
+    if (nuovoNumero) {
+      const numero = parseInt(nuovoNumero);
+      if (!isNaN(numero)) {
+        tavolo.numeroTavolo = numero;
+        this.TavoloRepo.updateNomeTavolo(tavolo.id, numero).subscribe(() => {
+          alert("Numero tavolo modificato");
+          this.caricaTavoli();
+        }, error => {
+          console.error("Errore durante il salvataggio:", error);
+        });
+      }
+    }
+  }
 }
 
 
