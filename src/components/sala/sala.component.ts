@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgFor, NgForOf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
-import {CdkDrag, CdkDragMove} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -37,10 +37,17 @@ export class SalaComponent implements OnInit {
 
   }
 
-  onDragEnded(event: any, tavolo: Tavolo): void {
+  onDragEnded(event: CdkDragEnd, tavolo: Tavolo): void {
     const pos = event.source.getFreeDragPosition();
     tavolo.x = pos.x;
     tavolo.y = pos.y;
-    this.TavoloRepo.updatePosition(tavolo.id, pos.x, pos.y).subscribe();
+    this.salvaPosizione(tavolo);
+  }
+
+  salvaPosizione(tavolo: Tavolo): void {
+    this.TavoloRepo.updatePosition(tavolo.numeroTAvolo, tavolo.x, tavolo.y).subscribe({
+      next: () => alert(`Salvato tavolo ${tavolo.numeroTAvolo} in posizione (${tavolo.x}, ${tavolo.y})`),
+      error: (err) => console.error('Errore salvataggio', err)
+    });
   }
 }
