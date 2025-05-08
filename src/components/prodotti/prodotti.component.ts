@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProdottiRepositoryService, Prodotti} from '../../services/prodotti-repository.service';
 import {FiltroService} from '../../services/filtro-repository.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-prodotti',
@@ -14,12 +15,19 @@ export class ProdottiComponent implements OnInit {
   prodottiFiltrati: Prodotti[] = [];
   filtro: string [] = [];
 
-  constructor(private prodottoRepo: ProdottiRepositoryService, private filtroService: FiltroService) {
+  constructor(private prodottoRepo: ProdottiRepositoryService, private route:ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.caricaProdotti();
-  }
+  /* ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const Tipologia = params.get('tipologia');
+      if (Tipologia) {
+        this.filtraProdotti([Tipologia]);
+        this.caricaProdotti();
+      }
+    })
+
+  }*/
 
   caricaProdotti(): void {
     this.prodottoRepo.getProdotti().subscribe((data => {

@@ -5,13 +5,17 @@ import {Tipologia} from '../../models/Prodotti';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {OverlayComponent} from '../overlay/overlay.component';
+import {ProdottiRepositoryService} from '../../services/prodotti-repository.service';
+import {ProdottiComponent} from '../prodotti/prodotti.component';
+import {Router} from '@angular/router';
 
 
 @Component({
   selector: 'app-nav-bar-ordine',
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    ProdottiComponent
   ],
   templateUrl: './navbarOrdine.component.html',
   styleUrl: './navbarOrdine.component.css'
@@ -22,7 +26,7 @@ export class NavbarOrdineComponent implements OnInit {
   tipologiaSelezionata: string = '';
   piattifiltrati: string[] = [];
 
-  constructor(private filtroService: FiltroService) {
+  constructor(private filtroService: FiltroService, router:Router) {
   }
 
   ngOnInit(): void {
@@ -35,5 +39,4 @@ export class NavbarOrdineComponent implements OnInit {
     this.tipologiaSelezionata = tip;
     this.piattifiltrati = tip ? [] : [];
   }
-
 }
