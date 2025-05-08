@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import {OverlayComponent} from '../overlay/overlay.component';
 
 
 @Component({
@@ -20,6 +23,19 @@ export class NavbarOrdineComponent implements OnInit {
   piattifiltrati: string[] = [];
 
   constructor(private filtroService: FiltroService) {
+  }
+  private overlay = inject(Overlay);
+  private overlayRef: OverlayRef | null = null;
+
+  openModal() {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-dark-backdrop',
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically()
+    });
+
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef?.dispose());
+    this.overlayRef.attach(new ComponentPortal(OverlayComponent));
   }
 
 
