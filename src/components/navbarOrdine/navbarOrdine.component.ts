@@ -2,10 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import {OverlayComponent} from '../overlay/overlay.component';
-import {ProdottiRepositoryService} from '../../services/prodotti-repository.service';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {Router} from '@angular/router';
 

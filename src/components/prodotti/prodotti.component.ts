@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ProdottiRepositoryService, Prodotti} from '../../services/prodotti-repository.service';
-import {FiltroService} from '../../services/filtro-repository.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CurrencyPipe, NgForOf} from '@angular/common';
+import {Prodotti} from '../../models/Prodotti';
+import {ProdottiRepoService} from '../../services/prodotti-repo.service';
 
 @Component({
   selector: 'app-prodotti',
@@ -19,7 +19,7 @@ export class ProdottiComponent implements OnInit {
   prodottiFiltrati: Prodotti[] = [];
   filtro: string [] = [];
 
-  constructor(private prodottoRepo: ProdottiRepositoryService, private route:ActivatedRoute) {
+  constructor(private prodottoRepo:ProdottiRepoService, private route:ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -49,10 +49,10 @@ export class ProdottiComponent implements OnInit {
 
   filtraProdotti(tipologia:string[]): void {
     this.filtro = tipologia;
-    this.prodottiFiltrati=this.prodotti.filter(prodotti => prodotti.tipologia===tipologia);
+    this.prodottiFiltrati=this.prodotti.filter(prodotti => prodotti.Tipologia ===tipologia);
   }
 
 
-  protected readonly test = module
+
 }
 

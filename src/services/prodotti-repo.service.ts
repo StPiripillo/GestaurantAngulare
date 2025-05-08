@@ -1,25 +1,13 @@
-import {Inject} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Ingredienti} from '../models/Ingredienti';
 import {Observable} from 'rxjs';
-import {Tipologia} from '../models/Prodotti';
+import {Prodotti} from '../models/Prodotti';
 
-export interface Prodotti{
-  id: number,
-  nome: string,
-  prezzo: number,
-  tipologia: Tipologia[],
-  intolleranza: string[],
-  ingredienti: Ingredienti[],
-  qtn: number
-}
-
-@Inject ({
+@Injectable({
   providedIn: 'root'
 })
+export class ProdottiRepoService {
 
-export class ProdottiRepositoryService
-{
   constructor(private http:HttpClient) { }
 
   getProdotti():Observable<Prodotti[]> {
@@ -30,4 +18,5 @@ export class ProdottiRepositoryService
     return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
 
   }
+
 }

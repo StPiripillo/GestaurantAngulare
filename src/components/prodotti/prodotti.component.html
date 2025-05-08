@@ -2,6 +2,5 @@
   <h3>{{ prodotto.nome }}</h3>
   <p>Descrizione: {{ prodotto.ingredienti }}</p>
   <p>Prezzo: {{ prodotto.prezzo | currency:'EUR':'symbol' }}</p>
-  <button (click)="test">Aggiungi al carrello</button>
   <button (click)="modificaPrezzo(prodotto, 0)">Cambia Prezzo</button>
 </div>
