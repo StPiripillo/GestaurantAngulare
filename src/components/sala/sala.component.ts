@@ -46,7 +46,6 @@ export class SalaComponent implements OnInit {
 
   salvaPosizione(tavolo: Tavolo): void {
     this.TavoloRepo.updatePosition(tavolo.id, tavolo.x, tavolo.y).subscribe({
-      next: () => alert(`Salvato tavolo ${tavolo.id} in posizione (${tavolo.x}, ${tavolo.y})`),
       error: (err) => console.error('Errore salvataggio', err)
     });
   }
