@@ -40,11 +40,6 @@ export class SalaComponent implements OnInit {
     });
   }
 
-  onDragMoved(event: CdkDragMove): void {
-
-  }
-
-
   salvaPosizione(tavolo: Tavolo): void {
     this.TavoloRepo.updatePosition(tavolo.id, tavolo.x, tavolo.y).subscribe({
       error: (err) => console.error('Errore salvataggio', err)
@@ -70,6 +65,7 @@ export class SalaComponent implements OnInit {
       this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
         alert(`Tavolo ${tavolo.numeroTavolo} eliminato`);
         this.caricaTavoli();
+        window.location.reload();
       });
     }
 
@@ -114,12 +110,15 @@ export class SalaComponent implements OnInit {
   occupaTavolo(tavolo: Tavolo): void {
     tavolo.occupato = !tavolo.occupato;
     this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
-      alert("Stato tavolo modificato");
       this.caricaTavoli();
     }, error => {
+      alert("Errore durante il salvataggio");
       console.error("Errore durante il salvataggio:", error);
     });
   }
+
 }
+
+
 
 
