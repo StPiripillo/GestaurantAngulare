@@ -65,6 +65,7 @@ export class SalaComponent implements OnInit {
       this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
         alert(`Tavolo ${tavolo.numeroTavolo} eliminato`);
         this.caricaTavoli();
+        window.location.reload();
       });
     }
 
