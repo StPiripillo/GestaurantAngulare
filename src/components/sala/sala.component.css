@@ -20,6 +20,43 @@ main
   z-index: 0;
 }
 
+.app-tavolo-container
+{
+  position: relative;
+  width: 160px;
+  height: 80px;
+}
+
+.app-tavolo-numero
+{
+  position: absolute;
+  width: 100%;
+}
+
+.app-tavolo-opzioni
+{
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  left: 12%;
+  display: flex;
+}
+
+.button-cancella
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #dc3545;
+}
+
+.button-stato
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .app-tavolo {
   position: absolute;
   width: 160px;
