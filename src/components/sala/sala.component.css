@@ -31,15 +31,22 @@ main
 {
   position: absolute;
   width: 100%;
+  top: -10%;
 }
 
-.app-tavolo-opzioni
+.app-tavolo-stato
 {
   position: absolute;
-  top: 70%;
-  width: 100%;
-  left: 12%;
-  display: flex;
+  top: 5px;
+  left: 5px;
+}
+
+.app-tavolo-posti
+{
+  position: absolute;
+  font-size: 20px;
+  bottom: -5px;
+  left: 30px;
 }
 
 .button-cancella
@@ -101,6 +108,7 @@ main
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  z-index: 1;
 }
 
 .menu-dropdown button:hover {
@@ -111,5 +119,6 @@ main
 /* Mostra il menu quando si passa il mouse sopra il tavolo */
 .app-tavolo:hover .menu-dropdown {
   display: block;
+  z-index: 100;
 }
 
