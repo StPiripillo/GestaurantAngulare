@@ -1,17 +1,38 @@
-import { Component } from '@angular/core';
-import {NgFor} from '@angular/common';
-import {OrdineRepositoryService} from '../../services/ordine-repository.service';
+import {Component, inject, OnInit} from '@angular/core';
+import {FiltroService} from '../../services/filtro-repository.service';
+import {CommonModule, NgForOf, NgIf} from '@angular/common';
+import {Tipologia} from '../../models/Prodotti';
+import {ProdottiComponent} from '../prodotti/prodotti.component';
+import {Router} from '@angular/router';
+
 
 @Component({
-  selector: 'app-ordine',
-  imports:[NgFor],
+  selector: 'app-nav-bar-ordine',
+  imports: [
+    NgForOf,
+    NgIf,
+    ProdottiComponent
+  ],
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
 })
-export class OrdineComponent {
+export class OrdineComponent implements OnInit {
 
-  ordine:any=[];
+  tipologie: Tipologia[] = [];
+  tipologiaSelezionata: string = '';
+  piattifiltrati: string[] = [];
 
-  constructor(private ordineRepo:OrdineRepositoryService) {
+  constructor(private filtroService: FiltroService, router:Router) {
+  }
+
+  ngOnInit(): void {
+    this.filtroService.getCategoria().subscribe((categorie: string[]) => {
+      this.tipologie = categorie.map(cat => cat as Tipologia);
+    });
+  }
+
+  selezionaTipologia(tip: Tipologia) {
+    this.tipologiaSelezionata = tip;
+    this.piattifiltrati = tip ? [] : [];
   }
 }

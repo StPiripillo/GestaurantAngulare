@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {NavbarOrdineComponent} from '../navbarOrdine/navbarOrdine.component';
+import {OrdineComponent} from '../ordine/ordine.component';
 
 @Component({
   selector: 'app-overlay',
-  imports : [NavbarOrdineComponent],
+  imports : [OrdineComponent],
   templateUrl: './overlay.component.html',
   styleUrl: './overlay.component.css'
 })
