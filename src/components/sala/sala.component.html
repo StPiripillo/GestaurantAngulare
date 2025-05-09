@@ -11,18 +11,23 @@
 
       <div class="app-tavolo-container">
         <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
-        <button class="button-stato" (click)="tavolo.occupato = !tavolo.occupato">
-          {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
-        </button>
-        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">X</button>
-        <div class="app-tavolo-opzioni">
-          <div class="button-ordine">
-            <button class="button-ordine-open" (click)="openModal()">Ordina</button>
-          </div>
-          <button class="button-modifica" (click)="cambioNumero(tavolo)">Modifica</button>
+        <div class="menu-dropdown">
+          <ul>
+            <li>
+              <button class="button-stato" (click)="tavolo.occupato = !tavolo.occupato">
+                {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
+              </button>
+            </li>
+            <li>
+              <button class="button-ordine-open" (click)="openModal()">Ordina</button>
+            </li>
+            <li>
+              <button class="button-modifica" (click)="cambioNumero(tavolo)">Modifica</button>
+            </li>
+          </ul>
         </div>
 
-
+        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">X</button>
       </div>
     </div>
   </main>
