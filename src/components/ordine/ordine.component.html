@@ -15,5 +15,26 @@
     <li *ngFor="let prodotto of piattifiltrati">"</li>
   </ul>
 </div>
+
+<button (click)="toggleNota()">Nota</button>
+
+<div *ngIf="spaziatoreAttivo" style="
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 300px;
+">
+  <textarea #annotazioneTextarea placeholder="Scrivi un'annotazione" rows="4" style="width: 100%;"></textarea>
+  <br />
+  <button (click)="salvaAnnotazione()">Salva Annotazione</button>
+</div>
+
 <app-prodotti></app-prodotti>
 

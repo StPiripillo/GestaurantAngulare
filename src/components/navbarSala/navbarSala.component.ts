@@ -13,7 +13,6 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 })
 export class NavbarSalaComponent {
 
-
   tavoli: Tavolo[] = [];
 
   constructor(private reposi: TavoloRepositoryService, private router: Router) {

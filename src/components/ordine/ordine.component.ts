@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
@@ -17,6 +17,21 @@ import {Router} from '@angular/router';
   styleUrl: './ordine.component.css'
 })
 export class OrdineComponent implements OnInit {
+  spaziatoreAttivo = false;
+
+  @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
+
+  toggleNota(): void {
+    this.spaziatoreAttivo = !this.spaziatoreAttivo;
+  }
+
+  salvaAnnotazione(): void {
+    const testo = this.annotazioneRef.nativeElement.value;
+    alert("Annotazione salvata: " + testo);
+    this.annotazioneRef.nativeElement.value = '';
+    this.spaziatoreAttivo = false;
+  }
+
 
   tipologie: Tipologia[] = [];
   tipologiaSelezionata: string = '';
