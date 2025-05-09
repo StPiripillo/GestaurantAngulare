@@ -50,14 +50,14 @@ main
   background-color: #dc3545;
 }
 
-.app-tavolo {
+.app-tavolo-container {
   position: absolute;
   width: 160px;
   height: 80px;
   background-color: #3bd219;
   color: white;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: move;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   user-select: none;
