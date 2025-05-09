@@ -11,7 +11,7 @@
 
     <div class="app-tavolo-header">
 
-      <button class="btn btn-danger" (click)="tavolo.occupato = !tavolo.occupato">
+      <button class="btn btn-danger" (click)="occupaTavolo(tavolo)">
         {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
       </button>
       <div class="menu-dropdown">
