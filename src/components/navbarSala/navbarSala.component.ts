@@ -16,8 +16,10 @@ export class NavbarSalaComponent {
   dragAttivo: boolean = false;
 
   tavoli: Tavolo[] = [];
+  utilizzabile=true;
 
   constructor(private reposi: TavoloRepositoryService, private router: Router) {
+    this.controllaOra()
   }
 
   tavoloDaSalvare: Tavolo =
@@ -30,6 +32,12 @@ export class NavbarSalaComponent {
       y:0
     };
 
+  controllaOra() {
+    const oraAttuale = new Date().getHours();
+    const oraLimite = 20;
+    this.utilizzabile = oraAttuale < oraLimite;
+  }
+
   caricaTavoli() {
     this.reposi.getTavoli().subscribe((data) => {
       this.tavoli = data;
@@ -37,6 +45,10 @@ export class NavbarSalaComponent {
   }
 
   salvaTavolo() {
+     if (!this.utilizzabile) {
+      alert("Non puoi creare nuovi tavoli dopo le 20:00");
+      return;
+    }
     const numeroIns = prompt("Inserisci il numero del tavolo da aggiungere");
 
     if (numeroIns) {
