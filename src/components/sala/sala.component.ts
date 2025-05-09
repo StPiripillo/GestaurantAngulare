@@ -24,8 +24,16 @@ import {ComponentPortal} from '@angular/cdk/portal';
 export class SalaComponent implements OnInit {
 
   tavoli: Tavolo[] = [];
+  utilizzabile: boolean = true;
 
   constructor(private TavoloRepo: TavoloRepositoryService ) {
+    this.controllaOra();
+  }
+
+  controllaOra(){
+    const OraAttuale = new Date().getHours();
+    const oraLimite = 20;
+    this.utilizzabile = OraAttuale < oraLimite;
   }
 
   caricaTavoli() {
@@ -56,6 +64,7 @@ export class SalaComponent implements OnInit {
     });
   }
   onDragEnded(event: any, tavolo: Tavolo): void {
+
     const pos = event.source.getFreeDragPosition();
 
     const snap = (val: number) => Math.round(val / 20) * 20;
@@ -70,6 +79,10 @@ export class SalaComponent implements OnInit {
   }
 
   cancellaTavolo(tavolo: Tavolo): void {
+    if (!this.utilizzabile) {
+      alert("Non puoi eliminare i tavoli dopo le 20:00");
+      return;
+    }
     const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.numeroTavolo}?`);
     if (confirmDelete) {
       this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
