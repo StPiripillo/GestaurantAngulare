@@ -94,6 +94,13 @@ export class SalaComponent implements OnInit {
     if (nuovoNumero) {
       const numero = parseInt(nuovoNumero);
       if (!isNaN(numero)) {
+        //questo controlla se il numero gia esiste
+        const numeroEsistente = this.tavoli.some(t => t.numeroTavolo === numero && t.id !== tavolo.id);
+        if (numeroEsistente) {
+          alert("Errore: il numero del tavolo è già esistente.");
+          return;
+        }
+
         tavolo.numeroTavolo = numero;
         this.TavoloRepo.updateNomeTavolo(tavolo.id, numero).subscribe(() => {
           alert("Numero tavolo modificato");
@@ -103,6 +110,15 @@ export class SalaComponent implements OnInit {
         });
       }
     }
+  }
+  occupaTavolo(tavolo: Tavolo): void {
+    tavolo.occupato = !tavolo.occupato;
+    this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
+      alert("Stato tavolo modificato");
+      this.caricaTavoli();
+    }, error => {
+      console.error("Errore durante il salvataggio:", error);
+    });
   }
 }
 
