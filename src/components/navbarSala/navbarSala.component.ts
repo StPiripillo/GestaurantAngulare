@@ -24,7 +24,7 @@ export class NavbarSalaComponent {
       id: 0,
       numeroTavolo: 0,
       posti: 0,
-      occupato: true,
+      occupato: false,
       x:0,
       y:0
     };
