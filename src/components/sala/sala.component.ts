@@ -56,6 +56,7 @@ export class SalaComponent implements OnInit {
     });
   }
   onDragEnded(event: any, tavolo: Tavolo): void {
+
     const pos = event.source.getFreeDragPosition();
 
     const snap = (val: number) => Math.round(val / 20) * 20;

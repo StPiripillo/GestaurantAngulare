@@ -13,6 +13,8 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 })
 export class NavbarSalaComponent {
 
+  dragAttivo: boolean = false;
+
   tavoli: Tavolo[] = [];
 
   constructor(private reposi: TavoloRepositoryService, private router: Router) {
