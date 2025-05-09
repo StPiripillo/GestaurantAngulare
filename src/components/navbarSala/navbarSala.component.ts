@@ -65,13 +65,5 @@ export class NavbarSalaComponent {
       }
     }
   }
-
-
-
-  ngOnInit() {
-    this.reposi.getTavoli().subscribe((data) => {
-      this.tavoli = data;
-    });
-  }
 }
 

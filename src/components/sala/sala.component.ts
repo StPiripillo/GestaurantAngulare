@@ -34,6 +34,16 @@ export class SalaComponent implements OnInit {
     });
   }
 
+  occupaTavolo(tavolo: Tavolo): void {
+    tavolo.occupato = !tavolo.occupato;
+    this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
+      this.caricaTavoli();
+    }, error => {
+      alert("Errore durante il salvataggio");
+      console.error("Errore durante il salvataggio:", error);
+    });
+  }
+
   ngOnInit(): void {
     this.TavoloRepo.getTavoli().subscribe((data) => {
       this.tavoli = data;
@@ -107,15 +117,7 @@ export class SalaComponent implements OnInit {
       }
     }
   }
-  occupaTavolo(tavolo: Tavolo): void {
-    tavolo.occupato = !tavolo.occupato;
-    this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
-      this.caricaTavoli();
-    }, error => {
-      alert("Errore durante il salvataggio");
-      console.error("Errore durante il salvataggio:", error);
-    });
-  }
+
 
 }
 
