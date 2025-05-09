@@ -4,7 +4,7 @@
   </div>
   <h1 class="separatore"></h1>
   <div class="buttons">
-    <button (click)="dragAttivo = !dragAttivo" class="button-sposta-tavoli"> Sposta Tavoli</button>
+    <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
     <button class="button-nuovo-tavolo" (click)="salvaTavolo()">Nuovo Tavolo</button>
   </div>
 

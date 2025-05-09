@@ -69,10 +69,10 @@ main
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   user-select: none;
   transition: transform 0.002s ease;
-  z-index: 1;
+  transform: translateZ(0);
 }
 .menu-dropdown {
-  display: none; /* Nascosto per default */
+   display: none; /* Nascosto per default*/
   position: absolute;
   top: 0; /* Posizionato sotto l'elemento tavolo */
   left: 100%;
@@ -80,8 +80,8 @@ main
   padding: 8px 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: 1px solid #2c3e50;
-  border-radius: 4px;
-  z-index: 100; /* Assicura che appaia in primo piano */
+  border-radius: 4px;z-index: 9999;
+   /* Assicura che appaia in primo piano */
 }
 
 .menu-dropdown ul {

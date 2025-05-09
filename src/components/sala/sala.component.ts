@@ -9,6 +9,7 @@ import {VERSION} from '@angular/cdk';
 import {OverlayComponent} from '../overlay/overlay.component';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
+import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
   selector: 'app-sala',
@@ -26,7 +27,8 @@ export class SalaComponent implements OnInit {
   tavoli: Tavolo[] = [];
   utilizzabile: boolean = true;
 
-  constructor(private TavoloRepo: TavoloRepositoryService ) {
+
+  constructor(private TavoloRepo: TavoloRepositoryService, public tavoloS: TavoloGlobaleService) {
     this.controllaOra();
   }
 

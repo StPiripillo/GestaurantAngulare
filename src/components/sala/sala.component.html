@@ -3,11 +3,13 @@
     <div
       *ngFor="let tavolo of tavoli"
       cdkDrag
+      [cdkDragDisabled]="!tavoloS.dragAttivo"
       class="app-tavolo"
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
       (cdkDragEnded)="onDragEnded($event, tavolo)">
 
       <div [style.background-color] ="tavolo.occupato ? 'green' : 'red'" class="app-tavolo-container">
+
         <div class="app-tavolo-stato"> {{ tavolo.occupato ? 'Libero' : 'Occupato' }} </div>
         <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         <h1 class="app-tavolo-posti">N. Posti: {{tavolo.posti}}</h1>

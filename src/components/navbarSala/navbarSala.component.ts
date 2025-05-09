@@ -4,6 +4,7 @@ import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {NgForOf} from '@angular/common';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
+import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
   selector: 'app-nav-bar-sala',
@@ -13,12 +14,10 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 })
 export class NavbarSalaComponent {
 
-  dragAttivo: boolean = false;
-
   tavoli: Tavolo[] = [];
   utilizzabile=true;
 
-  constructor(private reposi: TavoloRepositoryService, private router: Router) {
+  constructor(private reposi: TavoloRepositoryService, private router: Router,public tavoloS:TavoloGlobaleService) {
     this.controllaOra()
   }
 

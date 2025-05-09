@@ -7,6 +7,7 @@ import {TavoloRepositoryService} from '../tavolo-repository.service';
 })
 export class TavoloGlobaleService {
   TavoliInApp:Tavolo[] = [];
+  dragAttivo: boolean = false;
 
   constructor(private tavoloRepo:TavoloRepositoryService)
   {
