@@ -40,11 +40,6 @@ export class SalaComponent implements OnInit {
     });
   }
 
-  onDragMoved(event: CdkDragMove): void {
-
-  }
-
-
   salvaPosizione(tavolo: Tavolo): void {
     this.TavoloRepo.updatePosition(tavolo.id, tavolo.x, tavolo.y).subscribe({
       error: (err) => console.error('Errore salvataggio', err)
@@ -120,6 +115,9 @@ export class SalaComponent implements OnInit {
       console.error("Errore durante il salvataggio:", error);
     });
   }
+
 }
+
+
 
 

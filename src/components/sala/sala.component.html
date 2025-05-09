@@ -10,16 +10,22 @@
 
 
     <div class="app-tavolo-header">
-
-      <button class="btn btn-danger" (click)="occupaTavolo(tavolo)">
-        {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
-      </button>
+      {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
       <div class="menu-dropdown">
-        <button class="btn btn-success" (click)="openModal()">Ordina</button>
+        <ul>
+          <li>
+            <button class="btn btn-danger" (click)="occupaTavolo(tavolo)">Occupa/Libera</button>
+          </li>
+          <li>
+            <button class="btn btn-success" (click)="openModal()">Ordina</button>
+          </li>
+          <li>
+            <button class="btn btn-warning" (click)="cambioNumero(tavolo)">Modifica</button>
+          </li>
+        </ul>
       </div>
       <h1>{{tavolo.numeroTavolo}} </h1>
       <button class="btn btn-primary" (click)="cancellaTavolo(tavolo)">Elimina</button>
-      <button class="btn btn-warning" (click)="cambioNumero(tavolo)">Modifica</button>
 
     </div>
     </div>
