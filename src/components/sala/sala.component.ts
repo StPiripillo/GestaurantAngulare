@@ -114,7 +114,6 @@ export class SalaComponent implements OnInit {
   occupaTavolo(tavolo: Tavolo): void {
     tavolo.occupato = !tavolo.occupato;
     this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
-      alert("Stato tavolo modificato");
       this.caricaTavoli();
     }, error => {
       console.error("Errore durante il salvataggio:", error);
