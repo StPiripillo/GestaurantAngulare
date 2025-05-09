@@ -1,65 +1,57 @@
-.nav-menu-button {
-  background-color: #17a2b8; /* Colore di sfondo blu chiaro */
+.navbar
+{
+  display: flex;
+  background-color: #2c3e50;
   padding: 10px 0;
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.navbar-brand:hover {
-  color: #d4edda; /* Colore verde chiaro al passaggio del mouse */
+  font-family: "Fira Code", sans-serif;
+  letter-spacing: 2px;
   text-decoration: none;
+  padding: 0 20px 0 20px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
 }
 
-.btn {
-  font-size: 1rem;
+.separatore
+{
+  border-left:1px solid #7a7c7e;
+  border-right:1px solid #7a7c7e;
+  padding: 0 0 0 0;
+  margin: 0 20px 0 10px;
+  height: 40px;
+}
+
+.button-nuovo-tavolo {
+  font-size: 1.5rem;
+  padding: 5px 10px 5px 10px;
   font-weight: bold;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-primary {
   background-color: #007bff;
   border: none;
   color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn-primary:hover {
+.button-nuovo-tavolo:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-.btn-danger {
-  background-color: #dc3545;
-  border: none;
-  color: #ffffff;
-}
+/*.grid-container {*/
+/*  display: grid;*/
+/*  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));*/
+/*  gap: 10px;*/
+/*  padding: 10px;*/
+/*}*/
 
-.btn-danger:hover {
-  background-color: #a71d2a;
-  transform: scale(1.05);
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  padding: 10px;
-}
-
-.grid-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  text-align: center;
-  background-color: #f9f9f9;
-}
+/*.grid-item {*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 5px;*/
+/*  padding: 10px;*/
+/*  text-align: center;*/
+/*  background-color: #f9f9f9;*/
+/*}*/

@@ -1,27 +1,29 @@
 <body>
-<main>
-  <div
-    *ngFor="let tavolo of tavoli"
-    cdkDrag
-    class="app-tavolo"
-    [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
-    (cdkDragEnded)="onDragEnded($event, tavolo)">
+  <main>
+    <div
+      *ngFor="let tavolo of tavoli"
+      cdkDrag
+      class="app-tavolo"
+      [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
+      (cdkDragEnded)="onDragEnded($event, tavolo)">
 
 
 
-    <div class="app-tavolo-header">
+      <div class="app-tavolo-container">
+        <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
+        <button class="button-stato" (click)="tavolo.occupato = !tavolo.occupato">
+          {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
+        </button>
+        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">X</button>
+        <div class="app-tavolo-opzioni">
+          <div class="button-ordine">
+            <button class="button-ordine-open" (click)="openModal()">Ordina</button>
+          </div>
+          <button class="button-modifica" (click)="cambioNumero(tavolo)">Modifica</button>
+        </div>
 
-      <button class="btn btn-danger" (click)="occupaTavolo(tavolo)">
-        {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
-      </button>
-      <div class="menu-dropdown">
-        <button class="btn btn-success" (click)="openModal()">Ordina</button>
+
       </div>
-      <h1>{{tavolo.numeroTavolo}} </h1>
-      <button class="btn btn-primary" (click)="cancellaTavolo(tavolo)">Elimina</button>
-      <button class="btn btn-warning" (click)="cambioNumero(tavolo)">Modifica</button>
-
     </div>
-    </div>
-</main>
+  </main>
 </body>
