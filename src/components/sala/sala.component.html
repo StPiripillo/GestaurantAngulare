@@ -7,15 +7,14 @@
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
       (cdkDragEnded)="onDragEnded($event, tavolo)">
 
-
-
       <div class="app-tavolo-container">
+        {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
         <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         <div class="menu-dropdown">
           <ul>
             <li>
               <button class="button-stato" (click)="tavolo.occupato = !tavolo.occupato">
-                {{ tavolo.occupato ? 'Libero' : 'Occupato' }}
+                Cambia stato
               </button>
             </li>
             <li>
@@ -26,7 +25,6 @@
             </li>
           </ul>
         </div>
-
         <button class="button-cancella" (click)="cancellaTavolo(tavolo)">X</button>
       </div>
     </div>
