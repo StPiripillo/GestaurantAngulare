@@ -12,8 +12,11 @@
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
   <h2>{{ tipologiaSelezionata }}</h2>
   <ul>
-    <li *ngFor="let prodotto of piattifiltrati">"</li>
+    <li *ngFor="let prodotto of piattifiltrati">{{prodotto}}</li>
   </ul>
+</div>
+<div *ngIf="piattifiltrati.length===0">
+    <p>Nessun prodotto disponibile per la tipologia selezionata</p>
 </div>
 
 <button (click)="toggleNota()">Nota</button>

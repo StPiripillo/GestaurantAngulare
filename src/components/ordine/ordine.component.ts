@@ -1,11 +1,10 @@
-import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
-import {Router} from '@angular/router';
 import {ProductEventService} from "../../services/product-event.service";
-import {Prodotti} from "../../services/prodotti-repo.service";
+import {Prodotti, ProdottiRepoService} from "../../services/prodotti-repo.service";
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -33,15 +32,22 @@ export class OrdineComponent implements OnInit {
     this.spaziatoreAttivo = false;
   }
 
-
+  prodotto: Prodotti[] = [];
   tipologie: Tipologia[] = [];
   tipologiaSelezionata: string = '';
   piattifiltrati: string[] = [];
 
-  constructor(private filtroService: FiltroService, router: Router, private productEventService: ProductEventService) {
+  constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService, private productEventService: ProductEventService) {
+  }
+
+  AllProdotti(){
+    this.prodottoRepo.getProdotti().subscribe((data) => {
+      this.prodotto = data;
+    });
   }
 
   ngOnInit(): void {
+    this.AllProdotti();
     this.filtroService.getCategoria().subscribe((categorie: string[]) => {
       this.tipologie = categorie.map(cat => cat as Tipologia);
     });
@@ -50,7 +56,7 @@ export class OrdineComponent implements OnInit {
 
   selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = tip ? [] : [];
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => prodotto.nome);
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
 }
