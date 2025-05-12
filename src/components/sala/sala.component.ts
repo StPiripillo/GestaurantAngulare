@@ -47,9 +47,6 @@ export class SalaComponent implements OnInit {
 
   cambiaStato(tavolo: Tavolo): void {
     tavolo.occupato = (tavolo.occupato +1) % 3;
-  }
-
-  occupaTavolo(tavolo: Tavolo): void {
     this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
       this.caricaTavoli();
     }, error => {
@@ -57,6 +54,7 @@ export class SalaComponent implements OnInit {
       console.error("Errore durante il salvataggio:", error);
     });
   }
+  
 
   ngOnInit(): void {
     this.TavoloRepo.getTavoli().subscribe((data) => {
