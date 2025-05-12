@@ -5,7 +5,7 @@ export interface Tavolo
   numeroTavolo:number,
   // Forma:Forma[],
   // Dimensione:Dimensione[],
-  occupato:boolean,
+  occupato:number,
   posti:number
   x:number,
   y:number

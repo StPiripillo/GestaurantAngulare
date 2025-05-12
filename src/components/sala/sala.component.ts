@@ -27,6 +27,7 @@ export class SalaComponent implements OnInit {
   tavoli: Tavolo[] = [];
   utilizzabile: boolean = true;
 
+  coloriTavolo : string[] = ['green', 'yellow', 'red'];
 
   constructor(private TavoloRepo: TavoloRepositoryService, public tavoloS: TavoloGlobaleService) {
     this.controllaOra();
@@ -44,14 +45,12 @@ export class SalaComponent implements OnInit {
     });
   }
 
+  cambiaStato(tavolo: Tavolo): void {
+    tavolo.occupato = (tavolo.occupato +1) % 3;
+  }
+
   occupaTavolo(tavolo: Tavolo): void {
-    tavolo.occupato = !tavolo.occupato;
-    this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
-      this.caricaTavoli();
-    }, error => {
-      alert("Errore durante il salvataggio");
-      console.error("Errore durante il salvataggio:", error);
-    });
+
   }
 
   ngOnInit(): void {

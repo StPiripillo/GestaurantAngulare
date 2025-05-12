@@ -7,7 +7,7 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
-  selector: 'app-nav-bar-sala',
+  selector: 'app-navbar-sala',
   imports: [RouterLink, NgForOf, ProdottiComponent],
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
@@ -28,7 +28,7 @@ export class NavbarSalaComponent {
       // Forma: [],
       // Dimensione: [],
       posti: 0,
-      occupato: false,
+      occupato: 0,
       x:0,
       y:0
     };

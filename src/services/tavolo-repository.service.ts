@@ -28,7 +28,7 @@ export class TavoloRepositoryService {
   updateNomeTavolo(id: number | undefined, numeroTavolo: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/numero`, { numeroTavolo });
   }
-  updateOccupato(id: number | undefined, occupato: boolean): Observable<any> {
+  updateOccupato(id: number | undefined, occupato: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/occupato`, { occupato });
   }
 }
