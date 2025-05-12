@@ -13,18 +13,18 @@ export interface Prodotti {
   providedIn: 'root'
 })
 export class ProdottiRepoService {
-
+  private apiUrl = '/api/ordine';
   constructor(private http:HttpClient) { }
 
   getProdotti():Observable<Prodotti[]> {
-    return this.http.get<Prodotti[]>('/api/ordine/prodotti');
+    return this.http.get<Prodotti[]>(`${this.apiUrl}/prodotti`);
   }
 
   modificaPrezzo(id: number | undefined, prezzo:number): Observable<any> {
-    return this.http.post('/api/ordine/${id}/prezzo', { prezzo });
+    return this.http.post(`${this.apiUrl}/${id}/prezzo`, { prezzo });
   }
 
   eliminaProdotto(id: number): Observable<Prodotti> {
-    return this.http.delete<Prodotti>('/api/ordine/${id}');
+    return this.http.delete<Prodotti>(`${this.apiUrl}/${id}`);
   }
 }

@@ -82,4 +82,18 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip);
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
+
+  //css carrello
+
+  isOpen = false;
+
+  openCart() {
+    this.isOpen = true;
+  }
+
+  closeCart() {
+    this.isOpen = false;
+  }
+
+
 }

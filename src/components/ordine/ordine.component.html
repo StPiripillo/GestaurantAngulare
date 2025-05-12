@@ -7,6 +7,7 @@
       </button>
     </li>
   </ul>
+  <button (click)="openCart()">Carrello</button>
 </nav>
 
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
@@ -43,5 +44,20 @@
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
 
-<app-prodotti #prodottiComponent></app-prodotti>
+<div class="cart-backdrop" *ngIf="isOpen" (click)="closeCart()"></div>
+
+<div class="cart-sidebar" [class.open]="isOpen">
+  <div class="cart-header">
+    <h3>Il Tuo Carrello</h3>
+    <button class="close-btn" (click)="closeCart()">×</button>
+  </div>
+  <div class="cart-content">
+    <!-- Inserisci i tuoi prodotti qui -->
+    <p>Prodotto 1</p>
+    <p>Prodotto 2</p>
+  </div>
+</div>
+
+
+<app-prodotti  #cart #prodottiComponent></app-prodotti>
 
