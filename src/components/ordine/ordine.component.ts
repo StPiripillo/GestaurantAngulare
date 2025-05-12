@@ -35,7 +35,7 @@ export class OrdineComponent implements OnInit {
   prodotto: Prodotti[] = [];
   tipologie: Tipologia[] = [];
   tipologiaSelezionata: string = '';
-  piattifiltrati: string[] = [];
+  piattifiltrati: { nome: string; prezzo: number }[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService, private productEventService: ProductEventService) {
   }
@@ -56,7 +56,7 @@ export class OrdineComponent implements OnInit {
 
   selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => prodotto.nome);
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => ({nome:prodotto.nome, prezzo:prodotto.prezzo}));
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
 }
