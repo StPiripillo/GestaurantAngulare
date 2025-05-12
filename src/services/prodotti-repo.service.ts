@@ -24,7 +24,7 @@ export class ProdottiRepoService {
     return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
   }
 
-  eliminaProdotto(id: number): Observable<any> {
-    return this.http.delete(`<span class="math-inline">\{this\.apiUrl\}/</span>{id}`);
+  eliminaProdotto(id: number | undefined): Observable<Prodotti> {
+    return this.http.delete<Prodotti>('/api/ordine/{id}');
   }
 }
