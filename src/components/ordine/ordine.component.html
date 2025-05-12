@@ -12,10 +12,12 @@
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
   <h2>{{ tipologiaSelezionata }}</h2>
   <ul>
-    <li *ngFor="let prodotto of piattifiltrati">{{prodotto.nome}} {{prodotto.prezzo | currency:'EUR':'symbol'}}</li>
+    <li *ngFor="let prodotto of piattifiltrati">{{prodotto.nome}} {{prodotto.prezzo | currency:'EUR':'symbol'}}
+      <button (click)="modificaPrezzo(prodotto.id)">Cambia Prezzo</button>
+      <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button></li>
+
   </ul>
-  <button (click)="modificaPrezzo()">Cambia Prezzo</button>
-  <button (click)="eliminaProdotto()">Elimina Prodotto</button>
+
 </div>
 <div *ngIf="piattifiltrati.length===0">
     <p>Nessun prodotto disponibile per la tipologia selezionata</p>
@@ -41,5 +43,5 @@
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
 
-<app-prodotti></app-prodotti>
+<app-prodotti #prodottiComponent></app-prodotti>
 

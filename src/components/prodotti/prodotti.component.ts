@@ -19,7 +19,7 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   filtro: string[] = [];
   private productEventSubscription?: Subscription;
 
-  modificaPrezzo(prodotto: Prodotti[]): void {
+  modificaPrezzo(prodotto: Prodotti): void {
     const nuovoPrezzo =parseFloat(prompt("Inserisci il nuovo prezzo:") || "0");
     const prodottoModificato = {prodotto, nuovoPrezzo};
 
@@ -29,7 +29,7 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   }
   eliminaProdotto(id: number): void {
     this.prodottoRepo.eliminaProdotto(id).subscribe(() => {
-      this.caricaProdotti();
+      this.filtraProdotti(this.filtro);
     });
   }
 

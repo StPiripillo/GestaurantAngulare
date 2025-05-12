@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
@@ -18,16 +18,28 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
 })
-export class OrdineComponent implements OnInit {
+export class OrdineComponent implements OnInit,AfterViewInit {
   spaziatoreAttivo = false;
 
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
-  modificaPrezzo(){
-    this.prodottiComponent.modificaPrezzo(this.prodotto);
+
+  ngAfterViewInit(): void {
+    // Ora this.prodottiComponent è inizializzato e puoi usarlo
   }
-  eliminaProdotto(){
-    this.prodottiComponent.eliminaProdotto(0);
+
+  modificaPrezzo(id:number){
+    const prodotto = this.prodottiComponent.prodotto.find(p => p.id === id);
+    if (prodotto)
+    {
+      this.prodottiComponent.modificaPrezzo(prodotto);
+    }
+
+  }
+  eliminaProdotto(id: number): void {
+    if (this.prodottiComponent) {
+      this.prodottiComponent.eliminaProdotto(id);
+    }
   }
 
 
@@ -45,7 +57,7 @@ export class OrdineComponent implements OnInit {
   prodotto: Prodotti[] = [];
   tipologie: Tipologia[] = [];
   tipologiaSelezionata: string = '';
-  piattifiltrati: { nome: string; prezzo: number }[] = [];
+  piattifiltrati: Prodotti[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
               private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
@@ -67,7 +79,7 @@ export class OrdineComponent implements OnInit {
 
   selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => ({id:prodotto.id,nome:prodotto.nome, prezzo:prodotto.prezzo}));
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip);
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
 }

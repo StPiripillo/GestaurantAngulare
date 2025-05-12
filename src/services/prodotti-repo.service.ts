@@ -20,11 +20,11 @@ export class ProdottiRepoService {
     return this.http.get<Prodotti[]>('/api/ordine/prodotti');
   }
 
-  modificaPrezzo(prodottoModificato: { prodotto: Prodotti[]; nuovoPrezzo: number }) {
-    return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
+  modificaPrezzo(prodottoModificato: { prodotto: Prodotti; nuovoPrezzo: number }) {
+    return this.http.post<Prodotti[]>('/api/prodotti/${id}/prezzo', prodottoModificato);
   }
 
-  eliminaProdotto(id: number | undefined): Observable<Prodotti> {
-    return this.http.delete<Prodotti>('/api/ordine/{id}');
+  eliminaProdotto(id: number): Observable<Prodotti> {
+    return this.http.delete<Prodotti>('/api/ordine/${id}');
   }
 }
