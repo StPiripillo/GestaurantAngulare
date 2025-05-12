@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgFor, NgForOf} from '@angular/common';
+import {NgFor, NgForOf, NgIf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag, CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
@@ -13,12 +13,13 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
 
 @Component({
   selector: 'app-sala',
-  imports: [
-    NgForOf,
-    CdkDrag,
-    FormsModule,
-    OverlayComponent
-  ],
+    imports: [
+        NgForOf,
+        CdkDrag,
+        FormsModule,
+        OverlayComponent,
+        NgIf
+    ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
 })
@@ -27,7 +28,7 @@ export class SalaComponent implements OnInit {
   tavoli: Tavolo[] = [];
   utilizzabile: boolean = true;
 
-  coloriTavolo : string[] = ['green', 'yellow', 'red'];
+  coloriTavolo : string[] = ['#1b980d', '#afb513', '#bc1010'];
 
   constructor(private TavoloRepo: TavoloRepositoryService, public tavoloS: TavoloGlobaleService) {
     this.controllaOra();
@@ -54,7 +55,7 @@ export class SalaComponent implements OnInit {
       console.error("Errore durante il salvataggio:", error);
     });
   }
-  
+
 
   ngOnInit(): void {
     this.TavoloRepo.getTavoli().subscribe((data) => {

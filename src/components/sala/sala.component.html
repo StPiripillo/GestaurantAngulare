@@ -10,7 +10,9 @@
 
       <div [style.background-color] = "coloriTavolo[tavolo.occupato]"  class="app-tavolo-container">
 
-        <div class="app-tavolo-stato-occupato"> Stato: {{tavolo.occupato}} </div>
+        <div class="app-tavolo-stato">
+          {{ tavolo.occupato === 0 ? 'Libero' : tavolo.occupato === 1 ? 'Prenotato' : 'Occupato' }}
+        </div>
         <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         <h1 class="app-tavolo-posti">N. Posti: {{tavolo.posti}}</h1>
         <div class="menu-dropdown">
@@ -28,7 +30,7 @@
             </li>
           </ul>
         </div>
-        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">X</button>
+        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">x</button>
       </div>
     </div>
   </main>
