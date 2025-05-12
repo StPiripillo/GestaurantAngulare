@@ -67,7 +67,7 @@ export class OrdineComponent implements OnInit {
 
   selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => ({nome:prodotto.nome, prezzo:prodotto.prezzo}));
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip).map(prodotto => ({id:prodotto.id,nome:prodotto.nome, prezzo:prodotto.prezzo}));
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
 }
