@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Prodotti} from '../models/Prodotti';
+
+export interface Prodotti {
+  id: number;
+  nome: string;
+  prezzo: number;
+  tipologia: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +22,9 @@ export class ProdottiRepoService {
 
   modificaPrezzo(prodottoModificato: { prodotto: Prodotti; prezzo: number }) {
     return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
-
   }
 
+  eliminaProdotto(id: number): Observable<any> {
+    return this.http.delete(`<span class="math-inline">\{this\.apiUrl\}/</span>{id}`);
+  }
 }

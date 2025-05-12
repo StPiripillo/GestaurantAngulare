@@ -1,43 +1,45 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CurrencyPipe, NgForOf} from '@angular/common';
-import {Prodotti} from '../../models/Prodotti';
-import {ProdottiRepoService} from '../../services/prodotti-repo.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ProdottiRepoService, Prodotti} from '../../services/prodotti-repo.service';
+import {FiltroService} from '../../services/filtro-repository.service';
+import {ProductEventService} from '../../services/product-event.service';
+import {Subscription} from 'rxjs';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-prodotti',
   imports: [
-    NgForOf,
     CurrencyPipe
   ],
   templateUrl: './prodotti.component.html',
   styleUrl: './prodotti.component.css'
 })
-export class ProdottiComponent implements OnInit {
-  prodotti: Prodotti[] = [];
+export class ProdottiComponent implements OnInit, OnDestroy {
+  prodotto: Prodotti[] = [];
   ordine: Prodotti[] = [];
   prodottiFiltrati: Prodotti[] = [];
-  filtro: string [] = [];
+  filtro: string[] = [];
+  private productEventSubscription?: Subscription;
 
-  constructor(private prodottoRepo:ProdottiRepoService, private route:ActivatedRoute) {
+  constructor(private prodottoRepo: ProdottiRepoService, private filtroService: FiltroService, private productEventService: ProductEventService) {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const Tipologia = params.get('tipologia');
-      if (Tipologia) {
-        this.filtraProdotti([Tipologia]);
-        this.caricaProdotti();
-      }
-    })
+    this.caricaProdotti();
+    this.productEventSubscription = this.productEventService.caricaProdotti$.subscribe(() => {
+      this.caricaProdotti();
+    });
+  }
 
+  ngOnDestroy(): void {
+    if (this.productEventSubscription) {
+      this.productEventSubscription.unsubscribe();
+    }
   }
 
   caricaProdotti(): void {
-    this.prodottoRepo.getProdotti().subscribe((data => {
-      this.prodotti = data;
-      this.prodottiFiltrati = data;
-    }));
+    this.prodottoRepo.getProdotti().subscribe(data => {
+      this.prodotto = data;
+    });
   }
 
   modificaPrezzo(prodotto: Prodotti, nuovoPrezzo: number): void {
@@ -47,12 +49,19 @@ export class ProdottiComponent implements OnInit {
     });
   }
 
-  filtraProdotti(tipologia:string[]): void {
+  filtraProdotti(tipologia: string[]): void {
     this.filtro = tipologia;
-    this.prodottiFiltrati=this.prodotti.filter(prodotti => prodotti.Tipologia ===tipologia);
+    this.prodottiFiltrati = tipologia.length > 0
+      ? this.prodotto.filter(prodotto => prodotto.tipologia === tipologia[0])
+      : this.prodotto;
   }
 
+  eliminaProdotto(id: number): void {
+    this.prodottoRepo.eliminaProdotto(id).subscribe(() => {
+      this.caricaProdotti();
+    });
+  }
 
-
+  protected readonly ProdottiRepoService = ProdottiRepoService;
 }
 
