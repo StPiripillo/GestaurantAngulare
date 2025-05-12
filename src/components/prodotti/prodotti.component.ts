@@ -4,6 +4,7 @@ import {FiltroService} from '../../services/filtro-repository.service';
 import {ProductEventService} from '../../services/product-event.service';
 import {Subscription} from 'rxjs';
 import {CurrencyPipe} from '@angular/common';
+import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 
 @Component({
   selector: 'app-prodotti',
@@ -20,7 +21,7 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   filtro: string[] = [];
   private productEventSubscription?: Subscription;
 
-  constructor(private prodottoRepo: ProdottiRepoService, private filtroService: FiltroService, private productEventService: ProductEventService) {
+  constructor(private prodottoRepo: ProdottiRepoService, public prodS: ProdGlobaleService, private productEventService: ProductEventService) {
   }
 
   ngOnInit(): void {

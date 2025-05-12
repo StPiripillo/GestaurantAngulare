@@ -5,6 +5,7 @@ import {Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import {Prodotti, ProdottiRepoService} from "../../services/prodotti-repo.service";
+import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -37,7 +38,8 @@ export class OrdineComponent implements OnInit {
   tipologiaSelezionata: string = '';
   piattifiltrati: { nome: string; prezzo: number }[] = [];
 
-  constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService, private productEventService: ProductEventService) {
+  constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
+              private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
   }
 
   AllProdotti(){
