@@ -32,7 +32,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     const prodotto = this.prodottiComponent.prodotto.find(p => p.id === id);
     if (prodotto)
     {
-      this.prodottiComponent.modificaPrezzo(prodotto);
+      this.prodottiComponent.modificaPrezzo(id);
     }
 
   }

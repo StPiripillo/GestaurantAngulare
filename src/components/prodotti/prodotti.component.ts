@@ -19,11 +19,10 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   filtro: string[] = [];
   private productEventSubscription?: Subscription;
 
-  modificaPrezzo(prodotto: Prodotti): void {
+  modificaPrezzo(id:number): void {
     const nuovoPrezzo =parseFloat(prompt("Inserisci il nuovo prezzo:") || "0");
-    const prodottoModificato = {prodotto, nuovoPrezzo};
 
-    this.prodottoRepo.modificaPrezzo(prodottoModificato).subscribe(() => {
+    this.prodottoRepo.modificaPrezzo(id, nuovoPrezzo).subscribe(() => {
       this.caricaProdotti();
     });
   }

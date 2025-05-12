@@ -20,8 +20,8 @@ export class ProdottiRepoService {
     return this.http.get<Prodotti[]>('/api/ordine/prodotti');
   }
 
-  modificaPrezzo(prodottoModificato: { prodotto: Prodotti; nuovoPrezzo: number }) {
-    return this.http.post<Prodotti[]>('/api/prodotti/${id}/prezzo', prodottoModificato);
+  modificaPrezzo(id: number | undefined, prezzo:number): Observable<any> {
+    return this.http.post('/api/ordine/${id}/prezzo', { prezzo });
   }
 
   eliminaProdotto(id: number): Observable<Prodotti> {
