@@ -16,7 +16,7 @@
     <li *ngFor="let prodotto of piattifiltrati">{{prodotto.nome}} {{prodotto.prezzo | currency:'EUR':'symbol'}}
       <button (click)="modificaPrezzo(prodotto.id)">Cambia Prezzo</button>
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
-      <button>Aggiungi al Carrello</button>
+      <button (click)="aggiungiAlCarrello(prodotto)">Aggiungi al Carrello</button>
     </li>
 
 
@@ -55,10 +55,12 @@
     <button class="close-btn" (click)="closeCart()">×</button>
   </div>
   <div class="cart-content">
-    <!-- Inserisci i tuoi prodotti qui -->
-    <p>Prodotto 1</p>
-    <p>Prodotto 2</p>
+
+    <p>1</p>
+    <p>2</p>
+
   </div>
+  <button class="close-btn" >Ordina</button>
 </div>
 
 

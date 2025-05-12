@@ -94,6 +94,17 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   closeCart() {
     this.isOpen = false;
   }
+  //
+
+  aggiungiAlCarrello(prodotto: Prodotti) {
+
+  }
+
+  ordinaProdotto(prodotto: Prodotti) {
+
+  }
+
+
 
 
 }
