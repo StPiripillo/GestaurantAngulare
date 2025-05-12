@@ -20,7 +20,7 @@ export class ProdottiRepoService {
     return this.http.get<Prodotti[]>('/api/ordine/prodotti');
   }
 
-  modificaPrezzo(prodottoModificato: { prodotto: Prodotti; prezzo: number }) {
+  modificaPrezzo(prodottoModificato: { prodotto: Prodotti[]; nuovoPrezzo: number }) {
     return this.http.post<Prodotti[]>('/api/prodotti', prodottoModificato);
   }
 

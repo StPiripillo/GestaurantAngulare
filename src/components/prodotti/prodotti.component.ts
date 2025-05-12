@@ -8,9 +8,7 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 
 @Component({
   selector: 'app-prodotti',
-  imports: [
-    CurrencyPipe
-  ],
+  imports: [],
   templateUrl: './prodotti.component.html',
   styleUrl: './prodotti.component.css'
 })
@@ -20,6 +18,20 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   prodottiFiltrati: Prodotti[] = [];
   filtro: string[] = [];
   private productEventSubscription?: Subscription;
+
+  modificaPrezzo(prodotto: Prodotti[]): void {
+    const nuovoPrezzo =parseFloat(prompt("Inserisci il nuovo prezzo:") || "0");
+    const prodottoModificato = {prodotto, nuovoPrezzo};
+
+    this.prodottoRepo.modificaPrezzo(prodottoModificato).subscribe(() => {
+      this.caricaProdotti();
+    });
+  }
+  eliminaProdotto(id: number): void {
+    this.prodottoRepo.eliminaProdotto(id).subscribe(() => {
+      this.caricaProdotti();
+    });
+  }
 
   constructor(private prodottoRepo: ProdottiRepoService, public prodS: ProdGlobaleService, private productEventService: ProductEventService) {
   }
@@ -43,24 +55,11 @@ export class ProdottiComponent implements OnInit, OnDestroy {
     });
   }
 
-  modificaPrezzo(prodotto: Prodotti, nuovoPrezzo: number): void {
-    const prodottoModificato = {prodotto, prezzo: nuovoPrezzo};
-    this.prodottoRepo.modificaPrezzo(prodottoModificato).subscribe(() => {
-      this.caricaProdotti();
-    });
-  }
-
   filtraProdotti(tipologia: string[]): void {
     this.filtro = tipologia;
     this.prodottiFiltrati = tipologia.length > 0
       ? this.prodotto.filter(prodotto => prodotto.tipologia === tipologia[0])
       : this.prodotto;
-  }
-
-  eliminaProdotto(id: number): void {
-    this.prodottoRepo.eliminaProdotto(id).subscribe(() => {
-      this.caricaProdotti();
-    });
   }
 
   protected readonly ProdottiRepoService = ProdottiRepoService;

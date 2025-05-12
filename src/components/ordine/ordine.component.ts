@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
-import {CommonModule, NgForOf, NgIf} from '@angular/common';
+import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
@@ -12,7 +12,8 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
   imports: [
     NgForOf,
     NgIf,
-    ProdottiComponent
+    ProdottiComponent,
+    CurrencyPipe
   ],
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
@@ -21,6 +22,14 @@ export class OrdineComponent implements OnInit {
   spaziatoreAttivo = false;
 
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
+  modificaPrezzo(){
+    this.prodottiComponent.modificaPrezzo(this.prodotto);
+  }
+  eliminaProdotto(){
+    this.prodottiComponent.eliminaProdotto(0);
+  }
+
 
   toggleNota(): void {
     this.spaziatoreAttivo = !this.spaziatoreAttivo;
