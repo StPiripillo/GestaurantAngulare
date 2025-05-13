@@ -1,18 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import {Component} from '@angular/core';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
-import {NgForOf} from '@angular/common';
-import {ProdottiComponent} from '../prodotti/prodotti.component';
+import {NgForOf, NgIf} from '@angular/common';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 import {ProdottiRepoService} from '../../services/prodotti-repo.service';
-import {Prodotti, Tipologia} from '../../models/Prodotti';
+import {Prodotti, Tip} from '../../models/Prodotti';
 import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-navbar-sala',
-  imports: [RouterLink, NgForOf, ProdottiComponent, FormsModule],
+  imports: [NgForOf, FormsModule, NgIf],
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
 })
@@ -22,12 +20,13 @@ export class NavbarSalaComponent {
   utilizzabile=true;
   mostraDialog: boolean = false;
   prodotto : Prodotti[] = [];
-  nuovoProdotto: { nome: string; prezzo: number; tipologia: Tipologia[] }=
+  tipologieDisponibili: Tip [] =Object.values(Tip);
+  nuovoProdotto: { nome: string; prezzo: number; tipologia: '' }=
     {
 
       nome: '',
       prezzo: 0,
-      tipologia: [Tipologia.ANTIPASTI]
+      tipologia: ''
 
     };
   prodottoDaSalvare: Prodotti =
@@ -35,10 +34,10 @@ export class NavbarSalaComponent {
       id: 0,
       nome: '',
       prezzo: 0,
-      Tipologia: [],
-      intolleranza: [],
-      ingredienti: [],
-      qtn: 0
+      tipologia: [] as Tip[],
+      intolleranze: [],
+      qtn: 0,
+      descrizione: ''
     };
 
 
@@ -95,8 +94,8 @@ export class NavbarSalaComponent {
 
         console.log("Dati Inviati: ", this.tavoloDaSalvare);
         this.reposi.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
-          alert("Tavolo aggiunto");
           this.caricaTavoli();
+          alert("Tavolo aggiunto");
           window.location.reload();
 
         }, error => {
@@ -117,20 +116,22 @@ export class NavbarSalaComponent {
       this.prodottoDaSalvare.id = Date.now();
       this.prodottoDaSalvare.nome = this.nuovoProdotto.nome;
       this.prodottoDaSalvare.prezzo = this.nuovoProdotto.prezzo;
-      this.prodottoDaSalvare.Tipologia = this.nuovoProdotto.tipologia;
+      this.prodottoDaSalvare.tipologia = [this.nuovoProdotto.tipologia];
       this.chiudiProdDialog()
       this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {
-        alert("Prodotto aggiunto");
         this.caricaProdotti();
+        alert("Prodotto aggiunto");
+
         window.location.reload();
 
       }, error => {
         console.log("Errore durante il salvataggio:", error);
       })
     }
+
   }
   nuovoProdottoDialog(): void {
-    this.nuovoProdotto = {nome: '', prezzo: 0, tipologia:[]};  // Reset dei dati
+    this.nuovoProdotto = {nome: '', prezzo: 0, tipologia:''};  // Reset dei dati
     this.mostraDialog = true;
   }
 
@@ -138,6 +139,5 @@ export class NavbarSalaComponent {
   chiudiProdDialog(): void {
     this.mostraDialog = false;
   }
-
 }
 

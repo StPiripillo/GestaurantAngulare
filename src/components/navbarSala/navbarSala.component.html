@@ -24,7 +24,7 @@
           <div class="form-group">
             <label for="tipologia">Tipologia:</label>
             <select id="tipologia" [(ngModel)]="nuovoProdotto.tipologia" name="tipologia" required>
-              <option *ngFor="let tipi of tipi" [value]="tipi">{{ tipi }}</option>
+              <option *ngFor="let tipi of tipologieDisponibili" [value]="tipi">{{ tipi }}</option>
             </select>
           </div>
           <div class="modal-actions">
