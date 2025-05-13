@@ -84,17 +84,17 @@ main
 .Piccolo.Rettangolare
 {
   width: 100px;
-  height: 80px;
+  height: 60px;
 }
 .Medio.Rettangolare
 {
-  width: 140px;
-  height: 120px;
+  width: 160px;
+  height: 100px;
 }
 .Grande.Rettangolare
 {
-  width: 180px;
-  height: 160px;
+  width: 200px;
+  height: 140px;
 }
 
 .menu-dropdown {
