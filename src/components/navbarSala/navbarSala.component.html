@@ -6,9 +6,8 @@
   <div class="buttons">
     <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
     <button class="button-nuovo-tavolo" (click)="salvaTavolo()">Nuovo Tavolo</button>
-    <button class="button-prodotti" >Nuovo Prodotto</button>
     <button class="button-sidebar" (click)="openSidebar()">Sidebar</button>
-    <button (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
+    <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
 
     <div class="sidebar-backdrop" *ngIf="isOpen" (click)="closeSidebar()"></div>
 
