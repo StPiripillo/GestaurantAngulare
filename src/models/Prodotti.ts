@@ -1,6 +1,6 @@
 import {Ingredienti} from './Ingredienti';
 
-export enum Tip
+export enum Tipologia
 {
   PRIMI=  "Primi",
   SECONDI= "Secondi",
@@ -16,7 +16,7 @@ export interface Prodotti
   nome: string,
   descrizione: string,
   prezzo: number,
-  tipologia: Tip[],
+  Tip: Tipologia,
   intolleranze: string[],
   qtn: number
 }

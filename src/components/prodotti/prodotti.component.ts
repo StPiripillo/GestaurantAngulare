@@ -5,7 +5,7 @@ import {ProductEventService} from '../../services/product-event.service';
 import {Subscription} from 'rxjs';
 import {CurrencyPipe} from '@angular/common';
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
-import {Prodotti, Tip} from '../../models/Prodotti';
+import {Prodotti, Tipologia} from '../../models/Prodotti';
 
 @Component({
   selector: 'app-prodotti',
@@ -58,7 +58,7 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   filtraProdotti(tipologia: string[]): void {
     this.filtro = tipologia;
     this.prodottiFiltrati = tipologia.length > 0
-      ? this.prodotto.filter(prodotto => prodotto.tipologia.includes(tipologia[0] as Tip))
+      ? this.prodotto.filter(prodotto => prodotto.Tip.includes(tipologia[0] as Tipologia))
       : this.prodotto;
   }
 

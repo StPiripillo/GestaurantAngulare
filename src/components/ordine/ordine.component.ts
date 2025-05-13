@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
-import {Prodotti, Tip} from '../../models/Prodotti';
+import {Prodotti, Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import { ProdottiRepoService} from "../../services/prodotti-repo.service";
@@ -55,7 +55,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   prodotto: Prodotti[] = [];
-  tipologie: Tip[] = [];
+  tipologie: Tipologia[] = [];
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
 
@@ -72,14 +72,14 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.AllProdotti();
     this.filtroService.getCategoria().subscribe((categorie: string[]) => {
-      this.tipologie = categorie.map(cat => cat as Tip);
+      this.tipologie = categorie.map(cat => cat as Tipologia);
     });
     this.productEventService.richiediCaricamento(); // Carica i prodotti all'inizializzazione
   }
 
-  selezionaTipologia(tip: Tip) {
+  selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia.includes(tip));
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.Tip.includes(tip));
     this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
   }
 

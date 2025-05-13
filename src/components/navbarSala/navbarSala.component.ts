@@ -5,7 +5,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 import {ProdottiRepoService} from '../../services/prodotti-repo.service';
-import {Prodotti, Tip} from '../../models/Prodotti';
+import {Prodotti, Tipologia} from '../../models/Prodotti';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -20,13 +20,12 @@ export class NavbarSalaComponent {
   utilizzabile=true;
   mostraDialog: boolean = false;
   prodotto : Prodotti[] = [];
-  tipologieDisponibili: Tip [] =Object.values(Tip);
-  nuovoProdotto: { nome: string; prezzo: number; tipologia: '' }=
+  nuovoProdotto: { nome: string; prezzo: number; Tip: Tipologia }=
     {
 
       nome: '',
       prezzo: 0,
-      tipologia: ''
+      Tip: Tipologia.ANTIPASTI
 
     };
   prodottoDaSalvare: Prodotti =
@@ -34,7 +33,7 @@ export class NavbarSalaComponent {
       id: 0,
       nome: '',
       prezzo: 0,
-      tipologia: [] as Tip[],
+      Tip: Tipologia.ANTIPASTI,
       intolleranze: [],
       qtn: 0,
       descrizione: ''
@@ -112,11 +111,11 @@ export class NavbarSalaComponent {
   }
 
   creaProdotto() {
-    if (this.nuovoProdotto.nome && this.nuovoProdotto.prezzo > 0 && this.nuovoProdotto.tipologia) {
+    if (this.nuovoProdotto.nome && this.nuovoProdotto.prezzo > 0 && this.nuovoProdotto.Tip) {
       this.prodottoDaSalvare.id = Date.now();
       this.prodottoDaSalvare.nome = this.nuovoProdotto.nome;
       this.prodottoDaSalvare.prezzo = this.nuovoProdotto.prezzo;
-      this.prodottoDaSalvare.tipologia = [this.nuovoProdotto.tipologia];
+      this.prodottoDaSalvare.Tip = this.nuovoProdotto.Tip;
       this.chiudiProdDialog()
       this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {
         this.caricaProdotti();
@@ -131,7 +130,7 @@ export class NavbarSalaComponent {
 
   }
   nuovoProdottoDialog(): void {
-    this.nuovoProdotto = {nome: '', prezzo: 0, tipologia:''};  // Reset dei dati
+    this.nuovoProdotto = {nome: '', prezzo: 0, Tip:Tipologia.ANTIPASTI};  // Reset dei dati
     this.mostraDialog = true;
   }
 
@@ -139,5 +138,8 @@ export class NavbarSalaComponent {
   chiudiProdDialog(): void {
     this.mostraDialog = false;
   }
+
+  protected readonly Object = Object;
+  protected readonly Tip = Tipologia;
 }
 
