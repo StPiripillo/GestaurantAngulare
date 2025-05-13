@@ -118,13 +118,10 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   ordini: Ordine[] = [];
-  ordineDaSalvare: Ordine = {
-    id : 0,
-    tavolo: 0,
-    totale: 0,
-    stato : false,
-    nomeOrdine: '',
-    noteOrdine: ''
+  ordineDaSalvare = {
+    tavoloId: 0,
+    prodotti: [] as string[],
+    totale: 0
   }
   ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
     nomeOrdine: '',
@@ -138,18 +135,13 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     });
   }
   creaOrdine(){
-    this.ordineDaSalvare.id = this.ordineDaSalvare.tavolo
+    this.ordineDaSalvare.tavoloId = this.ordineNuovo.nomeOrdine ? parseInt(this.ordineNuovo.nomeOrdine) : 0;
     this.ordineDaSalvare.totale = 0;
-    this.ordineDaSalvare.nomeOrdine = this.ordineNuovo.nomeOrdine;
-    this.ordineDaSalvare.noteOrdine = this.ordineNuovo.noteOrdine;
-    this.ordineDaSalvare.stato = false;
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
-    this.caricaOrdini();
-    alert("Ordine creato");
-    window.location.reload();
-
-  })
-
+      this.caricaOrdini();
+      alert("Ordine creato");
+      window.location.reload();
+    });
   }
 
 
