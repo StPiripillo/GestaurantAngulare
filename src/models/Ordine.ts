@@ -4,5 +4,7 @@ export interface Ordine
   tavolo: number;
   totale: number;
   stato: boolean;
+  nomeOrdine: string;
+  noteOrdine: string;
 
 }
