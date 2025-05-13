@@ -49,17 +49,13 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     this.spaziatoreAttivo = !this.spaziatoreAttivo;
   }
 
-  salvaAnnotazione(): void {
-    const testo = this.annotazioneRef.nativeElement.value;
-    alert("Annotazione salvata: " + testo);
-    this.annotazioneRef.nativeElement.value = '';
-    this.spaziatoreAttivo = false;
-  }
+
 
   prodotto: Prodotti[] = [];
   tipologie: Tipologia[]= [];
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
+  annotazione: String[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
               private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
@@ -105,7 +101,20 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   aggiungiAlCarrello(prodotto: Prodotti) {
     this.carrello.push(prodotto);
   }
-// ordinaProdotto() {
+
+  salvaAnnotazione(): void {
+    const testo = this.annotazioneRef.nativeElement.value.trim();
+    if (testo) {
+      this.annotazione.push(testo);
+      alert("Annotazione salvata: " + testo);
+    }
+    this.annotazioneRef.nativeElement.value = '';
+    this.spaziatoreAttivo = false;
+  }
+  rimuoviAnnotazione(index: number): void {
+    this.annotazione.splice(index, 1);
+  }
+
 
 
 
