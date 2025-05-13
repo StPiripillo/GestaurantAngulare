@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Tavolo} from '../../models/Tavolo';
+import {Dimensione, Forma, Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
@@ -20,14 +20,13 @@ export class NavbarSalaComponent {
   utilizzabile=true;
   mostraDialog: boolean = false;
   prodotto : Prodotti[] = [];
+
   nuovoProdotto: { nome: string; prezzo: number; Tip: Tipologia; intolleranze:Intolleranze }=
     {
-
       nome: '',
       prezzo: 0,
       Tip: Tipologia.ANTIPASTI,
       intolleranze: Intolleranze.GLUTINE,
-
     };
   prodottoDaSalvare: Prodotti =
     {
@@ -41,21 +40,28 @@ export class NavbarSalaComponent {
     };
 
 
-  constructor(private reposi: TavoloRepositoryService, private prodRepo:ProdGlobaleService,public tavoloS:TavoloGlobaleService, private ProdS:ProdottiRepoService) {
-    this.controllaOra()
-  }
-
+  nuovoTavolo: { numeroTavolo: number; forma: Forma; dimensione: Dimensione; posti: number} =
+    {
+      numeroTavolo: 0,
+      forma: Forma.QUADRATO,
+      dimensione: Dimensione.PICCOLO,
+      posti: 4
+    }
   tavoloDaSalvare: Tavolo =
     {
       id: 0,
       numeroTavolo: 0,
-      // Forma: [],
-      // Dimensione: [],
+      forma: Forma.QUADRATO,
+      dimensione: Dimensione.PICCOLO,
       posti: 0,
       occupato: 0,
       x:0,
       y:0
     };
+
+  constructor(private TavoloRepoS: TavoloRepositoryService, private prodRepo:ProdGlobaleService,public tavoloS:TavoloGlobaleService, private ProdS:ProdottiRepoService) {
+    this.controllaOra()
+  }
 
   controllaOra() {
     const oraAttuale = new Date().getHours();
@@ -64,9 +70,30 @@ export class NavbarSalaComponent {
   }
 
   caricaTavoli() {
-    this.reposi.getTavoli().subscribe((data) => {
+    this.TavoloRepoS.getTavoli().subscribe((data) => {
       this.tavoli = data;
     });
+  }
+
+  creaTavolo()
+  {
+    if (!this.utilizzabile) {
+      alert("Non puoi creare nuovi tavoli dopo le 20:00");
+      return; }
+    this.tavoloDaSalvare.id = Date.now();
+    this.tavoloDaSalvare.numeroTavolo = this.nuovoTavolo.numeroTavolo;
+    this.tavoloDaSalvare.forma = this.nuovoTavolo.forma;
+    this.tavoloDaSalvare.dimensione = this.nuovoTavolo.dimensione;
+    this.tavoloDaSalvare.posti = this.nuovoTavolo.posti;
+    this.TavoloRepoS.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
+      this.caricaTavoli();
+      alert("Tavolo aggiunto");
+
+      window.location.reload();
+
+    }, error => {
+      console.log("Errore durante il salvataggio:", error);
+    })
   }
 
   salvaTavolo() {
@@ -93,7 +120,7 @@ export class NavbarSalaComponent {
 
 
         console.log("Dati Inviati: ", this.tavoloDaSalvare);
-        this.reposi.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
+        this.TavoloRepoS.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
           this.caricaTavoli();
           alert("Tavolo aggiunto");
           window.location.reload();
@@ -143,17 +170,21 @@ export class NavbarSalaComponent {
 
   protected readonly Object = Object;
   protected readonly Tip = Tipologia;
+  protected readonly Intolleranze = Intolleranze;
+
+
+  // Funzioni per la sidebar
 
   isOpen = false;
 
   openSidebar() {
     this.isOpen = true;
   }
-
   closeSidebar() {
     this.isOpen = false;
   }
 
-  protected readonly Intolleranze = Intolleranze;
+  protected readonly Forma = Forma;
+  protected readonly Dimensione = Dimensione;
 }
 

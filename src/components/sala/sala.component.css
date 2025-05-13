@@ -52,7 +52,8 @@ main
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #ff0019;
+  background-color: transparent;
+  border-radius: 5px;
 }
 
 .app-tavolo-container {
