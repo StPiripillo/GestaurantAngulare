@@ -62,6 +62,32 @@
   </div>
   <button class="close-btn" >Ordina</button>
 </div>
+<div *ngIf="isOpen" class="carrello">
+  <h3>Carrello</h3>
+  <ul>
+    <li *ngFor="let item typeof carrello">
+      {{ item.nome }} - {{ item.prezzo | currency }}
+    </li>
+  </ul>
+  <button (click)="closeCart()">Chiudi</button>
+</div>
+<div *ngFor="let prodotto of prodotto">
+  <span>{{ prodotto.nome }}</span>
+  <button (click)="aggiungiAlCarrello(prodotto)">Aggiungi al carrello</button>
+</div>
+
+<hr>
+
+<h3>Carrello</h3>
+<ul>
+  <li *ngFor="let item of carrello">
+    {{ item.nome }} - {{ item.prezzo | currency }}
+  </li>
+</ul>
+
+
+<button (click)="openCart()">Apri Carrello</button>
+
 
 
 <app-prodotti  #cart #prodottiComponent></app-prodotti>

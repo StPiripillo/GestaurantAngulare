@@ -21,6 +21,8 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 export class OrdineComponent implements OnInit,AfterViewInit {
   spaziatoreAttivo = false;
 
+  carrello: Prodotti[]=[];
+
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
 
@@ -99,15 +101,13 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   closeCart() {
     this.isOpen = false;
   }
-  //
 
   aggiungiAlCarrello(prodotto: Prodotti) {
-
+    this.carrello.push(prodotto);
   }
+// ordinaProdotto() {
 
-  ordinaProdotto(prodotto: Prodotti) {
 
-  }
 
 
 
