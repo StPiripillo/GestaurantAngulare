@@ -4,7 +4,7 @@ import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {Prodotti, Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
-import { ProdottiRepoService} from "../../services/prodotti-repo.service";
+import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   prodotto: Prodotti[] = [];
-  tipologie: Tipologia[] = [];
+  tipologie: Tipologia[]= [];
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
 
@@ -70,17 +70,22 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.AllProdotti();
+    this.AllProdotti(); // Carica i prodotti iniziali
+
     this.filtroService.getCategoria().subscribe((categorie: string[]) => {
       this.tipologie = categorie.map(cat => cat as Tipologia);
     });
-    this.productEventService.richiediCaricamento(); // Carica i prodotti all'inizializzazione
+
+    // Ascolta l'evento di ricaricamento e aggiorna la lista dei prodotti
+    this.productEventService.caricaProdotti$.subscribe(() => {
+      this.AllProdotti();
+    });
   }
 
   selezionaTipologia(tip: Tipologia) {
     this.tipologiaSelezionata = tip;
-    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.Tip.includes(tip));
-    this.productEventService.richiediCaricamento(); // Ricarica i prodotti quando si seleziona una tipologia
+    this.piattifiltrati = this.prodotto.filter(prodotto => prodotto.tipologia === tip);
+    this.productEventService.richiediCaricamento();
   }
 
   //css carrello

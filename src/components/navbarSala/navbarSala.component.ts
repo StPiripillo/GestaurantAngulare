@@ -34,7 +34,7 @@ export class NavbarSalaComponent {
       id: 0,
       nome: '',
       prezzo: 0,
-      Tip: Tipologia.ANTIPASTI,
+      tipologia: Tipologia.ANTIPASTI,
       intolleranze: Intolleranze.GLUTINE,
       qtn: 0,
       descrizione: ''
@@ -116,7 +116,7 @@ export class NavbarSalaComponent {
       this.prodottoDaSalvare.id = Date.now();
       this.prodottoDaSalvare.nome = this.nuovoProdotto.nome;
       this.prodottoDaSalvare.prezzo = this.nuovoProdotto.prezzo;
-      this.prodottoDaSalvare.Tip = this.nuovoProdotto.Tip;
+      this.prodottoDaSalvare.tipologia = this.nuovoProdotto.Tip;
       this.prodottoDaSalvare.intolleranze = this.nuovoProdotto.intolleranze;
       this.chiudiProdDialog()
       this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {

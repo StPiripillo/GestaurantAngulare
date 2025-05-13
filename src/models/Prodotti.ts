@@ -23,7 +23,7 @@ export interface Prodotti
   nome: string,
   descrizione: string,
   prezzo: number,
-  Tip: Tipologia,
+  tipologia: Tipologia,
   intolleranze: Intolleranze,
   qtn: number
 }

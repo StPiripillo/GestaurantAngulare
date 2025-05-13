@@ -58,7 +58,7 @@ export class ProdottiComponent implements OnInit, OnDestroy {
   filtraProdotti(tipologia: string[]): void {
     this.filtro = tipologia;
     this.prodottiFiltrati = tipologia.length > 0
-      ? this.prodotto.filter(prodotto => prodotto.Tip.includes(tipologia[0] as Tipologia))
+      ? this.prodotto.filter(prodotto => prodotto.tipologia.includes(tipologia[0] as Tipologia))
       : this.prodotto;
   }
 
