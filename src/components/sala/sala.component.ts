@@ -130,7 +130,6 @@ export class SalaComponent implements OnInit {
         this.chiudiProdDialog();
         this.TavoloRepo.updateNomeTavolo(tavolo.id, tavolo.numeroTavolo).subscribe(() => {
           this.caricaTavoli();
-          alert("Tavolo modificato");
 
           window.location.reload();
         }, error => {
