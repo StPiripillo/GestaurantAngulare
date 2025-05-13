@@ -46,6 +46,12 @@
   <br />
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
+<div *ngIf="annotazione.length > 0" style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 1rem;">
+  <h4>Annotazioni</h4>
+  <ul>
+    <li *ngFor="let nota of annotazione">{{ nota }}</li>
+  </ul>
+</div>
 
 <div class="cart-backdrop" *ngIf="isOpen" (click)="closeCart()"></div>
 
