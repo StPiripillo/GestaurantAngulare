@@ -14,9 +14,11 @@
           {{ tavolo.occupato === 0 ? 'Libero' : tavolo.occupato === 1 ? 'Prenotato' : 'Occupato' }}
         </div>
         <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
-        <h1 class="app-tavolo-posti">N. Posti: {{tavolo.posti}}</h1>
         <div class="menu-dropdown">
           <ul>
+            <li>
+              <h1 class="app-tavolo-posti">Posti : {{tavolo.posti}}</h1>
+            </li>
             <li>
               <button class="button-stato" (click)="cambiaStato(tavolo)">
                 Cambia stato
