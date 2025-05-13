@@ -14,6 +14,7 @@ import {Tavolo} from '../../models/Tavolo';
 
   tavoli: Tavolo[] = [];
 
+
   constructor(private TavoloRepo: TavoloRepositoryService ) { }
 
   ngOnInit(): void {

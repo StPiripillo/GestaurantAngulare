@@ -6,6 +6,8 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
+import {OrdineRepositoryService} from '../../services/ordine-repository.service';
+import {Ordine} from '../../models/Ordine';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -58,7 +60,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   annotazione: String[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
-              private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
+              private productEventService: ProductEventService, private ordRep:OrdineRepositoryService) {
   }
 
   AllProdotti(){
@@ -113,6 +115,41 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
   rimuoviAnnotazione(index: number): void {
     this.annotazione.splice(index, 1);
+  }
+
+  ordini: Ordine[] = [];
+  ordineDaSalvare: Ordine = {
+    id : 0,
+    tavolo: 0,
+    totale: 0,
+    stato : false,
+    nomeOrdine: '',
+    noteOrdine: ''
+  }
+  ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
+    nomeOrdine: '',
+    noteOrdine: ''
+  }
+
+  caricaOrdini() {
+
+    this.ordRep.getOrdini().subscribe((data) => {
+      this.ordini = data;
+    });
+  }
+  creaOrdine(){
+    this.ordineDaSalvare.id = this.ordineDaSalvare.tavolo
+    this.ordineDaSalvare.totale = 0;
+    this.ordineDaSalvare.nomeOrdine = this.ordineNuovo.nomeOrdine;
+    this.ordineDaSalvare.noteOrdine = this.ordineNuovo.noteOrdine;
+    this.ordineDaSalvare.stato = false;
+    this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
+    this.caricaOrdini();
+    alert("Ordine creato");
+    window.location.reload();
+
+  })
+
   }
 
 

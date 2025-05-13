@@ -72,7 +72,10 @@
     </ul>
   </div>
 
-  <button class="close-btn" >Ordina</button>
+
+  <button class="close-btn" (click)="creaOrdine()">Ordina</button>
+
+
 </div>
 <div *ngIf="isOpen" class="carrello">
   <button (click)="closeCart()">Chiudi</button>
