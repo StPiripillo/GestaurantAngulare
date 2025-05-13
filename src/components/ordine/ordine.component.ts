@@ -23,7 +23,8 @@ import {Ordine} from '../../models/Ordine';
 export class OrdineComponent implements OnInit,AfterViewInit {
   spaziatoreAttivo = false;
 
-  carrello: Prodotti[]=[];
+  carrello: { prodotto: Prodotti, nota?: string }[] = [];
+
 
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
@@ -101,8 +102,10 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   aggiungiAlCarrello(prodotto: Prodotti) {
-    this.carrello.push(prodotto);
+    const nota = prompt('Aggiungi una nota per questo prodotto (opzionale):') ?? undefined;
+    this.carrello.push({ nota, prodotto });
   }
+
 
   salvaAnnotazione(): void {
     const testo = this.annotazioneRef.nativeElement.value.trim();

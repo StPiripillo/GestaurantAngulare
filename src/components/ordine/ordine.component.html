@@ -56,10 +56,15 @@
     <button class="close-btn" (click)="closeCart()">×</button>
   </div>
   <div class="cart-content">
+    <ul>
+      <li *ngFor="let item of carrello">
+        {{ item.prodotto.nome }} - {{ item.prodotto.prezzo | currency }}
+        <div *ngIf="item.nota" style="font-style: italic; color: #555;">
+          Nota: {{ item.nota }}
+        </div>
+      </li>
+    </ul>
 
-    <li *ngFor="let item of carrello">
-      {{ item.nome }} - {{ item.prezzo | currency }}
-    </li>
   </div>
   <div *ngIf="annotazione.length > 0" class="annotazioni-carrello"
        style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 0.5rem;">
