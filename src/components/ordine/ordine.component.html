@@ -16,7 +16,7 @@
     <li *ngFor="let prodotto of piattifiltrati">{{prodotto.nome}} {{prodotto.prezzo | currency:'EUR':'symbol'}}
       <button (click)="modificaPrezzo(prodotto.id)">Cambia Prezzo</button>
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
-      <button (click)="aggiungiAlCarrello(prodotto)">Aggiungi al Carrello</button>
+      <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
 
 
@@ -62,37 +62,21 @@
   </div>
   <div class="cart-content">
 
-    <p>1</p>
-    <p>2</p>
+    <li *ngFor="let item of carrello">
+      {{ item.nome }} - {{ item.prezzo | currency }}
+    </li>
 
   </div>
   <button class="close-btn" >Ordina</button>
 </div>
 <div *ngIf="isOpen" class="carrello">
-  <h3>Carrello</h3>
-  <ul>
-    <li *ngFor="let item typeof carrello">
-      {{ item.nome }} - {{ item.prezzo | currency }}
-    </li>
-  </ul>
   <button (click)="closeCart()">Chiudi</button>
-</div>
-<div *ngFor="let prodotto of prodotto">
-  <span>{{ prodotto.nome }}</span>
-  <button (click)="aggiungiAlCarrello(prodotto)">Aggiungi al carrello</button>
 </div>
 
 <hr>
 
-<h3>Carrello</h3>
-<ul>
-  <li *ngFor="let item of carrello">
-    {{ item.nome }} - {{ item.prezzo | currency }}
-  </li>
-</ul>
 
 
-<button (click)="openCart()">Apri Carrello</button>
 
 
 
