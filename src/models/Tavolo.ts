@@ -14,7 +14,7 @@ export interface Tavolo
 export enum Forma
 {
   QUADRATO = 'QUADRATO',
-  RETTANGOLO = 'RETTANGOLO',
+  RETTANGOLARE = 'RETTANGOLARE',
   ROTONDO = 'ROTONDO'
 }
 
