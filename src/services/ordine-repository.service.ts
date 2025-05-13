@@ -11,7 +11,7 @@ export class OrdineRepositoryService {
   constructor(private http:HttpClient) {}
 
 
-  nuovoOrdine(ordine:Ordine):Observable<Ordine>
+  nuovoOrdine(ordine: { tavoloId: number; prodotti: string[]; totale: number }):Observable<Ordine>
   {
     return this.http.post<Ordine>(`${this.apiUrl}/newordine`, ordine);
   }
