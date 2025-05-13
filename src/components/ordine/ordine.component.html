@@ -8,6 +8,7 @@
     </li>
   </ul>
   <button (click)="openCart()">Carrello</button>
+  <button >Ordini</button>
 </nav>
 
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
@@ -18,10 +19,16 @@
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
       <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
-
-
   </ul>
+  <!-- parte degli ordini temporanea -->
+  <div class="ordini-container">
+    <h3>Ordini</h3>
+    <ul>
+      <li *ngFor="let ordine of ordini">
+        {{ ordine.nomeOrdine }} - {{ ordine.id}}
 
+      </li>
+    </ul>
 </div>
 <div *ngIf="piattifiltrati.length===0">
     <p>Nessun prodotto disponibile per la tipologia selezionata</p>
@@ -63,6 +70,7 @@
           Nota: {{ item.nota }}
         </div>
       </li>
+
     </ul>
 
   </div>
