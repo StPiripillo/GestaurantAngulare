@@ -6,7 +6,35 @@
   <div class="buttons">
     <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
     <button class="button-nuovo-tavolo" (click)="salvaTavolo()">Nuovo Tavolo</button>
-    <button class="button-prodotti" >Nuovo Prodotto</button>
+    <button (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
+
+    <div class="modal" *ngIf="mostraDialog">
+      <div class="modal-content">
+        <span class="close" (click)="chiudiProdDialog()">&times;</span>
+        <h2>Crea Nuovo Prodotto</h2>
+        <form (ngSubmit)="creaProdotto()">
+          <div class="form-group">
+            <label for="nome">Nome Prodotto:</label>
+            <input id="nome" type="text" [(ngModel)]="nuovoProdotto.nome" name="nome" required />
+          </div>
+          <div class="form-group">
+            <label for="prezzo">Prezzo:</label>
+            <input id="prezzo" type="number" [(ngModel)]="nuovoProdotto.prezzo" name="prezzo" required />
+          </div>
+          <div class="form-group">
+            <label for="tipologia">Tipologia:</label>
+            <select id="tipologia" [(ngModel)]="nuovoProdotto.tipologia" name="tipologia" required>
+              <option *ngFor="let tipi of tipi" [value]="tipi">{{ tipi }}</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button type="button" (click)="chiudiProdDialog()">Annulla</button>
+            <button type="submit">Crea</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </div>
 
 </nav>

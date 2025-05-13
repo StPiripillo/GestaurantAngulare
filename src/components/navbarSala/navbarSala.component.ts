@@ -5,10 +5,14 @@ import {TavoloRepositoryService} from '../../services/tavolo-repository.service'
 import {NgForOf} from '@angular/common';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
+import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
+import {ProdottiRepoService} from '../../services/prodotti-repo.service';
+import {Prodotti, Tipologia} from '../../models/Prodotti';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-navbar-sala',
-  imports: [RouterLink, NgForOf, ProdottiComponent],
+  imports: [RouterLink, NgForOf, ProdottiComponent, FormsModule],
   templateUrl: './navbarSala.component.html',
   styleUrl: './navbarSala.component.css'
 })
@@ -16,8 +20,29 @@ export class NavbarSalaComponent {
 
   tavoli: Tavolo[] = [];
   utilizzabile=true;
+  mostraDialog: boolean = false;
+  prodotto : Prodotti[] = [];
+  nuovoProdotto: { nome: string; prezzo: number; tipologia: Tipologia[] }=
+    {
 
-  constructor(private reposi: TavoloRepositoryService, private router: Router,public tavoloS:TavoloGlobaleService) {
+      nome: '',
+      prezzo: 0,
+      tipologia: [Tipologia.ANTIPASTI]
+
+    };
+  prodottoDaSalvare: Prodotti =
+    {
+      id: 0,
+      nome: '',
+      prezzo: 0,
+      Tipologia: [],
+      intolleranza: [],
+      ingredienti: [],
+      qtn: 0
+    };
+
+
+  constructor(private reposi: TavoloRepositoryService, private prodRepo:ProdGlobaleService,public tavoloS:TavoloGlobaleService, private ProdS:ProdottiRepoService) {
     this.controllaOra()
   }
 
@@ -80,5 +105,39 @@ export class NavbarSalaComponent {
       }
     }
   }
+
+  caricaProdotti() {
+    this.ProdS.getProdotti().subscribe((data) => {
+      this.prodotto= data;
+    });
+  }
+
+  creaProdotto() {
+    if (this.nuovoProdotto.nome && this.nuovoProdotto.prezzo > 0 && this.nuovoProdotto.tipologia) {
+      this.prodottoDaSalvare.id = Date.now();
+      this.prodottoDaSalvare.nome = this.nuovoProdotto.nome;
+      this.prodottoDaSalvare.prezzo = this.nuovoProdotto.prezzo;
+      this.prodottoDaSalvare.Tipologia = this.nuovoProdotto.tipologia;
+      this.chiudiProdDialog()
+      this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {
+        alert("Prodotto aggiunto");
+        this.caricaProdotti();
+        window.location.reload();
+
+      }, error => {
+        console.log("Errore durante il salvataggio:", error);
+      })
+    }
+  }
+  nuovoProdottoDialog(): void {
+    this.nuovoProdotto = {nome: '', prezzo: 0, tipologia:[]};  // Reset dei dati
+    this.mostraDialog = true;
+  }
+
+  // Chiude il dialog
+  chiudiProdDialog(): void {
+    this.mostraDialog = false;
+  }
+
 }
 
