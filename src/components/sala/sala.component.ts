@@ -139,9 +139,8 @@ export class SalaComponent implements OnInit {
     }
   }
 
-
-  protected readonly Intolleranze = Intolleranze;
-  protected readonly Tip = Tipologia;
+  protected readonly Forma = Forma;
+  protected readonly Dimensione = Dimensione;
 }
 
 
