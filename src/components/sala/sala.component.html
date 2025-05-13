@@ -12,11 +12,12 @@
            [ngClass]="{'Rotondo': tavolo.forma == Forma.ROTONDO, 'Quadrato': tavolo.forma == Forma.QUADRATO, 'Rettangolare': tavolo.forma == Forma.RETTANGOLARE,
            'Piccolo': tavolo.dimensione == Dimensione.PICCOLO, 'Medio': tavolo.dimensione == Dimensione.MEDIO, 'Grande': tavolo.dimensione == Dimensione.GRANDE}"
            class="app-tavolo-container">
-
-        <div class="app-tavolo-stato">
-          {{ tavolo.occupato === 0 ? 'Libero' : tavolo.occupato === 1 ? 'Prenotato' : 'Occupato' }}
+        <div class="app-tavolo-items">
+          <h4 class="app-tavolo-stato">
+            {{ tavolo.occupato === 0 ? 'Libero' : tavolo.occupato === 1 ? 'Prenotato' : 'Occupato' }}
+          </h4>
+          <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         </div>
-        <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         <div class="menu-dropdown">
           <ul>
             <li>
@@ -48,9 +49,11 @@
                 </div>
               </div>
             </li>
+            <li>
+              <button class="button-cancella" (click)="cancellaTavolo(tavolo)">Elimina</button>
+            </li>
           </ul>
         </div>
-        <button class="button-cancella" (click)="cancellaTavolo(tavolo)">x</button>
       </div>
     </div>
   </main>

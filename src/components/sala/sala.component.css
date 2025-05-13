@@ -22,13 +22,14 @@ main
 
 .app-tavolo-numero
 {
-  position: absolute;
+  margin: 0;
+  font-size: 2rem;
 }
 
 .app-tavolo-stato
 {
-  position: absolute;
-  top: 10%;
+  margin: 0;
+  font-weight: normal;
 }
 
 .app-tavolo-posti
@@ -37,20 +38,11 @@ main
   font-size: 20px;
 }
 
-.button-cancella
-{
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: transparent;
-  border-radius: 5px;
-}
-
 .app-tavolo-container {
   position: absolute;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   color: white;
   text-align: center;
   border-radius: 6px;
@@ -59,6 +51,13 @@ main
   user-select: none;
   transition: transform 0.002s ease;
   transform: translateZ(0);
+}
+
+.app-tavolo-items
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Rotondo
