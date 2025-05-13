@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
-import {Tavolo} from '../../models/Tavolo';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {Dimensione, Forma, Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
@@ -11,11 +11,12 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
 
 @Component({
   selector: 'app-sala',
-    imports: [
-        NgForOf,
-        CdkDrag,
-        FormsModule,
-    ],
+  imports: [
+    NgForOf,
+    CdkDrag,
+    FormsModule,
+    NgClass,
+  ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
 })
@@ -133,6 +134,8 @@ export class SalaComponent implements OnInit {
   }
 
 
+  protected readonly Forma = Forma;
+  protected readonly Dimensione = Dimensione;
 }
 
 

@@ -5,8 +5,7 @@
   <h1 class="separatore"></h1>
   <div class="buttons">
     <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
-    <button class="button-nuovo-tavolo" (click)="salvaTavolo()">Nuovo Tavolo</button>
-    <button class="button-sidebar" (click)="openSidebar()">Sidebar aggiungi tavolo</button>
+    <button class="button-sidebar" (click)="openSidebar()">Aggiungi Tavolo</button>
     <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
 
     <div class="sidebar-backdrop" *ngIf="isOpen" (click)="closeSidebar()"></div>
@@ -35,7 +34,7 @@
               </select>
             </div>
             <div class="modal-actions">
-              <button type="submit">Crea</button>
+              <button type="submit">Aggiungi</button>
             </div>
           </form>
         </div>

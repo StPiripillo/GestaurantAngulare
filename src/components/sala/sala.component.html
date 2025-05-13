@@ -8,7 +8,10 @@
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
       (cdkDragEnded)="onDragEnded($event, tavolo)">
 
-      <div [style.background-color] = "coloriTavolo[tavolo.occupato]"  class="app-tavolo-container">
+      <div [style.background-color] = "coloriTavolo[tavolo.occupato]"
+           [ngClass]="{'Rotondo': tavolo.forma == Forma.ROTONDO, 'Quadrato': tavolo.forma == Forma.QUADRATO, 'Rettangolare': tavolo.forma == Forma.RETTANGOLARE,
+           'Piccolo': tavolo.dimensione == Dimensione.PICCOLO, 'Medio': tavolo.dimensione == Dimensione.MEDIO, 'Grande': tavolo.dimensione == Dimensione.GRANDE}"
+           class="app-tavolo-container">
 
         <div class="app-tavolo-stato">
           {{ tavolo.occupato === 0 ? 'Libero' : tavolo.occupato === 1 ? 'Prenotato' : 'Occupato' }}
