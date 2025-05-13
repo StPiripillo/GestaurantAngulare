@@ -111,6 +111,9 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     this.annotazioneRef.nativeElement.value = '';
     this.spaziatoreAttivo = false;
   }
+  rimuoviAnnotazione(index: number): void {
+    this.annotazione.splice(index, 1);
+  }
 
 
 
