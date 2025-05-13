@@ -6,7 +6,7 @@
   <div class="buttons">
     <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
     <button class="button-nuovo-tavolo" (click)="salvaTavolo()">Nuovo Tavolo</button>
-    <button class="button-sidebar" (click)="openSidebar()">Sidebar</button>
+    <button class="button-sidebar" (click)="openSidebar()">Sidebar aggiungi tavolo</button>
     <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
 
     <div class="sidebar-backdrop" *ngIf="isOpen" (click)="closeSidebar()"></div>
@@ -16,6 +16,29 @@
         <h3>Aggiungi Tavolo</h3>
         <p>Seleziona la forma e la dimensione del tavolo che vuoi aggiungere</p>
         <button class="close-btn" (click)="closeSidebar()">×</button>
+      </div>
+      <div class="modal-tavoli">
+        <div class="modal-content">
+          <form (ngSubmit)="creaTavolo()">
+            <div class="form-group">
+              <label>Numero Tavolo: </label>
+              <input id="numeroTavolo" type="number" [(ngModel)]="nuovoTavolo.numeroTavolo" name="numeroTavolo" required />
+            </div>
+            <div class="form-group">
+              <label>Forma:</label>
+              <select id="forma" [(ngModel)]="nuovoTavolo.forma" name="forma" required>
+                <option *ngFor="let forme of Object.values(Forma)" [value]="forme">{{ forme }}</option>
+              </select>
+              <label>Dimensione:</label>
+              <select id="dimensione" [(ngModel)]="nuovoTavolo.dimensione" name="dimensione" required >
+                <option *ngFor="let dimensioni of Object.values(Dimensione)" [value]="dimensioni">{{ dimensioni }}</option>
+              </select>
+            </div>
+            <div class="modal-actions">
+              <button type="submit">Crea</button>
+            </div>
+          </form>
+        </div>
       </div>
       <form></form>
     </div>

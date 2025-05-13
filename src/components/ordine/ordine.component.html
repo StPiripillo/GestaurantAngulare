@@ -16,7 +16,7 @@
     <li *ngFor="let prodotto of piattifiltrati">{{prodotto.nome}} {{prodotto.prezzo | currency:'EUR':'symbol'}}
       <button (click)="modificaPrezzo(prodotto.id)">Cambia Prezzo</button>
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
-      <button (click)="aggiungiAlCarrello(prodotto)">Aggiungi al Carrello</button>
+      <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
 
 
@@ -47,21 +47,45 @@
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
 
+
 <div class="cart-backdrop" *ngIf="isOpen" (click)="closeCart()"></div>
 
 <div class="cart-sidebar" [class.open]="isOpen">
   <div class="cart-header">
-    <h3>Il Tuo Carrello</h3>
+    <h3>Il Tuo Ordine</h3>
     <button class="close-btn" (click)="closeCart()">×</button>
   </div>
   <div class="cart-content">
 
-    <p>1</p>
-    <p>2</p>
-
+    <li *ngFor="let item of carrello">
+      {{ item.nome }} - {{ item.prezzo | currency }}
+    </li>
   </div>
-  <button class="close-btn" >Ordina</button>
+  <div *ngIf="annotazione.length > 0" class="annotazioni-carrello"
+       style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 0.5rem;">
+    <h4>Annotazioni</h4>
+    <ul>
+      <li *ngFor="let nota of annotazione; let i = index">
+        {{ nota }}
+        <button (click)="rimuoviAnnotazione(i)" style="margin-left: 1rem; color: red;">🗑</button>
+      </li>
+    </ul>
+  </div>
+
+
+  <button class="close-btn" (click)="creaOrdine()">Ordina</button>
+
+
 </div>
+<div *ngIf="isOpen" class="carrello">
+  <button (click)="closeCart()">Chiudi</button>
+</div>
+
+<hr>
+
+
+
+
 
 
 <app-prodotti  #cart #prodottiComponent></app-prodotti>

@@ -6,6 +6,8 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
+import {OrdineRepositoryService} from '../../services/ordine-repository.service';
+import {Ordine} from '../../models/Ordine';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -20,6 +22,8 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 })
 export class OrdineComponent implements OnInit,AfterViewInit {
   spaziatoreAttivo = false;
+
+  carrello: Prodotti[]=[];
 
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
@@ -47,20 +51,16 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     this.spaziatoreAttivo = !this.spaziatoreAttivo;
   }
 
-  salvaAnnotazione(): void {
-    const testo = this.annotazioneRef.nativeElement.value;
-    alert("Annotazione salvata: " + testo);
-    this.annotazioneRef.nativeElement.value = '';
-    this.spaziatoreAttivo = false;
-  }
+
 
   prodotto: Prodotti[] = [];
   tipologie: Tipologia[]= [];
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
+  annotazione: String[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
-              private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
+              private productEventService: ProductEventService, private ordRep:OrdineRepositoryService) {
   }
 
   AllProdotti(){
@@ -99,15 +99,61 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   closeCart() {
     this.isOpen = false;
   }
-  //
 
   aggiungiAlCarrello(prodotto: Prodotti) {
+    this.carrello.push(prodotto);
+  }
+
+  salvaAnnotazione(): void {
+    const testo = this.annotazioneRef.nativeElement.value.trim();
+    if (testo) {
+      this.annotazione.push(testo);
+      alert("Annotazione salvata: " + testo);
+    }
+    this.annotazioneRef.nativeElement.value = '';
+    this.spaziatoreAttivo = false;
+  }
+  rimuoviAnnotazione(index: number): void {
+    this.annotazione.splice(index, 1);
+  }
+
+  ordini: Ordine[] = [];
+  ordineDaSalvare: Ordine = {
+    id : 0,
+    tavolo: 0,
+    totale: 0,
+    stato : false,
+    nomeOrdine: '',
+    noteOrdine: ''
+  }
+  ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
+    nomeOrdine: '',
+    noteOrdine: ''
+  }
+
+  caricaOrdini() {
+
+    this.ordRep.getOrdini().subscribe((data) => {
+      this.ordini = data;
+    });
+  }
+  creaOrdine(){
+    this.ordineDaSalvare.id = this.ordineDaSalvare.tavolo
+    this.ordineDaSalvare.totale = 0;
+    this.ordineDaSalvare.nomeOrdine = this.ordineNuovo.nomeOrdine;
+    this.ordineDaSalvare.noteOrdine = this.ordineNuovo.noteOrdine;
+    this.ordineDaSalvare.stato = false;
+    this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
+    this.caricaOrdini();
+    alert("Ordine creato");
+    window.location.reload();
+
+  })
 
   }
 
-  ordinaProdotto(prodotto: Prodotti) {
 
-  }
+
 
 
 
