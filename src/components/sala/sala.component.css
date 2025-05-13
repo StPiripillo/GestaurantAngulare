@@ -20,25 +20,15 @@ main
   z-index: 0;
 }
 
-.app-tavolo-container
-{
-  position: relative;
-  width: 160px;
-  height: 80px;
-}
-
 .app-tavolo-numero
 {
   position: absolute;
-  width: 100%;
-  top: 5%;
 }
 
 .app-tavolo-stato
 {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 10%;
 }
 
 .app-tavolo-posti
@@ -58,9 +48,9 @@ main
 
 .app-tavolo-container {
   position: absolute;
-  width: 160px;
-  height: 80px;
-  background-color: #3bd219;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   text-align: center;
   border-radius: 6px;
@@ -70,17 +60,54 @@ main
   transition: transform 0.002s ease;
   transform: translateZ(0);
 }
+
+.Rotondo
+{
+  border-radius: 50%;
+}
+
+.Piccolo
+{
+  width: 80px;
+  height: 80px;
+}
+.Medio
+{
+  width: 120px;
+  height: 120px;
+}
+.Grande
+{
+  width: 160px;
+  height: 160px;
+}
+.Piccolo.Rettangolare
+{
+  width: 100px;
+  height: 80px;
+}
+.Medio.Rettangolare
+{
+  width: 140px;
+  height: 120px;
+}
+.Grande.Rettangolare
+{
+  width: 180px;
+  height: 160px;
+}
+
 .menu-dropdown {
-   display: none; /* Nascosto per default*/
+  display: none; /* Nascosto per default*/
   position: absolute;
-  top: 0; /* Posizionato sotto l'elemento tavolo */
+  top: 0;
   left: 100%;
   background-color: #2c3e50;
   padding: 8px 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: 1px solid #2c3e50;
-  border-radius: 4px;z-index: 9999;
-   /* Assicura che appaia in primo piano */
+  border-radius: 10px;
+  z-index: 9999;
 }
 
 .menu-dropdown ul {
@@ -114,8 +141,6 @@ main
   background-color: #e67e22; /* Arancione raffinato */
 }
 
-
-/* Mostra il menu quando si passa il mouse sopra il tavolo */
 .app-tavolo:hover .menu-dropdown {
   display: block;
   z-index: 100;

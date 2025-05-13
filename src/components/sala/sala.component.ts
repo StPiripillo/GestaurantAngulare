@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
-import {Tavolo} from '../../models/Tavolo';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {Dimensione, Forma, Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
@@ -8,7 +8,6 @@ import {OverlayComponent} from '../overlay/overlay.component';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
-import {Intolleranze, Tipologia} from '../../models/Prodotti';
 
 @Component({
   selector: 'app-sala',
@@ -16,7 +15,8 @@ import {Intolleranze, Tipologia} from '../../models/Prodotti';
     NgForOf,
     CdkDrag,
     FormsModule,
-    NgIf,
+    NgClass,
+    NgIf
   ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
@@ -139,9 +139,8 @@ export class SalaComponent implements OnInit {
     }
   }
 
-
-  protected readonly Intolleranze = Intolleranze;
-  protected readonly Tip = Tipologia;
+  protected readonly Forma = Forma;
+  protected readonly Dimensione = Dimensione;
 }
 
 

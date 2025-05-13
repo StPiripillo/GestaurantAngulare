@@ -45,11 +45,10 @@ export class NavbarSalaComponent {
       numeroTavolo: 0,
       forma: Forma.QUADRATO,
       dimensione: Dimensione.PICCOLO,
-      posti: 4
+      posti: 2
     }
   tavoloDaSalvare: Tavolo =
     {
-      id: 0,
       numeroTavolo: 0,
       forma: Forma.QUADRATO,
       dimensione: Dimensione.PICCOLO,
@@ -80,11 +79,10 @@ export class NavbarSalaComponent {
     if (!this.utilizzabile) {
       alert("Non puoi creare nuovi tavoli dopo le 20:00");
       return; }
-    this.tavoloDaSalvare.id = Date.now();
     this.tavoloDaSalvare.numeroTavolo = this.nuovoTavolo.numeroTavolo;
     this.tavoloDaSalvare.forma = this.nuovoTavolo.forma;
     this.tavoloDaSalvare.dimensione = this.nuovoTavolo.dimensione;
-    this.tavoloDaSalvare.posti = this.nuovoTavolo.posti;
+    this.tavoloDaSalvare.posti = this.nuovoTavolo.dimensione == Dimensione.PICCOLO ? 2 : this.nuovoTavolo.dimensione == Dimensione.MEDIO ? 4 : 8;
     this.TavoloRepoS.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
       this.caricaTavoli();
       alert("Tavolo aggiunto");
@@ -94,42 +92,6 @@ export class NavbarSalaComponent {
     }, error => {
       console.log("Errore durante il salvataggio:", error);
     })
-  }
-
-  salvaTavolo() {
-     if (!this.utilizzabile) {
-      alert("Non puoi creare nuovi tavoli dopo le 20:00");
-      return;
-    }
-    const numeroIns = prompt("Inserisci il numero del tavolo da aggiungere");
-
-    if (numeroIns) {
-      const numeroTav = parseInt(numeroIns)
-      const numeroEsistente = this.tavoli.some(tavolo => tavolo.numeroTavolo === numeroTav);
-
-      const postiIns = prompt("Inserisci il numero di posti del tavolo da aggiungere");
-      if (postiIns) {
-        const postiTav = parseInt(postiIns);
-        this.tavoloDaSalvare.posti = postiTav;
-      }
-      if (numeroEsistente) {
-        alert("Tavolo già esistente");
-      } else {
-        this.tavoloDaSalvare.numeroTavolo = numeroTav;
-        console.log("Dati Inviati: ", this.tavoloDaSalvare);
-
-
-        console.log("Dati Inviati: ", this.tavoloDaSalvare);
-        this.TavoloRepoS.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
-          this.caricaTavoli();
-          alert("Tavolo aggiunto");
-          window.location.reload();
-
-        }, error => {
-          console.log("Errore durante il salvataggio:", error);
-        })
-      }
-    }
   }
 
   caricaProdotti() {
