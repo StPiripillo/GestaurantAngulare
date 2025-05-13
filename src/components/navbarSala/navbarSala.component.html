@@ -38,6 +38,10 @@
             <select id="tipologia" [(ngModel)]="nuovoProdotto.Tip" name="tipologia" required>
               <option *ngFor="let tipi of Object.values(Tip)" [value]="tipi">{{ tipi }}</option>
             </select>
+            <label for="intolleranze">Intolleranze:</label>
+            <select id="intolleranze" [(ngModel)]="nuovoProdotto.intolleranze" name="intolleranze" required>
+              <option *ngFor="let intolleranza of Object.values(Intolleranze)" [value]="intolleranza">{{ intolleranza }}</option>
+            </select>
           </div>
           <div class="modal-actions">
             <button type="button" (click)="chiudiProdDialog()">Annulla</button>

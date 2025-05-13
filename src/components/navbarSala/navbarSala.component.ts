@@ -5,7 +5,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 import {ProdottiRepoService} from '../../services/prodotti-repo.service';
-import {Prodotti, Tipologia} from '../../models/Prodotti';
+import {Intolleranze, Prodotti, Tipologia} from '../../models/Prodotti';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -20,12 +20,13 @@ export class NavbarSalaComponent {
   utilizzabile=true;
   mostraDialog: boolean = false;
   prodotto : Prodotti[] = [];
-  nuovoProdotto: { nome: string; prezzo: number; Tip: Tipologia }=
+  nuovoProdotto: { nome: string; prezzo: number; Tip: Tipologia; intolleranze:Intolleranze }=
     {
 
       nome: '',
       prezzo: 0,
-      Tip: Tipologia.ANTIPASTI
+      Tip: Tipologia.ANTIPASTI,
+      intolleranze: Intolleranze.GLUTINE,
 
     };
   prodottoDaSalvare: Prodotti =
@@ -34,7 +35,7 @@ export class NavbarSalaComponent {
       nome: '',
       prezzo: 0,
       Tip: Tipologia.ANTIPASTI,
-      intolleranze: [],
+      intolleranze: Intolleranze.GLUTINE,
       qtn: 0,
       descrizione: ''
     };
@@ -111,11 +112,12 @@ export class NavbarSalaComponent {
   }
 
   creaProdotto() {
-    if (this.nuovoProdotto.nome && this.nuovoProdotto.prezzo > 0 && this.nuovoProdotto.Tip) {
+    if (this.nuovoProdotto.nome && this.nuovoProdotto.intolleranze && this.nuovoProdotto.prezzo > 0 && this.nuovoProdotto.Tip) {
       this.prodottoDaSalvare.id = Date.now();
       this.prodottoDaSalvare.nome = this.nuovoProdotto.nome;
       this.prodottoDaSalvare.prezzo = this.nuovoProdotto.prezzo;
       this.prodottoDaSalvare.Tip = this.nuovoProdotto.Tip;
+      this.prodottoDaSalvare.intolleranze = this.nuovoProdotto.intolleranze;
       this.chiudiProdDialog()
       this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {
         this.caricaProdotti();
@@ -130,7 +132,7 @@ export class NavbarSalaComponent {
 
   }
   nuovoProdottoDialog(): void {
-    this.nuovoProdotto = {nome: '', prezzo: 0, Tip:Tipologia.ANTIPASTI};  // Reset dei dati
+    this.nuovoProdotto = {nome: '', prezzo: 0, Tip:Tipologia.ANTIPASTI, intolleranze:Intolleranze.GLUTINE};  // Reset dei dati
     this.mostraDialog = true;
   }
 
@@ -151,5 +153,7 @@ export class NavbarSalaComponent {
   closeSidebar() {
     this.isOpen = false;
   }
+
+  protected readonly Intolleranze = Intolleranze;
 }
 

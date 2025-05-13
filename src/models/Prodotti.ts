@@ -1,13 +1,20 @@
 import {Ingredienti} from './Ingredienti';
+export enum Intolleranze
+{
+  GLUTINE= "GLUTINE",
+  LATTOSIO= "LATTOSIO",
+  SOLFITI= "SOLFITI",
+  CONSERVANTI= "CONSERVANTI",
 
+}
 export enum Tipologia
 {
-  PRIMI=  "Primi",
-  SECONDI= "Secondi",
-  ANTIPASTI= "Antipasti",
-  CONTORNI= "Contorni",
-  BEVANDE= "Bevande",
-  DOLCI= "Dolci",
+  PRIMI=  "PRIMI",
+  SECONDI= "SECONDI",
+  ANTIPASTI= "ANTIPASTI",
+  CONTORNI= "CONTORNI",
+  BEVANDE= "BEVANDE",
+  DOLCI= "DOLCI",
 }
 
 export interface Prodotti
@@ -17,6 +24,6 @@ export interface Prodotti
   descrizione: string,
   prezzo: number,
   Tip: Tipologia,
-  intolleranze: string[],
+  intolleranze: Intolleranze,
   qtn: number
 }
