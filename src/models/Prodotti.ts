@@ -5,6 +5,7 @@ export enum Intolleranze
   LATTOSIO= "LATTOSIO",
   SOLFITI= "SOLFITI",
   CONSERVANTI= "CONSERVANTI",
+  NESSUNA= "NESSUNA",
 
 }
 export enum Tipologia
