@@ -5,7 +5,6 @@ import {Prodotti, Tipologia} from '../../models/Prodotti';
 import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
-import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 import {OrdineRepositoryService} from '../../services/ordine-repository.service';
 import {Ordine} from '../../models/Ordine';
 
