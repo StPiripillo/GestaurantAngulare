@@ -16,6 +16,7 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
     CdkDrag,
     FormsModule,
     NgClass,
+    NgIf
   ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
@@ -110,22 +111,27 @@ export class SalaComponent implements OnInit {
     this.overlayRef.attach(new ComponentPortal(OverlayComponent));
   }
 
-  cambioNumero(tavolo: Tavolo): void {
-    const nuovoNumero = prompt("Inserisci il nuovo numero del tavolo:");
-    if (nuovoNumero) {
-      const numero = parseInt(nuovoNumero);
-      if (!isNaN(numero)) {
-        //questo controlla se il numero gia esiste
-        const numeroEsistente = this.tavoli.some(t => t.numeroTavolo === numero && t.id !== tavolo.id);
-        if (numeroEsistente) {
-          alert("Errore: il numero del tavolo è già esistente.");
-          return;
-        }
+  mostraDialog: boolean = false;
+  nuovoNumero=0;
 
-        tavolo.numeroTavolo = numero;
-        this.TavoloRepo.updateNomeTavolo(tavolo.id, numero).subscribe(() => {
-          alert("Numero tavolo modificato");
+  nuovoProdottoDialog(): void {
+    this.nuovoNumero = 0;  // Reset dei dati
+    this.mostraDialog = true;
+  }
+
+  chiudiProdDialog(): void {
+    this.mostraDialog = false;
+  }
+
+  cambioNumero(tavolo: Tavolo): void {
+    if (this.nuovoNumero) {
+      if (!isNaN(this.nuovoNumero)) {
+        tavolo.numeroTavolo = this.nuovoNumero;
+        this.chiudiProdDialog();
+        this.TavoloRepo.updateNomeTavolo(tavolo.id, tavolo.numeroTavolo).subscribe(() => {
           this.caricaTavoli();
+
+          window.location.reload();
         }, error => {
           console.error("Errore durante il salvataggio:", error);
         });
@@ -134,8 +140,8 @@ export class SalaComponent implements OnInit {
   }
 
 
-  protected readonly Forma = Forma;
-  protected readonly Dimensione = Dimensione;
+  protected readonly Intolleranze = Intolleranze;
+  protected readonly Tip = Tipologia;
 }
 
 

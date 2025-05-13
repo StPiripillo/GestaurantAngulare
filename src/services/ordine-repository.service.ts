@@ -11,8 +11,12 @@ export class OrdineRepositoryService {
   constructor(private http:HttpClient) {}
 
 
-  getOrdine(ordine:{tavoloId:number, prodotti:string[], totale:number}):Observable<string>
+  nuovoOrdine(ordine:{tavoloId:number, prodotti:string[], totale:number}):Observable<string>
   {
     return this.http.post<string>(this.apiUrl,ordine);
+  }
+
+  getOrdini(): Observable<Ordine[]> {
+    return this.http.get<Ordine[]>(this.apiUrl);
   }
 }

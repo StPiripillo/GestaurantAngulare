@@ -6,6 +6,8 @@ import {ProdottiComponent} from '../prodotti/prodotti.component';
 import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
+import {OrdineRepositoryService} from '../../services/ordine-repository.service';
+import {Ordine} from '../../models/Ordine';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -21,7 +23,8 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 export class OrdineComponent implements OnInit,AfterViewInit {
   spaziatoreAttivo = false;
 
-  carrello: Prodotti[]=[];
+  carrello: { prodotto: Prodotti, nota?: string }[] = [];
+
 
   @ViewChild('annotazioneTextarea') annotazioneRef!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('prodottiComponent') prodottiComponent!: ProdottiComponent;
@@ -58,7 +61,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   annotazione: String[] = [];
 
   constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
-              private productEventService: ProductEventService, public prodS: ProdGlobaleService) {
+              private productEventService: ProductEventService, private ordRep:OrdineRepositoryService) {
   }
 
   AllProdotti(){
@@ -99,8 +102,10 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   aggiungiAlCarrello(prodotto: Prodotti) {
-    this.carrello.push(prodotto);
+    const nota = prompt('Aggiungi una nota per questo prodotto (opzionale):') ?? undefined;
+    this.carrello.push({ nota, prodotto });
   }
+
 
   salvaAnnotazione(): void {
     const testo = this.annotazioneRef.nativeElement.value.trim();
@@ -113,6 +118,33 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
   rimuoviAnnotazione(index: number): void {
     this.annotazione.splice(index, 1);
+  }
+
+  ordini: Ordine[] = [];
+  ordineDaSalvare = {
+    tavoloId: 0,
+    prodotti: [] as string[],
+    totale: 0
+  }
+  ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
+    nomeOrdine: '',
+    noteOrdine: ''
+  }
+
+  caricaOrdini() {
+
+    this.ordRep.getOrdini().subscribe((data) => {
+      this.ordini = data;
+    });
+  }
+  creaOrdine(){
+    this.ordineDaSalvare.tavoloId = this.ordineNuovo.nomeOrdine ? parseInt(this.ordineNuovo.nomeOrdine) : 0;
+    this.ordineDaSalvare.totale = 0;
+    this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
+      this.caricaOrdini();
+      alert("Ordine creato");
+      window.location.reload();
+    });
   }
 
 
