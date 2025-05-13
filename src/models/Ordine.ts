@@ -4,5 +4,5 @@ export interface Ordine
   tavolo: number;
   totale: number;
   stato: boolean;
-  data: Date;
+
 }
