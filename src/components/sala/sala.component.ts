@@ -1,11 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgFor, NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
-import {CdkDrag, CdkDragEnd, CdkDragMove} from '@angular/cdk/drag-drop';
+import {CdkDrag} from '@angular/cdk/drag-drop';
 import {FormsModule} from '@angular/forms';
-import {tmplAstVisitAll} from '@angular/compiler';
-import {VERSION} from '@angular/cdk';
 import {OverlayComponent} from '../overlay/overlay.component';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
@@ -17,8 +15,6 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
         NgForOf,
         CdkDrag,
         FormsModule,
-        OverlayComponent,
-        NgIf
     ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'

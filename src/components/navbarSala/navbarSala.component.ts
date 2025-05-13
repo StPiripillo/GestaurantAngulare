@@ -141,5 +141,15 @@ export class NavbarSalaComponent {
 
   protected readonly Object = Object;
   protected readonly Tip = Tipologia;
+
+  isOpen = false;
+
+  openSidebar() {
+    this.isOpen = true;
+  }
+
+  closeSidebar() {
+    this.isOpen = false;
+  }
 }
 

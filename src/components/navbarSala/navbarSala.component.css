@@ -6,7 +6,6 @@
 }
 
 .navbar-brand {
-  font-family: "Fira Code", sans-serif;
   letter-spacing: 2px;
   text-decoration: none;
   padding: 0 20px 0 20px;
@@ -25,7 +24,7 @@
   height: 40px;
 }
 
-.button-nuovo-tavolo, .button-sposta-tavoli, .button-prodotti {
+.button-nuovo-tavolo, .button-sposta-tavoli, .button-prodotti, .button-sidebar {
   font-size: 1.5rem;
   padding: 5px 10px 5px 10px;
   margin-right: 10px;
@@ -37,7 +36,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button-nuovo-tavolo:hover, .button-sposta-tavoli:hover, .button-prodotti:hover {
+.button-nuovo-tavolo:hover, .button-sposta-tavoli:hover, .button-prodotti:hover, .button-sidebar:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
@@ -47,10 +46,68 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
-ng generate component cart-sidebar
+
+ng generate component cart-sidebar,
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /*background: rgba(0,0,0,0.5);*/
+  z-index: 99;
+}
+
+.tavolo-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 500px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  transition: right 0.3s ease;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.tavolo-sidebar.open {
+  right: 0;
+}
+
+.tavolo-sidebar-header {
+  position: relative;
+  font-size: 2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.tavolo-sidebar-header h3
+{
+  margin: 1rem 0 2rem 0;
+}
+.tavolo-sidebar-header p
+{
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.close-btn {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background: transparent;
+  border-style: inset;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.close-btn:hover
+{
+  transform: scale(1.2);
+}
 
 .modal {
   position: fixed;

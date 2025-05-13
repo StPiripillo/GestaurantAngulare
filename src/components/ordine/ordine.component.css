@@ -74,7 +74,7 @@
   background-color: #e67e22;
   color: white;
 }
-ng generate component cart-sidebar
+ng generate component cart-sidebar,
 .cart-backdrop {
   position: fixed;
   top: 0;
