@@ -29,7 +29,7 @@
               </button>
             </li>
             <li>
-              <button class="button-ordine-open" (click)="openModal()">Ordina</button>
+              <button class="button-ordine-open" (click)="openModal(); tavoloS.idTavoloSelezionato=tavolo.id!">Ordina</button>
             </li>
             <li>
               <button class="button-ordine" (click)="mostraDialog=true">Modifica</button>

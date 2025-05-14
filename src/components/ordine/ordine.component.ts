@@ -10,6 +10,8 @@ import {Ordine} from '../../models/Ordine';
 import {FormsModule} from '@angular/forms';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {Tavolo} from '../../models/Tavolo';
+import {TavoloComponent} from '../tavolo/tavolo.component';
+import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -69,7 +71,8 @@ export class OrdineComponent implements OnInit,AfterViewInit {
               private productEventService: ProductEventService,
               private ordRep:OrdineRepositoryService,
               private prodS:ProdottiRepoService,
-              private tavoloS: TavoloRepositoryService) {
+              private tavoloS: TavoloRepositoryService,
+              private tavoloG: TavoloGlobaleService) {
   }
 
   AllProdotti(){
@@ -147,9 +150,9 @@ export class OrdineComponent implements OnInit,AfterViewInit {
       this.ordini = data;
     });
   }
-  creaOrdine(){
+  creaOrdine() {
     this.ordineDaSalvare = {
-      tavoloId: this.ordineDaSalvare.tavoloId, // ID del tavolo (modifica secondo le
+      tavoloId: this.tavoloG.idTavoloSelezionato, // ID del tavolo
       prodotti: this.carrello.map(item => item.prodotto.nome), // Lista dei nomi dei prodotti
       totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
       nomeOrdine: this.ordineNuovo.nomeOrdine, // Nome ordine
@@ -158,7 +161,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
       this.caricaOrdini();
       alert("Ordine creato");
-      window.location.reload();
+      //window.location.reload();
     });
   }
 
