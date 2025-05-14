@@ -7,6 +7,8 @@
       </button>
     </li>
     <button (click)="openCart()">Carrello</button>
+    <!-- Bottone per aprire sidebar ordini -->
+    <button (click)="apriOrdiniSidebar()" >Ordini</button>
   </ul>
 </nav>
 
@@ -18,10 +20,13 @@
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
       <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
+
   </ul>
-  <li *ngFor=" let ordine of getOrdiniFiltrati()">
-     Tavolo {{ordine.tavoloId}} - N.Ordine {{ordine.id}} - {{ordine.nomeOrdine}} - {{ordine.noteOrdine}}
-  </li>
+  <!-- <h2>Ordini</h2>
+  <div class="piatti-container" *ngFor=" let ordine of getOrdiniFiltrati()">
+
+    Tavolo {{ordine.tavoloId}} - N.Ordine {{ordine.id}} - {{ordine.nomeOrdine}} - {{ordine.noteOrdine}}
+  </div> --->
 
 <div *ngIf="piattifiltrati.length===0">
     <p>Nessun prodotto disponibile per la tipologia selezionata</p>
@@ -48,7 +53,7 @@
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
 
-
+<!-- Carrello -->
 <div class="cart-backdrop" *ngIf="isOpen" (click)="closeCart()"></div>
 
 <div class="cart-sidebar" [class.open]="isOpen">
@@ -80,21 +85,36 @@
       </li>
     </ul>
   </div>
-
-
   <button class="close-btn" (click)="creaOrdine()">Ordina</button>
-
-
 </div>
 <div *ngIf="isOpen" class="carrello">
   <button (click)="closeCart()">Chiudi</button>
 </div>
-
 <hr>
+</div>
 
+<!-- Sidebar Ordini Ricevuti -->
+<div class="ordini-sidebar" [class.open]="ordiniSidebarAperta">
+  <div class="cart-header">
+    <h3>Ordini Inviati</h3>
+    <button class="close-btn" (click)="chiudiOrdiniSidebar()">×</button>
+  </div>
 
-
-
-
+  <div class="cart-content">
+    <ul *ngIf="getOrdiniFiltrati().length > 0; else noOrdini">
+      <li *ngFor="let ordine of getOrdiniFiltrati()">
+        <strong>Ordine #{{ ordine.id }}</strong><br>
+        Tavolo: {{ ordine.tavoloId }}<br>
+        Nome: {{ ordine.nomeOrdine }}<br>
+        <div *ngIf="ordine.noteOrdine">
+          <em>Note: {{ ordine.noteOrdine }}</em>
+        </div>
+        <hr>
+      </li>
+    </ul>
+    <ng-template #noOrdini>
+      <p style="text-align: center;">Nessun ordine per questo tavolo.</p>
+    </ng-template>
+  </div>
 </div>
 <app-prodotti  #cart #prodottiComponent></app-prodotti>

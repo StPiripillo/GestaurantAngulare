@@ -123,11 +123,54 @@ ng generate component cart-sidebar,
   overflow-y: auto;
   flex-grow: 1;
 }
-/* provato a mettere per gli ordini */
-.ordini-container{
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f8f9fa; /* Grigio chiaro elegante */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+.ordini-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background: #f9f9f9;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1002;
+  overflow-y: auto;
+  padding: 1rem;
+  border-left: 1px solid #ddd;
+}
+
+.ordini-sidebar.open {
+  right: 0;
+}
+
+.ordini-sidebar .cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ordini-sidebar .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.ordini-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ordini-sidebar li {
+  background: #fff;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+
+
 
