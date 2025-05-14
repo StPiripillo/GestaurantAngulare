@@ -111,16 +111,20 @@
 
   <div class="cart-content">
     <ul *ngIf="ordini; else noOrdini">
-      <li *ngFor="let ord of ordini">
+      <li *ngFor="let ord of getOrdiniFiltrati()">
       <strong>Ordine #{{ord.id }}</strong><br>
         Tavolo: {{ord.tavoloId}}<br>
-        Nome: {{ ord.nomeOrdine }}<br>
+        Nome: {{ ord.nomeOrdine}}<br>
+
         <div *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
+        <button (click)="eliminaOrdini(ord.tavoloId)">Elimina</button>
+        <hr>
         <div>
             {{ ord.totale | currency:'EUR':'symbol' }}
         </div>
+
       </li>
     </ul>
     <ng-template #noOrdini>
