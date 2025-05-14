@@ -156,7 +156,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
       (data) => {
         console.log("Ordini ricevuti:", data); // debug
       this.ordini = data;
-      this.filterOrdiniByTavolo()
+     // this.filterOrdiniByTavolo()
     });
   }
   creaOrdine() {
@@ -173,22 +173,25 @@ export class OrdineComponent implements OnInit,AfterViewInit {
       //window.location.reload();
     });
   }
-  selectedTavoloId: number | null = null;  // tavolo selezionato
-  filteredOrdini: Ordine[] = [];  // ordini filtrati
 
-
-  onTavoloSelect(tavoloId: number): void {
-    this.selectedTavoloId = tavoloId;
-    this.filterOrdiniByTavolo();  // Filtra gli ordini
+  getOrdiniFiltrati(){
+    return this.ordini.filter(o=>o.tavoloId==this.tavoloG.idTavoloSelezionato)
   }
-  filterOrdiniByTavolo(): void {
-    if (this.selectedTavoloId !== null) {
-      this.filteredOrdini = this.ordini.filter(ordine => ordine.tavoloId === this.selectedTavoloId);
-    } else {
-      this.filteredOrdini = this.ordini;  // Mostra tutti gli ordini se nessun tavolo è selezionato
-    }
-  }
+  //selectedTavoloId: number | null = null;  // tavolo selezionato
+ // filteredOrdini: Ordine[] = [];  // ordini filtrati
 
 
-  protected readonly TavoloComponent = TavoloComponent;
+  //onTavoloSelect(tavoloId: number): void {
+  //  this.selectedTavoloId = tavoloId;
+  //  this.filterOrdiniByTavolo();  // Filtra gli ordini
+ // }
+  //filtraTavolo(idTavolo:number): void {
+   // this.selectedTavoloId = idTavolo;
+  //  this.filteredOrdini = this.ordini.filter(ordine => ordine.tavoloId === idTavolo);
+   //   ? this.ordini.filter(ordine => ordine.tavoloId === idTavolo)
+  //    : this.ordini;
+ // }
+
+
+
 }

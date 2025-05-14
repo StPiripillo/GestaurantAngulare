@@ -1,6 +1,7 @@
 export interface Ordine
 {
   tavoloId: number;
+  id?: number;
   tavolo: number
   totale: number;
   stato: boolean;
