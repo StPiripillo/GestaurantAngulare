@@ -1,7 +1,7 @@
 .navbar
 {
   display: flex;
-  background-color: #2c3e50;
+  background-color: #283849;
   padding: 10px 0;
 }
 
@@ -30,16 +30,19 @@
   margin-right: 10px;
   font-weight: bold;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #3a546e;
   border: none;
   color: #ffffff;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button-nuovo-tavolo:hover, .button-sposta-tavoli:hover, .button-prodotti:hover, .button-sidebar:hover, .button-salva-backup:hover, .button-carica-backup:hover {
-  background-color: #0056b3;
+  background-color: #e67e22;
   transform: scale(1.05);
 }
+
+
+
 .sala-container {
   height: 100vh;
   width: 100%;
