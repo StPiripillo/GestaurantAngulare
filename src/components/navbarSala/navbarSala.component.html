@@ -48,12 +48,11 @@
           </form>
         </div>
       </div>
-      <form></form>
     </div>
 
     <div class="modal" *ngIf="mostraDialog">
       <div class="modal-content">
-        <span class="close" (click)="chiudiProdDialog()">&times;</span>
+        <button class="close" aria-label="Close" (click)="chiudiProdDialog()">&times;</button>
         <h2>Crea Nuovo Prodotto</h2>
         <form (ngSubmit)="creaProdotto()">
           <div class="form-group">

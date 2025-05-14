@@ -107,12 +107,14 @@ ng generate component cart-sidebar,
   right: -100%;
   width: 500px;
   height: 100%;
-  background-color: #fff;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-  transition: right 0.3s ease;
-  z-index: 100;
+  background: #f7f9fb;
+  box-shadow: -2px 0 12px rgba(44, 62, 80, 0.10);
+  transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1001;
   display: flex;
   flex-direction: column;
+  border-left: 1px solid #e0e0e0;
+  padding: 0;
 }
 
 .tavolo-sidebar.open {
@@ -120,11 +122,19 @@ ng generate component cart-sidebar,
 }
 
 .tavolo-sidebar-header {
-  position: relative;
-  font-size: 2rem;
-  padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  background: #fff;
+  padding: 1.5rem 1rem 1rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
+
+@media (max-width: 600px) {
+  .tavolo-sidebar {
+    width: 100vw;
+  }
+}
+
 .tavolo-sidebar-header h3
 {
   margin: 1rem 0 2rem 0;
@@ -135,20 +145,30 @@ ng generate component cart-sidebar,
   margin: 0;
 }
 
-.close-btn {
+.close, .close-btn {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  top: 16px;
+  right: 20px;
   background: transparent;
-  border-style: inset;
+  border: none;
   border-radius: 5px;
   font-size: 2rem;
+  color: #aaa;
   cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.close:hover, .close-btn:hover {
+  color: #3a546e;
+  transform: scale(1.15);
 }
 
-.close-btn:hover
-{
-  transform: scale(1.2);
+.modal-tavoli {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 2rem 0;
+  background: transparent;
 }
 
 .modal {
@@ -168,11 +188,33 @@ ng generate component cart-sidebar,
 .modal-content {
   background-color: #fff;
   padding: 20px;
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+/* Modal title styling */
+.modal-content h2, .tavolo-sidebar-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Divider above modal actions */
+.modal-actions {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive button stacking */
+@media (max-width: 500px) {
+  .modal-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 /* Bottone di chiusura */
@@ -192,18 +234,61 @@ ng generate component cart-sidebar,
 
 /* Form styling */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #333;
 }
 
 .form-group input {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border: 2px solid #3a546e;
+  outline: none;
+}
+
+.form-group input:hover,
+select:hover {
+  background-color: #eef2f6;
+}
+
+#forma,
+#dimensione
+{
+  flex-direction: column;
+}
+
+select {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border: 1.5px solid #bfc9d1;
+  border-radius: 6px;
+  background: #f7f9fb url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%233a546e' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center/16px 12px;
+  font-size: 1rem;
+  color: #283849;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(44, 62, 80, 0.04);
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:focus {
+  border-color: #3a546e;
+  box-shadow: 0 0 0 2px rgba(58, 84, 110, 0.15);
+  outline: none;
+}
+
+/* Basic option styling (limited support) */
+select option {
+  color: #283849;
+  background: #f7f9fb;
+  font-size: 1rem;
 }
 
 /* Azioni del modal */
@@ -218,3 +303,30 @@ ng generate component cart-sidebar,
   cursor: pointer;
 }
 
+.modal-actions button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #3a546e;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-actions button:hover {
+  background-color: #e67e22;
+  transform: scale(1.05);
+}
+
+.modal-actions button:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    max-width: 95vw;
+    padding: 10px;
+  }
+}

@@ -27,6 +27,7 @@ export class SalaComponent implements OnInit {
 
   utilizzabile: boolean = true;
   tavoloHoverId: number | null = null;
+  isDragging = false;
 
   coloriTavolo : string[] = ['#1b980d', '#afb513', '#bc1010'];
 
@@ -67,6 +68,14 @@ export class SalaComponent implements OnInit {
     this.TavoloRepo.updatePosition(tavolo.id, tavolo.x, tavolo.y).subscribe({
       error: (err) => console.error('Errore salvataggio', err)
     });
+  }
+
+  onDragStart() {
+    this.isDragging = true;
+  }
+
+  onDragEnd() {
+    this.isDragging = false;
   }
 
   onDragEnded(event: any, tavolo: Tavolo): void {

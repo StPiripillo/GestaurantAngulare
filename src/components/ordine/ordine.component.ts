@@ -121,6 +121,18 @@ export class OrdineComponent implements OnInit,AfterViewInit{
   aggiungiAlCarrello(prodotto: Prodotti) {
     const nota = prompt('Aggiungi una nota per questo prodotto (opzionale):') ?? undefined;
     this.carrello.push({ nota, prodotto });
+    const esistente = this.carrello.find(item => item.prodotto.id === prodotto.id);
+    if (esistente) {
+      esistente.prodotto.qtn += 1;
+    } else {
+      prodotto.qtn = 1;
+      const nota = prompt('Aggiungi una nota per questo prodotto (opzionale):') ?? undefined;
+      this.carrello.push({ nota, prodotto });
+    }
+    this.ordineNuovo.nomeOrdine = prodotto.nome;
+    this.ordineNuovo.noteOrdine = nota || '';
+
+
   }
 
 
@@ -162,14 +174,15 @@ export class OrdineComponent implements OnInit,AfterViewInit{
   creaOrdine() {
     this.ordineDaSalvare = {
       tavoloId: this.tavoloG.idTavoloSelezionato, // ID del tavolo
-      prodotti: this.carrello.map(item => item.prodotto.nome), // Lista dei nomi dei prodotti
+      prodotti: this.carrello.map(item => item.prodotto.nome), // Solo i nomi dei prodotti
       totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
-      nomeOrdine: this.ordineNuovo.nomeOrdine, // Nome ordine
-      noteOrdine: this.ordineNuovo.noteOrdine  // Note ordine
+      nomeOrdine: this.carrello.map(item => item.prodotto.nome).join(', '), // Unisce i nomi dei prodotti
+      noteOrdine: this.carrello.map(item => item.nota).join(', ') // Unisce le note
     };
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
       this.caricaOrdini();
       alert("Ordine creato");
+      this.carrello=[];
       //window.location.reload();
     });
   }
@@ -197,5 +210,14 @@ export class OrdineComponent implements OnInit,AfterViewInit{
   chiudiOrdiniSidebar() {
     this.ordiniSidebarAperta = false;
   }
+
+  eliminaOrdini(id: number ): void {
+    this.ordRep.eliminaOrdine(id).subscribe(() => {
+
+      this.caricaOrdini();
+        window.location.reload();
+      });
+    }
+
 
 }

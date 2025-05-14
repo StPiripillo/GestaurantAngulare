@@ -26,12 +26,6 @@
       </li>
     </ul>
   </div>
-    <!-- <h2>Ordini</h2>
-    <div class="piatti-container" *ngFor=" let ordine of getOrdiniFiltrati()">
-
-      Tavolo {{ordine.tavoloId}} - N.Ordine {{ordine.id}} - {{ordine.nomeOrdine}} - {{ordine.noteOrdine}}
-    </div> --->
-
   <div *ngIf="piattifiltrati.length===0">
       <p>Nessun prodotto disponibile per la tipologia selezionata</p>
   </div>
@@ -76,10 +70,6 @@
     </div>
     <button class="close-btn" (click)="creaOrdine()">Ordina</button>
   </div>
-  <div *ngIf="isOpen" class="carrello">
-    <button (click)="closeCart()">Chiudi</button>
-  </div>
-  <hr>
 </div>
 <div class="cart-sidebar" [class.open]="isOpen">
   <div class="cart-header">
@@ -110,13 +100,8 @@
       </li>
     </ul>
   </div>
-  <button class="close-btn" (click)="creaOrdine()">Ordina</button>
+  <button class="button-ordine-cart" (click)="creaOrdine()">Ordina</button>
 </div>
-<div *ngIf="isOpen" class="carrello">
-  <button (click)="closeCart()">Chiudi</button>
-</div>
-<hr>
-
 <!-- Sidebar Ordini Ricevuti -->
 <div class="ordini-sidebar" [class.open]="ordiniSidebarAperta">
   <div class="cart-header">
@@ -126,17 +111,20 @@
 
   <div class="cart-content">
     <ul *ngIf="ordini; else noOrdini">
-      <li *ngFor="let ord of ordini">
+      <li *ngFor="let ord of getOrdiniFiltrati()">
       <strong>Ordine #{{ord.id }}</strong><br>
         Tavolo: {{ord.tavoloId}}<br>
-        Nome: {{ ord.nomeOrdine }}<br>
+        Nome: {{ ord.nomeOrdine}}<br>
+
         <div *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
+        <button (click)="eliminaOrdini(ord.tavoloId)">Elimina</button>
         <hr>
         <div>
             {{ ord.totale | currency:'EUR':'symbol' }}
         </div>
+
       </li>
     </ul>
     <ng-template #noOrdini>
