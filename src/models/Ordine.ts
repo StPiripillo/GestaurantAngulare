@@ -1,3 +1,5 @@
+import {Prodotti} from './Prodotti';
+
 export interface Ordine
 {
   tavoloId: number;
@@ -7,5 +9,6 @@ export interface Ordine
   stato: boolean;
   nomeOrdine: string;
   noteOrdine: string;
+  prodotti:Prodotti;
 
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, numberAttribute, OnInit, ViewChild} from '@angular/core';
 import {FiltroService} from '../../services/filtro-repository.service';
 import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {Prodotti, Tipologia} from '../../models/Prodotti';
@@ -10,7 +10,6 @@ import {Ordine} from '../../models/Ordine';
 import {FormsModule} from '@angular/forms';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {Tavolo} from '../../models/Tavolo';
-import {TavoloComponent} from '../tavolo/tavolo.component';
 import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
@@ -25,7 +24,7 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
 })
-export class OrdineComponent implements OnInit,AfterViewInit {
+export class OrdineComponent implements OnInit,AfterViewInit{
   spaziatoreAttivo = false;
 
   carrello: { prodotto: Prodotti, nota?: string }[] = [];
@@ -83,6 +82,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.getOrdineById(this.ordineId);
     this.AllProdotti();
     this.caricaOrdini();// Carica i prodotti iniziali
 
@@ -176,6 +176,16 @@ export class OrdineComponent implements OnInit,AfterViewInit {
 
   getOrdiniFiltrati(){
     return this.ordini.filter(o=>o.tavoloId==this.tavoloG.idTavoloSelezionato)
+  }
+
+  ordineId:number=1;
+
+  getOrdineById(id: number | undefined) {
+    this.ordRep.getOrdineById(this.ordineId).subscribe({next:(data) => {
+      console.log("Ordine ricevuto:", data); // debug
+        this.ordini = Array.isArray(data) ? data[0] : data;
+    }
+      });
   }
 
   //ordini tipo carrello

@@ -52,7 +52,7 @@
   <br />
   <button (click)="salvaAnnotazione()">Salva Annotazione</button>
 </div>
-
+</div>
 <!-- Carrello -->
 <div class="cart-backdrop" *ngIf="isOpen" (click)="closeCart()"></div>
 
@@ -91,7 +91,6 @@
   <button (click)="closeCart()">Chiudi</button>
 </div>
 <hr>
-</div>
 
 <!-- Sidebar Ordini Ricevuti -->
 <div class="ordini-sidebar" [class.open]="ordiniSidebarAperta">
@@ -101,15 +100,18 @@
   </div>
 
   <div class="cart-content">
-    <ul *ngIf="getOrdiniFiltrati().length > 0; else noOrdini">
-      <li *ngFor="let ordine of getOrdiniFiltrati()">
-        <strong>Ordine #{{ ordine.id }}</strong><br>
-        Tavolo: {{ ordine.tavoloId }}<br>
-        Nome: {{ ordine.nomeOrdine }}<br>
-        <div *ngIf="ordine.noteOrdine">
-          <em>Note: {{ ordine.noteOrdine }}</em>
+    <ul *ngIf="ordini; else noOrdini">
+      <li *ngFor="let ord of ordini">
+      <strong>Ordine #{{ord.id }}</strong><br>
+        Tavolo: {{ord.tavoloId}}<br>
+        Nome: {{ ord.nomeOrdine }}<br>
+        <div *ngIf="ord.noteOrdine">
+          <em>Note: {{ ord.noteOrdine }}</em>
         </div>
         <hr>
+        <div>
+            {{ ord.totale | currency:'EUR':'symbol' }}
+        </div>
       </li>
     </ul>
     <ng-template #noOrdini>
