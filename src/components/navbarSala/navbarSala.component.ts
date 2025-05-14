@@ -109,7 +109,7 @@ export class NavbarSalaComponent {
       this.chiudiProdDialog()
       this.ProdS.nuovoProdotto(this.prodottoDaSalvare).subscribe(() => {
         this.caricaProdotti();
-        alert("Prodotto aggiunto");
+        this.showPopup('Prodotto creato con successo!');
 
         window.location.reload();
 
@@ -135,6 +135,8 @@ export class NavbarSalaComponent {
 
   // Funzioni backup
 
+  popupMessage: string='';
+  popupVisible: boolean=false;
   salvaBackupPosizioni(): void {
     const posizioni = this.tavoloS.TavoliInApp
       .filter(t => t.id !== undefined)
@@ -146,25 +148,22 @@ export class NavbarSalaComponent {
     console.log("Posizioni:", posizioni);
     this.TavoloRepoS.salvaBackupPosizioni(posizioni).subscribe({
       next: () => {
-        this.showSnackbar('Backup posizioni salvato!', 'success');
+        this.showPopup('Backup posizioni salvato!');
       },
       error: (err) => {
-        this.showSnackbar('Errore nel salvataggio del backup!', 'error');
+        this.showPopup('Errore nel salvataggio del backup!');
         console.error(err);
       }
     });
   }
 
-  showSnackbar(message: string, type: 'success' | 'error') {
-    console.log('tipo', type);
-    this.snackBar.open(message, 'Chiudi', {
-      duration: 3000,
-      horizontalPosition: 'left',
-      verticalPosition: 'bottom',
-      panelClass: type
-    })
+  showPopup(message: string): void {
+    this.popupMessage = message;
+    this.popupVisible = true;
 
-
+    setTimeout(() => {
+      this.popupVisible = false; // Nasconde il popup dopo 3 secondi
+    }, 1000);
   }
 
   caricaBackupPosizioni(): void {
@@ -176,9 +175,9 @@ export class NavbarSalaComponent {
           tavolo.y = b.y;
         }
       });
-      this.showSnackbar('Backup posizioni caricato!', 'success')
+      this.showPopup('Backup posizioni caricato!')
     }, error => {
-      this.showSnackbar('Errore nel caricamento del backup!', 'error');
+      this.showPopup('Errore nel caricamento del backup!');
 
       console.error(error);
     });
