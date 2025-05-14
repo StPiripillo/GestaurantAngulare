@@ -66,6 +66,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   annotazione: String[] = [];
   tavolo: Tavolo [] = [];
 
+
   constructor(private filtroService: FiltroService,
               private prodottoRepo:ProdottiRepoService,
               private productEventService: ProductEventService,
@@ -82,7 +83,12 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.AllProdotti(); // Carica i prodotti iniziali
+    this.AllProdotti();
+    this.caricaOrdini();// Carica i prodotti iniziali
+
+    this.tavoloS.getTavoli().subscribe((data) => {
+      this.tavolo = data;
+    });
 
     this.filtroService.getCategoria().subscribe((categorie: string[]) => {
       this.tipologie = categorie.map(cat => cat as Tipologia);
@@ -146,8 +152,11 @@ export class OrdineComponent implements OnInit,AfterViewInit {
 
   caricaOrdini() {
 
-    this.ordRep.getOrdini().subscribe((data) => {
+    this.ordRep.getOrdini().subscribe(
+      (data) => {
+        console.log("Ordini ricevuti:", data); // debug
       this.ordini = data;
+      this.filterOrdiniByTavolo()
     });
   }
   creaOrdine() {
@@ -164,11 +173,22 @@ export class OrdineComponent implements OnInit,AfterViewInit {
       //window.location.reload();
     });
   }
+  selectedTavoloId: number | null = null;  // tavolo selezionato
+  filteredOrdini: Ordine[] = [];  // ordini filtrati
 
 
+  onTavoloSelect(tavoloId: number): void {
+    this.selectedTavoloId = tavoloId;
+    this.filterOrdiniByTavolo();  // Filtra gli ordini
+  }
+  filterOrdiniByTavolo(): void {
+    if (this.selectedTavoloId !== null) {
+      this.filteredOrdini = this.ordini.filter(ordine => ordine.tavoloId === this.selectedTavoloId);
+    } else {
+      this.filteredOrdini = this.ordini;  // Mostra tutti gli ordini se nessun tavolo è selezionato
+    }
+  }
 
 
-
-
-
+  protected readonly TavoloComponent = TavoloComponent;
 }

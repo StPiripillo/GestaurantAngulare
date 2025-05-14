@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class OrdineRepositoryService {
-  private apiUrl = '/api/ordine/';
+  private apiUrl = '/api/ordine';
   constructor(private http:HttpClient) {}
 
 
@@ -15,8 +15,11 @@ export class OrdineRepositoryService {
   {
     return this.http.post<Ordine>(`${this.apiUrl}/newordine`, ordine);
   }
-
   getOrdini(): Observable<Ordine[]> {
-    return this.http.get<Ordine[]>(`${this.apiUrl}/listaordini`);
+    return this.http.get<Ordine[]>(`${this.apiUrl}`);
+  }
+  //per filtro
+  getOrdiniByTavolo(tavoloId: number): Observable<Ordine[]> {
+    return this.http.get<Ordine[]>(`${this.apiUrl}/bytavolo`);
   }
 }
