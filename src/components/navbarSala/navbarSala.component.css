@@ -228,6 +228,9 @@ ng generate component cart-sidebar,
   cursor: pointer;
 }
 
+
+
+
 .close:hover {
   color: #000;
 }
@@ -322,6 +325,28 @@ select option {
 
 .modal-actions button:active {
   transform: scale(0.95);
+}
+
+.popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-weight: bold;
+  text-align: center;
+  transform: translateY(100%); /* Partenza fuori schermo */
+  opacity: 0; /* Invisibile inizialmente */
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Transizione */
+}
+
+.popup.show {
+  transform: translateY(0); /* Posizione visibile */
+  opacity: 1; /* Visibile */
 }
 
 @media (max-width: 600px) {
