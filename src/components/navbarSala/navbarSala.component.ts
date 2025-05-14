@@ -7,6 +7,7 @@ import {ProdGlobaleService} from '../../services/stato/prod-globale.service';
 import {ProdottiRepoService} from '../../services/prodotti-repo.service';
 import {Intolleranze, Prodotti, Tipologia} from '../../models/Prodotti';
 import {FormsModule} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar-sala',
@@ -58,7 +59,7 @@ export class NavbarSalaComponent {
       y:0
     };
 
-  constructor(private TavoloRepoS: TavoloRepositoryService, private prodRepo:ProdGlobaleService,public tavoloS:TavoloGlobaleService, private ProdS:ProdottiRepoService) {
+  constructor(private TavoloRepoS: TavoloRepositoryService, private snackBar:MatSnackBar,public tavoloS:TavoloGlobaleService, private ProdS:ProdottiRepoService) {
     this.controllaOra()
   }
 
@@ -143,12 +144,27 @@ export class NavbarSalaComponent {
         y: t.y
       }));
     console.log("Posizioni:", posizioni);
-    this.TavoloRepoS.salvaBackupPosizioni(posizioni).subscribe(() => {
-      alert('Backup posizioni salvato!');
-    }, error => {
-      alert('Errore nel salvataggio del backup!');
-      console.error(error);
+    this.TavoloRepoS.salvaBackupPosizioni(posizioni).subscribe({
+      next: () => {
+        this.showSnackbar('Backup posizioni salvato!', 'success');
+      },
+      error: (err) => {
+        this.showSnackbar('Errore nel salvataggio del backup!', 'error');
+        console.error(err);
+      }
     });
+  }
+
+  showSnackbar(message: string, type: 'success' | 'error') {
+    console.log('tipo', type);
+    this.snackBar.open(message, 'Chiudi', {
+      duration: 3000,
+      horizontalPosition: 'left',
+      verticalPosition: 'bottom',
+      panelClass: type
+    })
+
+
   }
 
   caricaBackupPosizioni(): void {
@@ -160,9 +176,10 @@ export class NavbarSalaComponent {
           tavolo.y = b.y;
         }
       });
-      alert('Backup posizioni caricato!');
+      this.showSnackbar('Backup posizioni caricato!', 'success')
     }, error => {
-      alert('Errore nel caricamento del backup!');
+      this.showSnackbar('Errore nel caricamento del backup!', 'error');
+
       console.error(error);
     });
   }
