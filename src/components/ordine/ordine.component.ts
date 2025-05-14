@@ -178,7 +178,14 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     return this.ordini.filter(o=>o.tavoloId==this.tavoloG.idTavoloSelezionato)
   }
 
+  //ordini tipo carrello
+  ordiniSidebarAperta: boolean = false;
+  apriOrdiniSidebar() {
+    this.ordiniSidebarAperta = true;
+  }
 
-
+  chiudiOrdiniSidebar() {
+    this.ordiniSidebarAperta = false;
+  }
 
 }
