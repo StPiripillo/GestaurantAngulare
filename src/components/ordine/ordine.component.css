@@ -123,4 +123,11 @@ ng generate component cart-sidebar,
   overflow-y: auto;
   flex-grow: 1;
 }
+/* provato a mettere per gli ordini */
+.ordini-container{
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa; /* Grigio chiaro elegante */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
 

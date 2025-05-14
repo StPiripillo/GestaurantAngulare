@@ -7,6 +7,11 @@ import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {OrdineRepositoryService} from '../../services/ordine-repository.service';
 import {Ordine} from '../../models/Ordine';
+import {FormsModule} from '@angular/forms';
+import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
+import {Tavolo} from '../../models/Tavolo';
+import {TavoloComponent} from '../tavolo/tavolo.component';
+import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -14,7 +19,8 @@ import {Ordine} from '../../models/Ordine';
     NgForOf,
     NgIf,
     ProdottiComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    FormsModule
   ],
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
@@ -58,9 +64,15 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
   annotazione: String[] = [];
+  tavolo: Tavolo [] = [];
 
-  constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
-              private productEventService: ProductEventService, private ordRep:OrdineRepositoryService) {
+  constructor(private filtroService: FiltroService,
+              private prodottoRepo:ProdottiRepoService,
+              private productEventService: ProductEventService,
+              private ordRep:OrdineRepositoryService,
+              private prodS:ProdottiRepoService,
+              private tavoloS: TavoloRepositoryService,
+              private tavoloG: TavoloGlobaleService) {
   }
 
   AllProdotti(){
@@ -123,7 +135,9 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   ordineDaSalvare = {
     tavoloId: 0,
     prodotti: [] as string[],
-    totale: 0
+    totale: 0,
+    nomeOrdine: '',
+    noteOrdine: '',
   }
   ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
     nomeOrdine: '',
@@ -136,13 +150,18 @@ export class OrdineComponent implements OnInit,AfterViewInit {
       this.ordini = data;
     });
   }
-  creaOrdine(){
-    this.ordineDaSalvare.tavoloId = this.ordineNuovo.nomeOrdine ? parseInt(this.ordineNuovo.nomeOrdine) : 0;
-    this.ordineDaSalvare.totale = 0;
+  creaOrdine() {
+    this.ordineDaSalvare = {
+      tavoloId: this.tavoloG.idTavoloSelezionato, // ID del tavolo
+      prodotti: this.carrello.map(item => item.prodotto.nome), // Lista dei nomi dei prodotti
+      totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
+      nomeOrdine: this.ordineNuovo.nomeOrdine, // Nome ordine
+      noteOrdine: this.ordineNuovo.noteOrdine  // Note ordine
+    };
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
       this.caricaOrdini();
       alert("Ordine creato");
-      window.location.reload();
+      //window.location.reload();
     });
   }
 

@@ -17,6 +17,6 @@ export class OrdineRepositoryService {
   }
 
   getOrdini(): Observable<Ordine[]> {
-    return this.http.get<Ordine[]>(`${this.apiUrl}`);
+    return this.http.get<Ordine[]>(`${this.apiUrl}/listaordini`);
   }
 }

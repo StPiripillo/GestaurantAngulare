@@ -8,6 +8,7 @@
     </li>
   </ul>
   <button (click)="openCart()">Carrello</button>
+  <button >Ordini</button>
 </nav>
 
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
@@ -18,16 +19,23 @@
       <button (click)="eliminaProdotto(prodotto.id)">Elimina Prodotto</button>
       <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
-
-
   </ul>
+  <!-- parte degli ordini temporanea -->
+  <div class="ordini-container">
+    <h3>Ordini</h3>
+    <ul>
+      <li *ngFor="let ordine of ordini">
+        - {{ ordine.id}}
 
+      </li>
+    </ul>
 </div>
 <div *ngIf="piattifiltrati.length===0">
     <p>Nessun prodotto disponibile per la tipologia selezionata</p>
 </div>
 
 <button (click)="toggleNota()">Nota</button>
+
 
 <div *ngIf="spaziatoreAttivo" style="
     position: fixed;
@@ -63,8 +71,11 @@
           Nota: {{ item.nota }}
         </div>
       </li>
+      <div>
+        <label for="noteOrdine">Note Ordine:</label>
+        <textarea id="noteOrdine" [(ngModel)]="ordineNuovo.noteOrdine" placeholder="Inserisci le note dell'ordine"></textarea>
+      </div>
     </ul>
-
   </div>
   <div *ngIf="annotazione.length > 0" class="annotazioni-carrello"
        style="margin-top: 1rem; border-top: 1px solid #ccc; padding-top: 0.5rem;">
@@ -92,6 +103,5 @@
 
 
 
-
+</div>
 <app-prodotti  #cart #prodottiComponent></app-prodotti>
-
