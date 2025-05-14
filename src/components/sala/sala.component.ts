@@ -23,7 +23,7 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
 })
 export class SalaComponent implements OnInit {
 
-  tavoli: Tavolo[] = [];
+
   utilizzabile: boolean = true;
 
   coloriTavolo : string[] = ['#1b980d', '#afb513', '#bc1010'];
@@ -40,7 +40,7 @@ export class SalaComponent implements OnInit {
 
   caricaTavoli() {
     this.TavoloRepo.getTavoli().subscribe((data: Tavolo[]) => {
-      this.tavoli = data;
+      this.tavoloS.TavoliInApp = data;
     });
   }
 
@@ -57,7 +57,7 @@ export class SalaComponent implements OnInit {
 
   ngOnInit(): void {
     this.TavoloRepo.getTavoli().subscribe((data) => {
-      this.tavoli = data;
+      this.tavoloS.TavoliInApp = data;
     });
   }
 

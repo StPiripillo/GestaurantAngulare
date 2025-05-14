@@ -7,6 +7,8 @@
     <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
     <button class="button-sidebar" (click)="openSidebar()">Aggiungi Tavolo</button>
     <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
+    <button class="button-salva-backup" (click)="salvaBackupPosizioni()">Salva Backup Posizioni</button>
+    <button class="button-carica-backup" (click)="caricaBackupPosizioni()">Carica Backup Posizioni</button>
 
     <div class="sidebar-backdrop" *ngIf="isOpen" (click)="closeSidebar()"></div>
 
