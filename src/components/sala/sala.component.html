@@ -7,7 +7,8 @@
       [cdkDragDisabled]="!tavoloS.dragAttivo"
       class="app-tavolo"
       [cdkDragFreeDragPosition]="{ x: tavolo.x, y: tavolo.y }"
-      (cdkDragEnded)="onDragEnded($event, tavolo)">
+      (cdkDragStarted)="onDragStart()"
+      (cdkDragEnded)="onDragEnd(); onDragEnded($event, tavolo)">
 
       <div [style.background-color] = "coloriTavolo[tavolo.occupato]"
            [ngStyle]="{boxShadow: tavoloHoverId === (tavolo.id ?? null) ? '0 0 12px 3px ' + coloriTavolo[tavolo.occupato] + ', 0 4px 10px rgba(0,0,0,0.2)' : ''}"
@@ -22,7 +23,7 @@
           </h4>
           <h1 class="app-tavolo-numero">{{tavolo.numeroTavolo}} </h1>
         </div>
-        <div class="menu-dropdown">
+        <div class="menu-dropdown" *ngIf="!isDragging">
           <ul>
             <li>
               <h1 class="app-tavolo-posti">Posti : {{tavolo.posti}}</h1>
@@ -39,8 +40,8 @@
               <button class="button-ordine" (click)="mostraDialog=true">Modifica</button>
               <div class="modal" *ngIf="mostraDialog">
                 <div class="modal-content">
-                  <span class="close" (click)="chiudiProdDialog()">&times;</span>
-                  <form (ngSubmit)="cambioNumero(tavolo)">
+                  <span class="close" (click)="chiudiProdDialog()"></span>
+                  <form class="modifica-numero-container" (ngSubmit)="cambioNumero(tavolo)">
                     <div class="form-group">
                       <label for="numero">Nuovo Numero Tavolo:</label>
                       <input id="numero" type="text" [(ngModel)]="nuovoNumero" name="numero" required />
