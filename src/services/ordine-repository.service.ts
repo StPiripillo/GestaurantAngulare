@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Ordine} from '../models/Ordine';
 import {Observable} from 'rxjs';
-import {Prodotti} from '../models/Prodotti';
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +33,8 @@ export class OrdineRepositoryService {
   getOrdiniByTavolo(tavoloId: number): Observable<Ordine[]> {
     return this.http.get<Ordine[]>(`${this.apiUrl}/bytavolo`);
   }
+  eliminaOrdine(id: number): Observable<Ordine> {
+    return this.http.delete<Ordine>(`${this.apiUrl}/${id}/cancella`);
+  }
+
 }

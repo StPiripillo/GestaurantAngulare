@@ -130,13 +130,20 @@
       <strong>Ordine #{{ord.id }}</strong><br>
         Tavolo: {{ord.tavoloId}}<br>
         Nome: {{ ord.nomeOrdine }}<br>
+
         <div *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
+        <button (click)="eliminaOrdini(ord.tavoloId)">Elimina</button>
+
+
+
+
         <hr>
         <div>
             {{ ord.totale | currency:'EUR':'symbol' }}
         </div>
+
       </li>
     </ul>
     <ng-template #noOrdini>
