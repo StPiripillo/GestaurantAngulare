@@ -7,11 +7,16 @@
   font-family: Poppins, sans-serif;
 }
 
+:host {
+  display: block;
+  height: 100%;
+}
+
 body
 {
   margin: 0;
   padding: 0;
-  height: 95vh;
+  height: 100%;
 }
 
 .navbar
