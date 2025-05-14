@@ -19,6 +19,7 @@
       <button (click)="aggiungiAlCarrello(prodotto)" (click)="openCart()">Aggiungi al Carrello</button>
     </li>
   </ul>
+  <li *ngFor=" let ordine of getOrdiniFiltrati()">{{ordine.tavoloId}} - {{ordine.id}} </li>
 
 <div *ngIf="piattifiltrati.length===0">
     <p>Nessun prodotto disponibile per la tipologia selezionata</p>
