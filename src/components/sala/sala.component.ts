@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import {Dimensione, Forma, Tavolo} from '../../models/Tavolo';
 import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
 import {CdkDrag} from '@angular/cdk/drag-drop';
@@ -16,7 +16,8 @@ import {TavoloGlobaleService} from '../../services/stato/tavolo-globale.service'
     CdkDrag,
     FormsModule,
     NgClass,
-    NgIf
+    NgIf,
+    NgStyle
   ],
   templateUrl: './sala.component.html',
   styleUrl: './sala.component.css'
@@ -25,6 +26,7 @@ export class SalaComponent implements OnInit {
 
 
   utilizzabile: boolean = true;
+  tavoloHoverId: number | null = null;
 
   coloriTavolo : string[] = ['#1b980d', '#afb513', '#bc1010'];
 
@@ -66,6 +68,7 @@ export class SalaComponent implements OnInit {
       error: (err) => console.error('Errore salvataggio', err)
     });
   }
+
   onDragEnded(event: any, tavolo: Tavolo): void {
 
     const pos = event.source.getFreeDragPosition();

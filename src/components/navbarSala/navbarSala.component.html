@@ -1,15 +1,22 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <nav class="navbar">
-  <div class="title">
-    <a class="navbar-brand">Gestione tavoli</a>
+  <div class="navbar-title">
+    <h1 class="navbar-brand">Gestione tavoli</h1>
   </div>
-  <h1 class="separatore"></h1>
-  <div class="buttons">
-    <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
-    <button class="button-sidebar" (click)="openSidebar()">Aggiungi Tavolo</button>
-    <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
-    <button class="button-salva-backup" (click)="salvaBackupPosizioni()">Salva Backup Posizioni</button>
-    <button class="button-carica-backup" (click)="caricaBackupPosizioni()">Carica Backup Posizioni</button>
-
+  <div class="navbar-separatore">
+    <h1 class="separatore"></h1>
+  </div>
+  <div class="navbar-buttons">
+    <div class="buttons-main">
+      <button (click)="tavoloS.dragAttivo = !tavoloS.dragAttivo" class="button-sposta-tavoli"> {{tavoloS.dragAttivo?"Fine":"Sposta"}}</button>
+      <button class="button-sidebar" (click)="openSidebar()">Aggiungi Tavolo</button>
+      <button class="button-prodotti" (click)="nuovoProdottoDialog()">Aggiungi Nuovo Prodotto</button>
+    </div>
+    <div class="buttons-backup">
+      <button class="button-salva-backup" (click)="salvaBackupPosizioni()">Salva Backup Posizioni</button>
+      <button class="button-carica-backup" (click)="caricaBackupPosizioni()">Carica Backup Posizioni</button>
+    </div>
+  </div>
     <div class="sidebar-backdrop" *ngIf="isOpen" (click)="closeSidebar()"></div>
 
     <div class="tavolo-sidebar" [class.open]="isOpen">
@@ -74,7 +81,5 @@
         </form>
       </div>
     </div>
-
-  </div>
 </nav>
 

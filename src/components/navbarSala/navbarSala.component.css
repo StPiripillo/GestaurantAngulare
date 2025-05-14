@@ -3,9 +3,18 @@
   display: flex;
   background-color: #283849;
   padding: 10px 0;
+  margin: 0;
+}
+
+.navbar-title
+{
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
 }
 
 .navbar-brand {
+  display: flex;
   letter-spacing: 2px;
   text-decoration: none;
   padding: 0 20px 0 20px;
@@ -15,19 +24,49 @@
   font-weight: bold;
 }
 
+.navbar-separatore
+{
+  display: flex;
+}
+
 .separatore
 {
   border-left:1px solid #7a7c7e;
   border-right:1px solid #7a7c7e;
   padding: 0 0 0 0;
   margin: 0 20px 0 10px;
-  height: 40px;
+  height: auto;
+}
+
+.navbar-buttons
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.buttons-main
+{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.buttons-backup
+{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-right: 10px;
 }
 
 .button-nuovo-tavolo, .button-sposta-tavoli, .button-prodotti, .button-sidebar, .button-salva-backup, .button-carica-backup {
-  font-size: 1.5rem;
+  height: auto;
+  font-size: 1.2rem;
   padding: 5px 10px 5px 10px;
-  margin-right: 10px;
   font-weight: bold;
   border-radius: 5px;
   background-color: #3a546e;

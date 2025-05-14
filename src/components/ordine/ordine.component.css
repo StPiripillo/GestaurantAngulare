@@ -2,6 +2,7 @@
   background-color: #2c3e50; /* Blu notte elegante */
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  border-radius: 10px;
 }
 
 .navbar ul {
@@ -39,16 +40,154 @@
 }
 
 .piatti-container {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f8f9fa; /* Grigio chiaro elegante */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
   text-align: center;
+  margin: 20px auto;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #3a546e 60%, #e67e22 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(44, 62, 80, 0.12);
+  max-width: 600px;
+  color: black;
+}
+
+.piatto-singolo
+{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.piatti
+{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lista-piatti {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  box-shadow: 0 2px 6px rgba(44, 62, 80, 0.07);
+  transition: box-shadow 0.2s, background 0.2s;
+  position: relative;
+}
+
+.lista-piatti:hover {
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.13);
+  background: #eaf1fb;
+}
+
+.button-ordine
+{
+  background-color: #3a546e; /* Arancione raffinato */
+  color: white;
+  font-size: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.button-ordine:hover
+{
+  background-color: #e67e22; /* Arancione raffinato */
+}
+
+.button-cancella
+{
+  background-color: #e74c3c; /* Red */
+  color: #fff;
+  border: none;
+  border-radius: 30%;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.button-cancella:hover {
+  background-color: #c0392b; /* Darker red */
+  transform: scale(1.1);
+}
+
+.button-prezzo {
+  background-color: #2980b9; /* Blue */
+  color: #fff;
+  border: none;
+  border-radius: 30%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.button-prezzo:hover {
+  background-color: #1c5d8c; /* Darker blue */
+  transform: scale(1.1);
+}
+
+.nota {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  background-color: white;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.nota:hover {
+  background-color: lightgray;
+  transform: scale(1.05);
+}
+
+.spaziatore
+{
+  position: absolute;
+  top: 0;
+  right: -78%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: 300px;
 }
 
 .piatti-container h2 {
-  color: #2c3e50;
+  color: #ffffff;
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -71,8 +210,8 @@
 
 .piatti-container li:hover {
   transform: scale(1.05); /* Effetto hover */
-  background-color: #e67e22;
-  color: white;
+  /*background-color: #e67e22;*/
+  /*color: white;*/
 }
 ng generate component cart-sidebar,
 .cart-backdrop {
