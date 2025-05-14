@@ -129,6 +129,7 @@ export class OrdineComponent implements OnInit,AfterViewInit{
       const nota = prompt('Aggiungi una nota per questo prodotto (opzionale):') ?? undefined;
       this.carrello.push({ nota, prodotto });
     }
+    this.ordineNuovo.nomeOrdine = prodotto.nome;
 
   }
 
@@ -173,7 +174,7 @@ export class OrdineComponent implements OnInit,AfterViewInit{
       tavoloId: this.tavoloG.idTavoloSelezionato, // ID del tavolo
       prodotti: this.carrello.map(item => item.prodotto.nome), // Solo i nomi dei prodotti
       totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
-      nomeOrdine: this.ordineNuovo.nomeOrdine, // Nome ordine
+      nomeOrdine: this.carrello.map(item => item.prodotto.nome).join(', '), // Unisce i nomi dei prodotti
       noteOrdine: this.ordineNuovo.noteOrdine  // Note ordine
     };
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
