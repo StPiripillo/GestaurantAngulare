@@ -10,9 +10,9 @@ export enum Intolleranze
 }
 export enum Tipologia
 {
+  ANTIPASTI= "ANTIPASTI",
   PRIMI=  "PRIMI",
   SECONDI= "SECONDI",
-  ANTIPASTI= "ANTIPASTI",
   CONTORNI= "CONTORNI",
   BEVANDE= "BEVANDE",
   DOLCI= "DOLCI",
