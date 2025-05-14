@@ -16,7 +16,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class NavbarSalaComponent {
 
-  tavoli: Tavolo[] = [];
+  tavoliBackup: Tavolo[] = [];
   utilizzabile=true;
   mostraDialog: boolean = false;
   prodotto : Prodotti[] = [];
@@ -70,7 +70,7 @@ export class NavbarSalaComponent {
 
   caricaTavoli() {
     this.TavoloRepoS.getTavoli().subscribe((data) => {
-      this.tavoli = data;
+      this.tavoloS.TavoliInApp = data;
     });
   }
 
@@ -85,8 +85,6 @@ export class NavbarSalaComponent {
     this.tavoloDaSalvare.posti = this.nuovoTavolo.dimensione == Dimensione.PICCOLO ? 2 : this.nuovoTavolo.dimensione == Dimensione.MEDIO ? 4 : 8;
     this.TavoloRepoS.insertTavolo(this.tavoloDaSalvare).subscribe(() => {
       this.caricaTavoli();
-      alert("Tavolo aggiunto");
-
       window.location.reload();
 
     }, error => {
@@ -134,6 +132,40 @@ export class NavbarSalaComponent {
   protected readonly Tip = Tipologia;
   protected readonly Intolleranze = Intolleranze;
 
+  // Funzioni backup
+
+  salvaBackupPosizioni(): void {
+    const posizioni = this.tavoloS.TavoliInApp
+      .filter(t => t.id !== undefined)
+      .map(t => ({
+        id: t.id as number,
+        x: t.x,
+        y: t.y
+      }));
+    console.log("Posizioni:", posizioni);
+    this.TavoloRepoS.salvaBackupPosizioni(posizioni).subscribe(() => {
+      alert('Backup posizioni salvato!');
+    }, error => {
+      alert('Errore nel salvataggio del backup!');
+      console.error(error);
+    });
+  }
+
+  caricaBackupPosizioni(): void {
+    this.TavoloRepoS.caricaBackupPosizioni().subscribe((backup) => {
+      backup.forEach((b: { id: number; x: number; y: number; }) => {
+        const tavolo = this.tavoloS.TavoliInApp.find(t => t.id === b.id);
+        if (tavolo) {
+          tavolo.x = b.x;
+          tavolo.y = b.y;
+        }
+      });
+      alert('Backup posizioni caricato!');
+    }, error => {
+      alert('Errore nel caricamento del backup!');
+      console.error(error);
+    });
+  }
 
   // Funzioni per la sidebar
 

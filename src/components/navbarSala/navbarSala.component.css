@@ -24,7 +24,7 @@
   height: 40px;
 }
 
-.button-nuovo-tavolo, .button-sposta-tavoli, .button-prodotti, .button-sidebar {
+.button-nuovo-tavolo, .button-sposta-tavoli, .button-prodotti, .button-sidebar, .button-salva-backup, .button-carica-backup {
   font-size: 1.5rem;
   padding: 5px 10px 5px 10px;
   margin-right: 10px;
@@ -36,7 +36,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button-nuovo-tavolo:hover, .button-sposta-tavoli:hover, .button-prodotti:hover, .button-sidebar:hover {
+.button-nuovo-tavolo:hover, .button-sposta-tavoli:hover, .button-prodotti:hover, .button-sidebar:hover, .button-salva-backup:hover, .button-carica-backup:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }

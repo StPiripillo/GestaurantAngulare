@@ -32,4 +32,11 @@ export class TavoloRepositoryService {
     return this.http.put(`${this.apiUrl}/${id}/occupato`, { occupato });
   }
 
+  salvaBackupPosizioni(posizioni: { id: number; x: number; y: number }[]): Observable<any> {
+    return this.http.post('/api/tavoli/backup-posizioni', posizioni);
+  }
+
+  caricaBackupPosizioni(): Observable<{ id: number; x: number; y: number }[]> {
+    return this.http.get<{ id: number; x: number; y: number }[]>('/api/tavoli/backup-posizioni');
+  }
 }
