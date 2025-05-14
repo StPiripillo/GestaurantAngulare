@@ -119,7 +119,7 @@
         <div *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
-        <button (click)="eliminaOrdini(ord.tavoloId)">Elimina</button>
+        <button class="button-cancella" (click)="eliminaOrdini(ord.tavoloId)">x</button>
         <hr>
         <div>
             {{ ord.totale | currency:'EUR':'symbol' }}
