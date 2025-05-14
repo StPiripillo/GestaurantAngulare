@@ -177,20 +177,7 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   getOrdiniFiltrati(){
     return this.ordini.filter(o=>o.tavoloId==this.tavoloG.idTavoloSelezionato)
   }
-  //selectedTavoloId: number | null = null;  // tavolo selezionato
- // filteredOrdini: Ordine[] = [];  // ordini filtrati
 
-
-  //onTavoloSelect(tavoloId: number): void {
-  //  this.selectedTavoloId = tavoloId;
-  //  this.filterOrdiniByTavolo();  // Filtra gli ordini
- // }
-  //filtraTavolo(idTavolo:number): void {
-   // this.selectedTavoloId = idTavolo;
-  //  this.filteredOrdini = this.ordini.filter(ordine => ordine.tavoloId === idTavolo);
-   //   ? this.ordini.filter(ordine => ordine.tavoloId === idTavolo)
-  //    : this.ordini;
- // }
 
 
 
