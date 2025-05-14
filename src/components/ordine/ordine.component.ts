@@ -130,6 +130,8 @@ export class OrdineComponent implements OnInit,AfterViewInit{
       this.carrello.push({ nota, prodotto });
     }
     this.ordineNuovo.nomeOrdine = prodotto.nome;
+    this.ordineNuovo.noteOrdine = nota || '';
+
 
   }
 
@@ -175,7 +177,7 @@ export class OrdineComponent implements OnInit,AfterViewInit{
       prodotti: this.carrello.map(item => item.prodotto.nome), // Solo i nomi dei prodotti
       totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
       nomeOrdine: this.carrello.map(item => item.prodotto.nome).join(', '), // Unisce i nomi dei prodotti
-      noteOrdine: this.ordineNuovo.noteOrdine  // Note ordine
+      noteOrdine: this.carrello.map(item => item.nota).join(', ') // Unisce le note
     };
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
       this.caricaOrdini();
