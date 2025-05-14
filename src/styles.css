@@ -11,12 +11,12 @@ body
 {
   margin: 0;
   padding: 0;
-  height: 94vh;
+  height: 95vh;
 }
 
 .navbar
 {
-  height: 6vh;
+  height: auto;
 }
 
 main
