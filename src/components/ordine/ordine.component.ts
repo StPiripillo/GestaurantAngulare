@@ -7,6 +7,9 @@ import {ProductEventService} from "../../services/product-event.service";
 import {ProdottiRepoService} from "../../services/prodotti-repo.service";
 import {OrdineRepositoryService} from '../../services/ordine-repository.service';
 import {Ordine} from '../../models/Ordine';
+import {FormsModule} from '@angular/forms';
+import {TavoloRepositoryService} from '../../services/tavolo-repository.service';
+import {Tavolo} from '../../models/Tavolo';
 
 @Component({
   selector: 'app-nav-bar-ordine',
@@ -14,7 +17,8 @@ import {Ordine} from '../../models/Ordine';
     NgForOf,
     NgIf,
     ProdottiComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    FormsModule
   ],
   templateUrl: './ordine.component.html',
   styleUrl: './ordine.component.css'
@@ -58,9 +62,14 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   tipologiaSelezionata: string = '';
   piattifiltrati: Prodotti[] = [];
   annotazione: String[] = [];
+  tavolo: Tavolo [] = [];
 
-  constructor(private filtroService: FiltroService,private prodottoRepo:ProdottiRepoService,
-              private productEventService: ProductEventService, private ordRep:OrdineRepositoryService) {
+  constructor(private filtroService: FiltroService,
+              private prodottoRepo:ProdottiRepoService,
+              private productEventService: ProductEventService,
+              private ordRep:OrdineRepositoryService,
+              private prodS:ProdottiRepoService,
+              private tavoloS: TavoloRepositoryService) {
   }
 
   AllProdotti(){
@@ -123,7 +132,9 @@ export class OrdineComponent implements OnInit,AfterViewInit {
   ordineDaSalvare = {
     tavoloId: 0,
     prodotti: [] as string[],
-    totale: 0
+    totale: 0,
+    nomeOrdine: '',
+    noteOrdine: '',
   }
   ordineNuovo: { nomeOrdine: string, noteOrdine: string } = {
     nomeOrdine: '',
@@ -137,8 +148,13 @@ export class OrdineComponent implements OnInit,AfterViewInit {
     });
   }
   creaOrdine(){
-    this.ordineDaSalvare.tavoloId = this.ordineNuovo.nomeOrdine ? parseInt(this.ordineNuovo.nomeOrdine) : 0;
-    this.ordineDaSalvare.totale = 0;
+    this.ordineDaSalvare = {
+      tavoloId: this.ordineDaSalvare.tavoloId, // ID del tavolo (modifica secondo le
+      prodotti: this.carrello.map(item => item.prodotto.nome), // Lista dei nomi dei prodotti
+      totale: this.carrello.reduce((acc, item) => acc + item.prodotto.prezzo, 0), // Calcolo del totale
+      nomeOrdine: this.ordineNuovo.nomeOrdine, // Nome ordine
+      noteOrdine: this.ordineNuovo.noteOrdine  // Note ordine
+    };
     this.ordRep.nuovoOrdine(this.ordineDaSalvare).subscribe(() => {
       this.caricaOrdini();
       alert("Ordine creato");

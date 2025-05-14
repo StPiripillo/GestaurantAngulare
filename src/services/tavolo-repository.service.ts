@@ -31,4 +31,5 @@ export class TavoloRepositoryService {
   updateOccupato(id: number | undefined, occupato: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/occupato`, { occupato });
   }
+
 }
