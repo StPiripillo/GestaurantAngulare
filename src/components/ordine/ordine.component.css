@@ -171,6 +171,52 @@
   transform: scale(1.05);
 }
 
+.nota-ordine {
+  font-style: italic;
+  color: #555; /* Neutral gray for readability */
+  background-color: #f9f9f9; /* Light background for contrast */
+  padding: 8px 12px;
+  border-left: 4px solid #e67e22; /* Highlight with a colored border */
+  border-radius: 4px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nota-ordine:hover {
+  background-color: #f5e6d8; /* Slightly darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.note-carrello-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.note-carrello-text {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-carrello-text:focus {
+  border-color: #e67e22;
+  box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
+  outline: none;
+}
+
+
+
 .spaziatore
 {
   position: absolute;

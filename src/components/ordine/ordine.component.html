@@ -85,8 +85,8 @@
         </div>
       </li>
       <div>
-        <label for="noteOrdine">Note Ordine:</label>
-        <textarea id="noteOrdine" [(ngModel)]="ordineNuovo.noteOrdine" placeholder="Inserisci le note dell'ordine"></textarea>
+        <label class="note-carrello-label" for="noteOrdine">Note Ordine:</label>
+        <textarea class="note-carrello-text" id="noteOrdine" [(ngModel)]="ordineNuovo.noteOrdine" placeholder="Inserisci le note dell'ordine"></textarea>
       </div>
     </ul>
   </div>
@@ -116,7 +116,7 @@
         Tavolo: {{ord.tavoloId}}<br>
         Prodotti: {{ ord.nomeOrdine}}<br>
 
-        <div *ngIf="ord.noteOrdine">
+        <div class="nota-ordine" *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
         <button class="button-cancella" (click)="eliminaOrdini(ord.id!)">x</button>

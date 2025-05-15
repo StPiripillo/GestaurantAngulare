@@ -55,7 +55,7 @@
               </div>
             </li>
             <li>
-              <button class="button-cancella" (click)="cancellaTavolo(tavolo)">Elimina</button>
+              <button class="button-elimina" (click)="cancellaTavolo(tavolo)">Elimina</button>
               <div *ngIf="mostraConfermaEliminazione" class="overlay">
                 <div class="conferma-box">
                   <p>Sei sicuro di voler eliminare il tavolo {{ tavoloDaEliminare?.numeroTavolo }}?</p>
