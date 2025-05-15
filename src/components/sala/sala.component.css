@@ -35,7 +35,7 @@ main
   border-radius: 6px;
   cursor: move;
   z-index: auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   user-select: none;
   transition: background-color 0.3s, box-shadow 0.3s, border 0.3s, transform 0.002s ease;
 }

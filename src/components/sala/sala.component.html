@@ -11,7 +11,7 @@
       (cdkDragEnded)="onDragEnd(); onDragEnded($event, tavolo)">
 
       <div [style.background-color] = "coloriTavolo[tavolo.occupato]"
-           [ngStyle]="{boxShadow: tavoloHoverId === (tavolo.id ?? null) ? '0 0 12px 3px ' + coloriTavolo[tavolo.occupato] + ', 0 4px 10px rgba(0,0,0,0.2)' : ''}"
+           [ngStyle]="{boxShadow: tavoloHoverId === (tavolo.id ?? null) ? '0 0 12px 3px ' + coloriTavolo[tavolo.occupato] + ', 0 4px 10px rgba(0,0,2)' : ''}"
            (mouseenter)="tavoloHoverId = tavolo.id ?? null"
            (mouseleave)="tavoloHoverId = null"
            [ngClass]="{'Rotondo': tavolo.forma == Forma.ROTONDO, 'Quadrato': tavolo.forma == Forma.QUADRATO, 'Rettangolare': tavolo.forma == Forma.RETTANGOLARE,
