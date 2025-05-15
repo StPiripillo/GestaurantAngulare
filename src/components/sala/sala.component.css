@@ -105,10 +105,20 @@ button:focus, .modal-actions button:focus {
   outline-offset: 2px;
 }
 
+.modal-content {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: #283849;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .modal-content {
-    max-width: 95vw;
-    padding: 10px;
+    max-width: 90%;
+    padding: 15px;
   }
 }
 
@@ -212,10 +222,35 @@ button:focus, .modal-actions button:focus {
   gap: 10px;
 }
 
-.modal-actions button {
-  padding: 8px 12px;
-  margin: 0;
+/*.modal-actions button {*/
+/*  padding: 8px 12px;*/
+/*  margin: 0;*/
+/*  cursor: pointer;*/
+/*}*/
+
+.modal-actions-elimina {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions-elimina button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #3a546e; /* Dark gray */
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+.modal-actions-elimina button:hover {
+  background-color: #e67e22; /* Refined orange */
 }
 .overlay {
   position: absolute;
@@ -230,10 +265,10 @@ button:focus, .modal-actions button:focus {
 }
 
 .conferma-box {
-  background: white;
+  background-color: #283849;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
 }
 

@@ -163,7 +163,7 @@ export class NavbarSalaComponent {
 
     setTimeout(() => {
       this.popupVisible = false; // Nasconde il popup dopo 3 secondi
-    }, 1000);
+    }, 2000);
   }
 
   caricaBackupPosizioni(): void {
