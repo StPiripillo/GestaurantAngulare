@@ -91,10 +91,6 @@
           Nota: {{ item.nota }}
         </div>
       </li>
-      <div>
-        <label class="note-carrello-label" for="noteOrdine">Note Ordine:</label>
-        <textarea class="note-carrello-text" id="noteOrdine" [(ngModel)]="ordineNuovo.noteOrdine" placeholder="Inserisci le note dell'ordine"></textarea>
-      </div>
     </ul>
   </div>
   <div *ngIf="annotazione.length > 0" class="annotazioni-carrello"

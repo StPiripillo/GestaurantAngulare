@@ -76,6 +76,9 @@
             </select>
           </div>
           <div class="modal-actions">
+            <div class="popup" [class.show]="popupVisible">
+            {{ popupMessage }}
+          </div>
             <button type="button" (click)="chiudiProdDialog()">Annulla</button>
             <button type="submit">Crea</button>
           </div>

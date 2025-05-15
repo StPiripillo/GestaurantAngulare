@@ -78,8 +78,18 @@ export class NavbarSalaComponent {
   creaTavolo()
   {
     if (!this.utilizzabile) {
+
       alert("Non puoi creare nuovi tavoli dopo le 20:00");
       return; }
+
+    const tavoloEsistente = this.tavoloS.TavoliInApp.some(
+      (tavolo) => tavolo.numeroTavolo === this.nuovoTavolo.numeroTavolo
+    );
+
+    if (tavoloEsistente) {
+      alert("Esiste già un tavolo con questo numero!");
+      return;
+    }
     this.tavoloDaSalvare.numeroTavolo = this.nuovoTavolo.numeroTavolo;
     this.tavoloDaSalvare.forma = this.nuovoTavolo.forma;
     this.tavoloDaSalvare.dimensione = this.nuovoTavolo.dimensione;
@@ -176,6 +186,7 @@ export class NavbarSalaComponent {
         }
       });
       this.showPopup('Backup posizioni caricato!')
+
     }, error => {
       this.showPopup('Errore nel caricamento del backup!');
 

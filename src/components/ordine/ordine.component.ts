@@ -43,12 +43,14 @@ export class OrdineComponent implements OnInit,AfterViewInit{
     {
       this.prodottiComponent.modificaPrezzo(id);
     }
+    window.location.reload();
 
   }
   eliminaProdotto(id: number): void {
     if (this.prodottiComponent) {
       this.prodottiComponent.eliminaProdotto(id);
     }
+    window.location.reload();
   }
 
 
