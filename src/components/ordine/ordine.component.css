@@ -17,6 +17,38 @@
   display: inline-block;
 }
 
+.navbar-ordine
+{
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-ordine-ul
+{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar-ordine-buttons
+{
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-separatore
+{
+  display: flex;
+}
+
+.separatore
+{
+  border-left:1px solid #7a7c7e;
+  border-right:1px solid #7a7c7e;
+  padding: 0 0 0 0;
+  margin: 0 20px 0 20px;
+  height: auto;
+}
+
 /* Pulsanti */
 .navbar button {
   background-color: #3a546e; /* Grigio scuro */

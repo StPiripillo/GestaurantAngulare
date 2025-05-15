@@ -1,15 +1,22 @@
 <nav class="navbar">
-  <ul>
-    <li *ngFor="let tipo of tipologie">
-      <button (click)="selezionaTipologia(tipo)"
-        [class.active]="tipo===tipologiaSelezionata">
-        {{ tipo }}
-      </button>
-    </li>
-    <button (click)="openCart()">Carrello</button>
-    <!-- Bottone per aprire sidebar ordini -->
-    <button (click)="apriOrdiniSidebar()" >Ordini</button>
-  </ul>
+  <div class="navbar-ordine">
+    <ul class="navbar-ordine-ul">
+      <li *ngFor="let tipo of tipologie">
+          <button (click)="selezionaTipologia(tipo)"
+                  [class.active]="tipo===tipologiaSelezionata">
+            {{ tipo }}
+          </button>
+      </li>
+      <div class="navbar-separatore">
+        <h1 class="separatore"></h1>
+      </div>
+      <div class="navbar-ordine-buttons">
+        <button (click)="openCart()">Carrello</button>
+        <!-- Bottone per aprire sidebar ordini -->
+        <button (click)="apriOrdiniSidebar()" >Ordini</button>
+      </div>
+    </ul>
+  </div>
 </nav>
 
 <div class="piatti-container" *ngIf="tipologiaSelezionata">
