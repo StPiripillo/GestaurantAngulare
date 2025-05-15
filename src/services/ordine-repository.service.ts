@@ -33,8 +33,8 @@ export class OrdineRepositoryService {
   getOrdiniByTavolo(tavoloId: number): Observable<Ordine[]> {
     return this.http.get<Ordine[]>(`${this.apiUrl}/bytavolo`);
   }
-  eliminaOrdine(id: number): Observable<Ordine> {
-    return this.http.delete<Ordine>(`${this.apiUrl}/${id}/cancella`);
+  eliminaOrdine(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/delete`);
   }
 
 }

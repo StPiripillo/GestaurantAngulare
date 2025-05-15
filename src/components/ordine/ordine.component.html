@@ -114,12 +114,12 @@
       <li *ngFor="let ord of getOrdiniFiltrati()">
       <strong>Ordine #{{ord.id }}</strong><br>
         Tavolo: {{ord.tavoloId}}<br>
-        Nome: {{ ord.nomeOrdine}}<br>
+        Prodotti: {{ ord.nomeOrdine}}<br>
 
         <div *ngIf="ord.noteOrdine">
           <em>Note: {{ ord.noteOrdine }}</em>
         </div>
-        <button class="button-cancella" (click)="eliminaOrdini(ord.tavoloId)">x</button>
+        <button class="button-cancella" (click)="eliminaOrdini(ord.id!)">x</button>
         <hr>
         <div>
             {{ ord.totale | currency:'EUR':'symbol' }}

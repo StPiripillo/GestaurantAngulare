@@ -149,6 +149,8 @@ export class OrdineComponent implements OnInit,AfterViewInit{
     this.annotazione.splice(index, 1);
   }
 
+
+
   ordini: Ordine[] = [];
   ordineDaSalvare = {
     tavoloId: 0,
@@ -183,7 +185,7 @@ export class OrdineComponent implements OnInit,AfterViewInit{
       this.caricaOrdini();
       alert("Ordine creato");
       this.carrello=[];
-      //window.location.reload();
+      window.location.reload();
     });
   }
 
@@ -210,14 +212,13 @@ export class OrdineComponent implements OnInit,AfterViewInit{
   chiudiOrdiniSidebar() {
     this.ordiniSidebarAperta = false;
   }
-
   eliminaOrdini(id: number ): void {
     this.ordRep.eliminaOrdine(id).subscribe(() => {
-
       this.caricaOrdini();
-        window.location.reload();
-      });
-    }
+      window.location.reload();
+    });
+  }
+
 
 
 }
