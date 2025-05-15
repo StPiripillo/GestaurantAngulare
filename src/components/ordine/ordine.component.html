@@ -110,10 +110,10 @@
   <button class="button-ordine-cart" (click)="creaOrdine()">Ordina</button>
 </div>
 <!-- Sidebar Ordini Ricevuti -->
+<button class="cart-backdrop" *ngIf="ordiniSidebarAperta" (click)="chiudiOrdiniSidebar()">×</button>
 <div class="ordini-sidebar" [class.open]="ordiniSidebarAperta">
   <div class="cart-header">
     <h3>Ordini Inviati</h3>
-    <button class="close-btn" (click)="chiudiOrdiniSidebar()">×</button>
   </div>
 
   <div class="cart-content">
