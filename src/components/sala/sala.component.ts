@@ -166,6 +166,28 @@ export class SalaComponent implements OnInit {
     }
   }
 
+  mostraModaleConto: boolean = false;
+
+  apriModaleConto(tavolo: Tavolo): void {
+    this.mostraModaleConto = true;
+  }
+
+  chiudiModaleConto(): void {
+    this.mostraModaleConto = false;
+  }
+
+  confermaStampaConto(tavolo: Tavolo): void {
+    this.TavoloRepo.eliminaOrdini(tavolo.id).subscribe(() => {
+      tavolo.occupato = 0; // Stato "libero"
+      this.TavoloRepo.updateOccupato(tavolo.id, tavolo.occupato).subscribe(() => {
+        alert(`Il conto è stato stampato e il tavolo ${tavolo.numeroTavolo} è ora libero.`);
+        this.mostraModaleConto = false;
+        this.caricaTavoli();
+      });
+    });
+  }
+
+
   protected readonly Forma = Forma;
   protected readonly Dimensione = Dimensione;
 }

@@ -66,6 +66,16 @@
                 </div>
               </div>
             </li>
+            <li>
+              <button class="button-conto" (click)="apriModaleConto(tavolo)">Conto</button>
+            </li>
+            <div class="modal" *ngIf="mostraModaleConto">
+              <div class="modal-content">
+                <h2>Vuoi stampare il conto?</h2>
+                <button class="button-si" (click)="confermaStampaConto(tavolo)">Sì</button>
+                <button class="button-no" (click)="chiudiModaleConto()">No</button>
+              </div>
+            </div>
           </ul>
         </div>
       </div>

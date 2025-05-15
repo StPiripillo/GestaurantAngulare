@@ -39,4 +39,18 @@ export class TavoloRepositoryService {
   caricaBackupPosizioni(): Observable<{ id: number; x: number; y: number }[]> {
     return this.http.get<{ id: number; x: number; y: number }[]>('/api/tavoli/backup-posizioni');
   }
+
+  getOrdiniTavolo(tavoloId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${tavoloId}/ordini`);
+  }
+
+  eliminaOrdini(tavoloId: any): Observable<void> {
+    // Correzione qui: usa l'URL corretto che corrisponde al backend
+    return this.http.delete<void>(`/api/ordine/tavolo/${tavoloId}`);
+  }
+
+  calcolaTotale(tavoloId: number): Observable<number> {
+    return this.http.get<number>(`/api/tavoli/${tavoloId}/totale`);
+  }
+
 }
