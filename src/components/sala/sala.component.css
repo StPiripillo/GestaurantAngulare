@@ -217,4 +217,23 @@ button:focus, .modal-actions button:focus {
   margin: 0;
   cursor: pointer;
 }
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 100%; /* Posiziona accanto al menu dropdown */
+  margin-left: 10px; /* Spazio tra il menu e la finestra */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.conferma-box {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 

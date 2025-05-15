@@ -93,20 +93,35 @@ export class SalaComponent implements OnInit {
     this.salvaPosizione(tavolo);
   }
 
-  cancellaTavolo(tavolo: Tavolo): void {
-    if (!this.utilizzabile) {
-      alert("Non puoi eliminare i tavoli dopo le 20:00");
-      return;
-    }
-    const confirmDelete = confirm(`Sei sicuro di voler eliminare il tavolo ${tavolo.numeroTavolo}?`);
-    if (confirmDelete) {
-      this.TavoloRepo.eliminaTavolo(tavolo.id).subscribe(() => {
-        alert(`Tavolo ${tavolo.numeroTavolo} eliminato`);
+  tavoloDaEliminare: Tavolo | null = null;
+  mostraConfermaEliminazione: boolean = false;
+
+  apriConfermaEliminazione(tavolo: Tavolo): void {
+    this.tavoloDaEliminare = tavolo;
+    this.mostraConfermaEliminazione = true;
+  }
+
+  confermaEliminazione(): void {
+    if (this.tavoloDaEliminare) {
+      this.TavoloRepo.eliminaTavolo(this.tavoloDaEliminare.id).subscribe(() => {
         this.caricaTavoli();
-        window.location.reload();
+        this.mostraConfermaEliminazione = false;
+        this.tavoloDaEliminare = null;
       });
     }
+  }
 
+  annullaEliminazione(): void {
+    this.mostraConfermaEliminazione = false;
+    this.tavoloDaEliminare = null;
+  }
+
+  cancellaTavolo(tavolo: Tavolo): void {
+    if (!this.utilizzabile) {
+      this.apriConfermaEliminazione(tavolo);
+      return;
+    }
+    this.apriConfermaEliminazione(tavolo);
   }
 
   private overlay = inject(Overlay);

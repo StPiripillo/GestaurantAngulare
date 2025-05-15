@@ -56,6 +56,15 @@
             </li>
             <li>
               <button class="button-cancella" (click)="cancellaTavolo(tavolo)">Elimina</button>
+              <div *ngIf="mostraConfermaEliminazione" class="overlay">
+                <div class="conferma-box">
+                  <p>Sei sicuro di voler eliminare il tavolo {{ tavoloDaEliminare?.numeroTavolo }}?</p>
+                  <div class="modal-actions">
+                    <button (click)="confermaEliminazione()">Conferma</button>
+                    <button (click)="annullaEliminazione()">Annulla</button>
+                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
